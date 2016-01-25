@@ -112,8 +112,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source ~/.bashrc.d/apparix_aliases
-source ~/.bashrc.d/bash_aliases
+my_dir="$(dirname "$0")"
+source ./.bashrc.d/apparix_aliases
+source ./.bashrc.d/bash_aliases
 eval $(thefuck --alias)
 
 # OPAM configuration
