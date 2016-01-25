@@ -19,7 +19,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'wincent/command-t'
 Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
-Plugin 'jeaye/color_coded'
 Plugin 'rdnetto/YCM-Generator'
 
 " All of your Plugins must be added before the following line
@@ -345,9 +344,6 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-
-"Enable color_coded
-let g:color_coded_enabled = 1
 
 " Syntastic related settings
 set statusline+=%#warningmsg#
