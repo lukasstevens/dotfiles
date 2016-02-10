@@ -20,6 +20,7 @@ Plugin 'wincent/command-t'
 Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'rdnetto/YCM-Generator'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -362,8 +363,8 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 
 " NERDTree Settings
+map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
