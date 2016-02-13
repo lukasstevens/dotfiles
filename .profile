@@ -21,7 +21,8 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+export PATH=$PATH:/home/lukas/.cargo/bin
+
 # OPAM configuration
 . /home/lukas/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 
-export PATH=$PATH:/home/lukas/.cargo/bin
