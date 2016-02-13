@@ -51,7 +51,9 @@ filetype plugin indent on    " required
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Include vim scripts
-execute 'source ' . expand('<sfile>:p:h') . '/.dotfiles/a.vim/plugin/a.vim'
+
+let vimrcdir = fnamemodify(resolve(expand('<sfile>:p')),":h")
+execute 'source ' . vimrcdir . '/a.vim/plugin/a.vim'
 
 " Sets how many lines of history VIM has to remember
 set history=500
