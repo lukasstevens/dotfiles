@@ -112,10 +112,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# get the absolute path of this script
+pushd . > /dev/null
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+while([ -h "${SCRIPT_PATH}" ]); do
+    cd "`dirname "${SCRIPT_PATH}"`"
+    SCRIPT_PATH="$(readlink "`basename "${SCRIPT_PATH}"`")";
+done
+cd "`dirname "${SCRIPT_PATH}"`" > /dev/null
+SCRIPT_PATH="`pwd`";
+popd  > /dev/null
 
-THIS_DIR="${BASH_SOURCE%/*}"
-source $THIS_DIR/.bashrc.d/apparix_aliases
-source $THIS_DIR/.bashrc.d/bash_aliases
+source $SCRIPT_PATH/.bashrc.d/apparix_aliases
+source $SCRIPT_PATH/.bashrc.d/bash_aliases
 eval $(thefuck --alias)
 
 # OPAM configuration
