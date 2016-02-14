@@ -366,6 +366,8 @@ let g:syntastic_ocaml_checkers = ['merlin']
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
+let g:ycm_rust_src_path = '/usr/local/src/rust/src'
+autocmd FileType *.rs setf rust
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
