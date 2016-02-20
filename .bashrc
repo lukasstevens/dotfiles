@@ -116,6 +116,7 @@ popd  > /dev/null
 
 source $SCRIPT_PATH/.bashrc.d/apparix_aliases
 source $SCRIPT_PATH/.bashrc.d/bash_aliases
+source $SCRIPT_PATH/.bashrc.d/gulp-completion.bash
 eval $(thefuck --alias)
 
 # add additional directories to path
