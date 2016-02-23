@@ -2,3 +2,6 @@ alias minecraft='bash minecraft.sh'
 alias xclip='xclip -selection c'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
+lstwitch() {
+    livestreamer twitch.tv/"$1" best
+}
