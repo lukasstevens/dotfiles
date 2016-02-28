@@ -54,7 +54,6 @@ filetype plugin indent on    " required
 " Include vim scripts
 
 let vimrcdir = fnamemodify(resolve(expand('<sfile>:p')),":h")
-execute 'source ' . vimrcdir . '/a.vim/plugin/a.vim'
 
 " Sets how many lines of history VIM has to remember
 set history=500
