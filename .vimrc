@@ -21,6 +21,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'vim-scripts/a.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -367,7 +368,7 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 let g:ycm_rust_src_path = '/usr/local/src/rust/src'
-autocmd FileType *.rs setf rust
+au BufRead,BufNewFile *.rs set filetype=rust
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
