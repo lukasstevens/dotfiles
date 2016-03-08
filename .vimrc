@@ -14,15 +14,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "Own plugins
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
-Plugin 'wincent/command-t'
 Plugin 'scrooloose/syntastic'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'jistr/vim-nerdtree-tabs'
+lugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
-Plugin 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
