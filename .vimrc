@@ -16,7 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Own plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-lugin 'jistr/vim-nerdtree-tabs'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 
 " All of your Plugins must be added before the following line
