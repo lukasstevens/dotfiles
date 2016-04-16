@@ -23,6 +23,7 @@ Plugin 'rdnetto/YCM-Generator'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'LaTex-Box-Team/LaTeX-Box'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -363,6 +364,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['standard']
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd BufWritePost *.js silent !standard-format -w % 
+set autoread
 let g:syntastic_ocaml_checkers = ['merlin']
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
