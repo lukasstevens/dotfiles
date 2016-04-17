@@ -18,6 +18,7 @@ order += "wireless _first_"
 order += "battery 0"
 order += "volume master"
 order += "tztime local"
+order += "empty"
 
 wireless _first_ {
         format_up = "W: (%quality at %essid) %ip"
@@ -26,10 +27,6 @@ wireless _first_ {
 
 battery 0 {
         format = "%status %percentage %remaining"
-}
-
-run_watch VPN {
-        pidfile = "/var/run/vpnc/pid"
 }
 
 tztime local {
