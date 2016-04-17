@@ -354,6 +354,7 @@ map <leader>x :e ~/buffer.md<cr>
 map <leader>pp :setlocal paste!<cr>
 
 " Syntastic related settings
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
