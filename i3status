@@ -14,6 +14,7 @@ general {
 order += "disk /"
 order += "wireless _first_"
 order += "battery 0"
+order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
@@ -23,12 +24,22 @@ wireless _first_ {
 
 battery 0 {
         format = "%status %percentage %remaining"
+        format_down = "No battery"
 }
 
 tztime local {
-        format = "%m-%d-%Y %H:%M:%S"
+        format = "%d-%m-%Y %H:%M:%S"
 }
 
 disk "/" {
         format = "%avail"
 }
+
+volume master {
+    format = "♪: %volume"
+    format_muted = "♪: muted (%volume)"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
