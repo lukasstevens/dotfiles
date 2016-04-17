@@ -193,3 +193,6 @@ bar {
 			urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 		}
 }
+
+# start owncloud on login
+exec --no-startup-id owncloud
