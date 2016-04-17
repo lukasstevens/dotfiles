@@ -197,8 +197,9 @@ bar {
 		}
 }
 
-# start owncloud on login
+# startup programs
 exec --no-startup-id owncloud
+exec --no-startup-id nm-applet
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
