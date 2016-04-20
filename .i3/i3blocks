@@ -28,6 +28,7 @@
 command=/usr/share/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
+align=center
 
 # Volume indicator
 #
@@ -35,10 +36,8 @@ markup=pango
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=VOL
-#label=♪
+label=
 instance=Master
-#instance=PCM
 interval=once
 signal=10
 
@@ -46,12 +45,12 @@ signal=10
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=
 separator=false
 interval=30
 
 [memory]
-label=SWAP
+label=
 instance=swap
 separator=false
 interval=30
@@ -62,7 +61,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME
+label=
 #instance=/mnt/data
 interval=30
 
@@ -72,7 +71,6 @@ interval=30
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #instance=wlan0
-color=#00FF00
 interval=10
 separator=false
 
@@ -112,4 +110,5 @@ interval=30
 [time]
 command=date '+%d-%m-%Y %H:%M:%S'
 interval=1
+separator=false
 
