@@ -1,0 +1,10 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #2f343f, #2f343f, #f3f4f5
+rofi.color-normal: #2f343f, #c1c1c1, #2f343f, #446cb3, #ffffff
+rofi.color-active: #2f343f, #80cbc4, #2f343f, #446cb3, #80cbc4
+rofi.color-urgent: #2f343f, #ff1844, #2f343f, #446cb3, #ff1844
+rofi.font: Inconsolata 14
+rofi.eh: 2
