@@ -107,7 +107,7 @@ set $w1 1
 set $w2 2
 set $w3 3
 set $w4 4
-set $w5 5
+set $w5 5: music
 set $w6 6: msg
 set $w7 7: mail
 set $w8 8: www
@@ -203,9 +203,10 @@ exec --no-startup-id owncloud
 exec_always --no-startup-id nm-applet
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle
+set $signal pkill -SIGRTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D pulse sset Master 3%+; $signal"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -D pulse sset Master 3%-; $signal"
+bindsym XF86AudioMute exec --no-startup-id "amixer -D pulse sset Master toggle; $signal"
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
@@ -214,3 +215,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# Assign windows to workspaces automatically
+assign [class="Thunderbird"] $w7
+assign [class="Firefox"] $w8
+assign [class="Telegram"] $w6

@@ -39,7 +39,7 @@ align=center
 label=
 instance=Master
 interval=once
-signal=10
+signal=1
 
 # Memory usage
 #
