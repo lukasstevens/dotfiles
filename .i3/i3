@@ -200,7 +200,8 @@ bar {
 
 # startup programs
 exec --no-startup-id owncloud
-exec_always --no-startup-id nm-applet
+exec --no-startup-id nm-applet
+exec --no-startup-id compton
 
 # Pulse Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
