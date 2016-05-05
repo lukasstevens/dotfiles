@@ -221,3 +221,4 @@ bindsym XF86AudioPrev exec playerctl previous
 assign [class="Thunderbird"] $w7
 assign [class="Firefox"] $w8
 assign [class="Telegram"] $w6
+for_window [class="Spotify"] move to workspace $w5
