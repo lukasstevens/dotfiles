@@ -165,7 +165,7 @@ set background=dark
 set t_Co=256
 "let base16colorspace=256
 try
-    colorscheme my-base-16 
+    colorscheme desert
 catch
 endtry
 
