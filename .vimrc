@@ -16,7 +16,6 @@ Plugin 'VundleVim/Vundle.vim'
 "Own plugins
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
-Plugin 'wincent/command-t'
 Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'rdnetto/YCM-Generator'
@@ -24,7 +23,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'LaTex-Box-Team/LaTeX-Box'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'lukas-123/my-base-16'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -162,12 +161,13 @@ set number
 " Enable syntax highlighting
 syntax enable 
 
+set background=dark
+set t_Co=256
+"let base16colorspace=256
 try
-    colorscheme desert
+    colorscheme my-base-16 
 catch
 endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")

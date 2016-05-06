@@ -56,6 +56,12 @@ URxvt.color14:      #52bb50
 URxvt.color7:       #e6e1dc
 URxvt.color15:      #f9f7f3
 
+URxvt.color16:                        #cc6666
+URxvt.color17:                        #f9f7f3
+URxvt.color18:                        #dc6a5d
+URxvt.color19:                        #9dbf4b
+URxvt.color20:                        #708cda
+URxvt.color21:                        #4ebc4d
 
 URxvt.internalBorder:      0
 URxvt.externalBorder:      0
