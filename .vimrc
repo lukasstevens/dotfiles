@@ -23,7 +23,6 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'LaTex-Box-Team/LaTeX-Box'
-Plugin 'lukas-123/my-base-16'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

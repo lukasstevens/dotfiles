@@ -114,6 +114,9 @@ cd "`dirname "${SCRIPT_PATH}"`" > /dev/null
 SCRIPT_PATH="`pwd`";
 popd  > /dev/null
 
+BASE16_SHELL=$SCRIPT_PATH/colors/my-base16.sh
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 source $SCRIPT_PATH/.bashrc.d/apparix_aliases
 source $SCRIPT_PATH/.bashrc.d/bash_aliases
 source $SCRIPT_PATH/.bashrc.d/gulp-completion.bash
