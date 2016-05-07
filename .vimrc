@@ -23,6 +23,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'LaTex-Box-Team/LaTeX-Box'
+Plugin 'lukas-123/dotfiles'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -162,9 +163,9 @@ syntax enable
 
 set background=dark
 set t_Co=256
-"let base16colorspace=256
+let base16colorspace=256
 try
-    colorscheme desert
+    colorscheme my-base16
 catch
 endtry
 
