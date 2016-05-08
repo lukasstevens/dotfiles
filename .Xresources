@@ -21,7 +21,7 @@ URxvt.letterSpace:         -1
 
 ! special
 URxvt.foreground:   #e6e1dc
-URxvt.background:   #272b37
+URxvt.background:   #262528
 URxvt.cursorColor:  #e6e1dc
 
 URxvt.internalBorder:      0
