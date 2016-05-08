@@ -13,10 +13,10 @@ rofi.eh: 2
 ! ------------------------------------------------------------------------------
 ! Urxvt Settings 
 ! ------------------------------------------------------------------------------
-URxvt.font:                xft:Inconsolata:size=14
-URxvt.boldFont:            xft:Inconsolata:size=14:bold
-URxvt.italicFont:          xft:Inconsolata:size=14:italic
-URxvt.boldItalicFont:      xft:Inconsolata:size=14:bold:italic
+URxvt.font:                xft:Inconsolata:size=15
+URxvt.boldFont:            xft:Inconsolata:size=15:bold
+URxvt.italicFont:          xft:Inconsolata:size=15:italic
+URxvt.boldItalicFont:      xft:Inconsolata:size=15:bold:italic
 URxvt.letterSpace:         -1
 
 ! special
