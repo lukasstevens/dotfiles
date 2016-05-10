@@ -42,7 +42,7 @@ plugins=(git bookmark)
 # User configuration
 
 # Shell coloring
-base16_shell=$SCRIPT_PATH/colors/my-base16.sh
+base16_shell=$SCRIPT_DIR/colors/my-base16.sh
 [[ -s $base16_shell ]] && source $base16_shell
 
 # Aliases
