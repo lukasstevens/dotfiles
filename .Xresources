@@ -36,5 +36,5 @@ URxvt.perl-ext-common:     matcher,resize-font
 URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger:  C-plus
 
-URxvt.url-launcher:        /usr/bin/firefox
+URxvt.url-launcher:        /usr/bin/xdg-open
 URxvt.colorUL:             #7780a1
