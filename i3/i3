@@ -83,7 +83,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # hide borders
-#hide_edge_borders both
+hide_edge_borders both
 
 # focus the child container
 #bindsym $mod+d focus child
