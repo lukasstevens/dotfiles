@@ -11,15 +11,56 @@ rofi.eh: 2
 
 
 ! ------------------------------------------------------------------------------
+! Color theme
+! ------------------------------------------------------------------------------
+#define base00 #262528
+#define base01 #272935
+#define base02 #3a4055
+#define base03 #5a647e
+#define base04 #d4cfc9
+#define base05 #e6e1dc
+#define base06 #f4f1ed
+#define base07 #f9f7f3
+#define base08 #de3e2f
+#define base09 #cc7833
+#define base0A #f89406
+#define base0B #6fd952
+#define base0C #59abe3
+#define base0D #4183d7
+#define base0E #bf55ec
+#define base0F #bc9458
+
+*foreground:   base05
+*background:   base00
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base09
+*color10:      base01
+*color11:      base02
+*color12:      base04
+*color13:      base06
+*color14:      base0F
+*color15:      base07
+
+! ------------------------------------------------------------------------------
 ! Urxvt Settings 
 ! ------------------------------------------------------------------------------
-URxvt.font:                xft:Inconsolata:size=15
-URxvt.boldFont:            xft:Inconsolata:size=15:bold
-URxvt.italicFont:          xft:Inconsolata:size=15:italic
-URxvt.boldItalicFont:      xft:Inconsolata:size=15:bold:italic
+URxvt.font:                xft:Inconsolata for Powerline:size=15
+URxvt.boldFont:            xft:Inconsolata for Powerline:bold:size=15, xft:Inconsolata for Powerline patched:size=15
+URxvt.italicFont:          xft:Inconsolata for Powerline:size=15:italic, xft:Inconsolata for Powerline patched:size=15
+URxvt.boldItalicFont:      xft:Inconsolata for Powerline:size=15:bold:italic, xft:Inconsolata for Powerline patched:size=15
 URxvt.letterSpace:         -1
 
-! special
 URxvt.foreground:   #e6e1dc
 URxvt.background:   #262528
 URxvt.cursorColor:  #e6e1dc

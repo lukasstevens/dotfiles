@@ -162,7 +162,7 @@ bindsym $mod+r mode "resize"
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.focused          $bg-color        $blue-accent        $text-color          #00ff00
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
@@ -211,7 +211,7 @@ for_window [class="Spotify"] move to workspace $w5
 # i3-gaps settings
 gaps inner 10 
 # remove window borders
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 4
 smart_gaps on
 
 # set desktop background
