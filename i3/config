@@ -212,7 +212,6 @@ for_window [class="Spotify"] move to workspace $w5
 gaps inner 10 
 # remove window borders
 for_window [class="^.*"] border pixel 4
-smart_gaps on
 
 # set desktop background
 exec_always feh --bg-scale http://www.hdwallpapers.in/walls/solid_abstract_colors-HD.jpg
