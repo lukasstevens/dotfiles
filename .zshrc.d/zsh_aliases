@@ -23,3 +23,15 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias zshrc='vim ~/.zshrc'
+alias zshrc_reload='exec zsh' 
+
+# go up directories
+..(){
+    cd ../$@
+}
+
+..2()
+{
+    cd ../../$@
+}
