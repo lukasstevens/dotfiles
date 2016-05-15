@@ -12,7 +12,11 @@ antigen use oh-my-zsh
 antigen theme agnoster
 
 antigen bundle git
-antigen bundle command-not-found
+antigen bundle git-extras
+antigen bundle npm
+antigen bundle pip
+antigen bundle python
+antigen bundle wd
 
 antigen apply
 
