@@ -26,7 +26,7 @@ set $text-color             #f3f4f5
 set $inactive-text-color    #676e7d
 set $urgent-bg-color        #E53935
 set $blue-accent            #446cb3
-set $indicator              #446cb3
+set $indicator              #2f343f
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
