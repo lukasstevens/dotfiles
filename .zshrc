@@ -27,7 +27,7 @@ base16_shell=$SCRIPT_DIR/colors/my-base16.sh
 [[ -s $base16_shell ]] && source $base16_shell
 
 # Additional configuration
-source $CONFIG_DIR/
+source $CONFIG_DIR/*
 
 # End user configuration
 
