@@ -17,6 +17,7 @@ antigen bundle npm
 antigen bundle pip
 antigen bundle python
 antigen bundle wd
+antigen bundle thefuck
 
 antigen apply
 
