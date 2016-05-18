@@ -26,6 +26,9 @@ alias l='ls -CF'
 alias zshrc='vim ~/.zshrc'
 alias zshrc_reload='exec zsh' 
 
+alias bm=wd add
+alias to=wd
+
 # go up directories
 ..(){
     cd ../$@
