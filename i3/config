@@ -211,6 +211,7 @@ for_window [class="Spotify"] move to workspace $w5
 
 # i3-gaps settings
 gaps inner 10 
+smart_gaps on
 # remove window borders
 for_window [class="^.*"] border pixel 4
 
