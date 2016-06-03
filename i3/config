@@ -205,6 +205,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Assign windows to workspaces automatically
 assign [class="Thunderbird"] $w7
+assign [class="Discord"] $w6
 assign [class="Firefox"] $w8
 assign [class="Telegram"] $w6
 assign [class="Franz"] $w6
