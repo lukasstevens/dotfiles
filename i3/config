@@ -188,15 +188,16 @@ bar {
 exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
 exec --no-startup-id compton
+exec --no-startup-id pia
 
-# Pulse Audio controls
+# default Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D pulse sset Master 3%+; $signal"
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -D pulse sset Master 3%-; $signal"
-bindsym XF86AudioMute exec --no-startup-id "amixer -D pulse sset Master toggle; $signal"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D default sset Master 3%+ unmute; $signal"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -D default sset Master 3%- unmute; $signal"
+bindsym XF86AudioMute exec --no-startup-id "amixer -D default sset Master toggle; $signal"
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 50 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 50 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 -time 1 -steps 1 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 -time 1 -steps 1 # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -208,6 +209,7 @@ assign [class="Thunderbird"] $w7
 assign [class="Discord"] $w6
 assign [class="Firefox"] $w8
 assign [class="Telegram"] $w6
+assign [class="Franz"] $w6
 for_window [class="Spotify"] move to workspace $w5
 
 # i3-gaps settings

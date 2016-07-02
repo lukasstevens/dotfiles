@@ -3,7 +3,7 @@ alias xclip='xclip -selection c'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
 livetwitcher() {
-    livestreamer twitch.tv/"$1" best
+    livestreamer --default-stream best "${@:1:${#}-1}" twitch.tv/"${@: -1}"
 }
 
 # enable color support of ls and also add handy aliases
