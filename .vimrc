@@ -26,6 +26,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'LaTex-Box-Team/LaTeX-Box'
 Plugin 'lukas-123/dotfiles'
 Plugin 'wincent/command-t'
+Plugin 'tfnico/vim-gradle'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
