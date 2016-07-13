@@ -83,9 +83,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# hide borders
-hide_edge_borders both
-
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -212,11 +209,8 @@ assign [class="Telegram"] $w6
 assign [class="Franz"] $w6
 for_window [class="Spotify"] move to workspace $w5
 
-# i3-gaps settings
-gaps inner 10 
-smart_gaps on
 # remove window borders
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 3 
 
 # set desktop background
 exec_always feh --bg-scale http://www.hdwallpapers.in/walls/solid_abstract_colors-HD.jpg
