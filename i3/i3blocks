@@ -30,6 +30,12 @@ separator_block_width=15
 markup=pango
 align=center
 
+[keyboard]
+full_text= 
+command=/usr/bin/onboard
+min_width=button=1 x=1366 y=768
+align=right
+
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
