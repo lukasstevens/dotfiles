@@ -21,6 +21,7 @@ fi
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -la'
+alias lah='ls -lah'
 alias l='ls -CF'
 
 alias zshrc='vim ~/.zshrc'
