@@ -30,10 +30,12 @@ separator_block_width=15
 markup=pango
 align=center
 
+[separator]
+
 [keyboard]
 full_text= 
 command=/usr/bin/onboard
-min_width=button=1 x=1366 y=768
+min_width=100
 align=right
 
 # Volume indicator
