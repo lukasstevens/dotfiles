@@ -30,6 +30,9 @@ base16_shell=$SCRIPT_DIR/colors/my-base16.sh
 # Additional configuration
 source $CONFIG_DIR/*
 
+# virtualenv
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
 # End user configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
