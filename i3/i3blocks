@@ -34,7 +34,7 @@ align=center
 
 [keyboard]
 full_text= 
-command=/usr/bin/onboard
+command=dbus-send --type=method_call --dest=org.onboard.Onboard /org/onboard/Onboard/Keyboard org.onboard.Onboard.Keyboard.ToggleVisible
 min_width=100
 align=right
 
