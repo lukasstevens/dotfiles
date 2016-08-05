@@ -18,6 +18,7 @@ antigen bundle pip
 antigen bundle python
 antigen bundle wd
 antigen bundle thefuck
+antigen bundle dickeyxxx/gh zsh/gh
 
 antigen apply
 
