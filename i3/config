@@ -191,7 +191,7 @@ exec --no-startup-id compton
 exec --no-startup-id pia
 
 # start programs with keypresses
-bindsym $mod+Shift+a exec "keepass2 --auto-type-selected"
+bindsym $mod+Shift+a exec --no-startup-id "keepass2 --auto-type"
 
 # default Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
