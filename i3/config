@@ -190,6 +190,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id compton
 exec --no-startup-id pia
 
+# start programs with keypresses
+bindsym $mod+Shift+a exec "keepass2 --auto-type-selected"
+
 # default Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D default sset Master 3%+ unmute; $signal"
