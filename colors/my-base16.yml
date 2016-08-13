@@ -1,15 +1,15 @@
 scheme: "my-base16"
 author: "Lukas Stevens (https://github.com/lukas-123)"
 # Default Background
-base00: "#282830"
+base00: "#2b2b2b"
 # Lighter Background
-base01: "#203040"
+base01: "#272935"
 # Selection Background
-base02: "#34495E"
+base02: "#3a4055"
 # Comments, Invisibles, Line Highlighting
-base03: "#65878F"
+base03: "#5a647e"
 # Dark Foreground (Used for status bars)
-base04: "#34495E"
+base04: "#d4cfc9"
 # Default Foreground, Caret, Delimiters, Operators
 base05: "#e6e1dc"
 # Light Foreground
@@ -17,18 +17,18 @@ base06: "#f4f1ed"
 # Light Foreground
 base07: "#f9f7f3"
 # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-base08: "#de3e2f"
+base08: "#da4939"
 # Integers, Boolean, Constants, XML Attributes, Markup Link URL
-base09: "#FEC606"
+base09: "#cc7833"
 # Classes, Markup Bold, Search Text Background
-base0A: "#f89406"
+base0A: "#ff7b2c"
 # Strings, Inherited Class, Markup Code, Diff Inserted
-base0B: "#6fd952"
+base0B: "#a5c261"
 # Support, Regex, Escape Characters, Markup Quotes
-base0C: "#59abe3"
+base0C: "#519f50"
 # Functions, Methods, Attribute IDs, Headings
-base0D: "#4183d7"
+base0D: "#2C82C9"
 # Keywords, Storage, Selector, Markup, Italic, Diff Changed
-base0E: "#bf55ec"
+base0E: "#8870ff"
 # Deprecated, Opening/Closing Embedded Language Tags
-base0F: "#E74C3C"
+base0F: "#bc9458"
