@@ -17,7 +17,7 @@ base06: "#f4f1ed"
 # Light Foreground
 base07: "#f9f7f3"
 # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-base08: "#da4939"
+base08: "#de3e2f"
 # Integers, Boolean, Constants, XML Attributes, Markup Link URL
 base09: "#59abe3"
 # Classes, Markup Bold, Search Text Background
