@@ -16,17 +16,17 @@ Plugin 'VundleVim/Vundle.vim'
 "Own plugins
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'rdnetto/YCM-Generator'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'LaTex-Box-Team/LaTeX-Box'
 Plugin 'lukas-123/dotfiles'
 Plugin 'wincent/command-t'
 Plugin 'tfnico/vim-gradle'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
