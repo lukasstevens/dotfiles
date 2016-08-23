@@ -33,9 +33,12 @@ source $CONFIG_DIR/*
 # virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
+# rust
+source $HOME/.cargo/env
+
 # End user configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/lukas/.cargo/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
 export MANPATH="/usr/local/man:$MANPATH"
 # virtualenv env variables
 export WORKON_HOME=$HOME/.virtualenvs
