@@ -371,6 +371,7 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 let g:ycm_rust_src_path = '/usr/local/src/rust/src'
 au BufRead,BufNewFile *.rs set filetype=rust
+let g:rustfmt_autosave = 1
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
