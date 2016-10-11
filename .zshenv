@@ -10,5 +10,5 @@ WORKON_HOME=~/.virtualenvs
 typeset -x VIRTUALENVWRAPPER_PYTHON 
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # Rust variables
-typeset -rx RUST_SRC_PATH
+typeset -x RUST_SRC_PATH
 RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
