@@ -5,9 +5,9 @@ MANPATH="/usr/local/man:$MANPATH"
 # virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 # virtualenv env variables
-typeset -rx WORKON_HOME 
+typeset -x WORKON_HOME 
 WORKON_HOME=~/.virtualenvs
-typeset -rx VIRTUALENVWRAPPER_PYTHON 
+typeset -x VIRTUALENVWRAPPER_PYTHON 
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # Rust variables
 typeset -rx RUST_SRC_PATH
