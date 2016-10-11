@@ -9,3 +9,5 @@ typeset -U WORKON_HOME
 WORKON_HOME=~/.virtualenvs
 typeset -U VIRTUALENVWRAPPER_PYTHON 
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
+typeset -U RUST_SRC_PATH
+RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
