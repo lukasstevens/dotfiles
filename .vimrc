@@ -375,8 +375,7 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 
 " Rust settings
-let g:rust_src_path = $RUST_SRC_PATH
-let g:racer_experimental_completer = 1
+let g:ycm_rust_src_path = $RUST_SRC_PATH
 au BufRead,BufNewFile *.rs set filetype=rust hidden
 let g:rustfmt_autosave = 1
 
