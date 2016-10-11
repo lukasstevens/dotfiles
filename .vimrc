@@ -361,16 +361,22 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" JavaScript settings
 let g:syntastic_javascript_checkers = ['standard']
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd BufWritePost *.js silent !standard-format -w % 
 set autoread
+
+" Ocaml settings
 let g:syntastic_ocaml_checkers = ['merlin']
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
-let g:ycm_rust_src_path = '/usr/local/src/rust/src'
-au BufRead,BufNewFile *.rs set filetype=rust
+
+" Rust settings
+let g:racer_experimental_completer = 1
+au BufRead,BufNewFile *.rs set filetype=rust hidden
 let g:rustfmt_autosave = 1
 
 " NERDTree Settings
