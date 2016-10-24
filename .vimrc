@@ -377,7 +377,7 @@ autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 " Rust settings
 let g:ycm_rust_src_path = $RUST_SRC_PATH
 au BufRead,BufNewFile *.rs set filetype=rust hidden
-let g:rustfmt_autosave = 1
+" let g:rustfmt_autosave = 1
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
