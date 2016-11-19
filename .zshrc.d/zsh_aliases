@@ -1,12 +1,9 @@
-alias minecraft='bash minecraft.sh'
 alias xclip='xclip -selection c'
 alias setclip='xclip -selection c'
 alias getclip='xclip -selection clipboard -o'
 livetwitcher() {
     livestreamer --default-stream best "${@:1:${#}-1}" twitch.tv/"${@: -1}"
 }
-alias python=python3
-alias pip=pip3
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
