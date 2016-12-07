@@ -12,3 +12,4 @@ VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # Rust variables
 typeset -x RUST_SRC_PATH
 RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src
+fpath+=~/.zfunc
