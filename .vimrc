@@ -26,6 +26,7 @@ Plugin 'wincent/command-t'
 Plugin 'tfnico/vim-gradle'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
+Plugin 'vimwiki/vimwiki'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -382,6 +383,9 @@ au BufRead,BufNewFile *.rs set filetype=rust hidden
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Vimwiki settings
+autocmd BufWritePost *.wiki silent Vimwiki2HTML
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
