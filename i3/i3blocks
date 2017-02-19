@@ -30,21 +30,13 @@ separator_block_width=15
 markup=pango
 align=center
 
-[separator]
-
-[keyboard]
-full_text= 
-command=dbus-send --type=method_call --print-reply --dest=org.onboard.Onboard /org/onboard/Onboard/Keyboard org.onboard.Onboard.Keyboard.ToggleVisible || onboard
-min_width=100
-align=right
-
 # Volume indicator
 #
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=
+label=Vol.
 instance=Master
 interval=once
 signal=1
@@ -53,12 +45,12 @@ signal=1
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=
+label=R
 separator=false
 interval=30
 
 [memory]
-label=
+label=S
 instance=swap
 separator=false
 interval=30
@@ -69,7 +61,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=
+label=D
 #instance=/mnt/data
 interval=30
 
