@@ -41,3 +41,6 @@ alias to='wd'
 
 # mount hdd on desktop
 alias hdd_mount='sudo mount /dev/sdb2 /mnt/hdd'
+
+# Disable glob so that [] is parsed correctly
+alias craftr='noglob craftr'
