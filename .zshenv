@@ -12,4 +12,10 @@ VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # Rust variables
 typeset -x RUST_SRC_PATH
 RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
+# Go
+typeset -x GOPATH 
+GOPATH=$HOME/src/gocode
+typeset -U PATH
+PATH="$GOPATH/bin:$PATH"
+
 fpath+=~/.zfunc
