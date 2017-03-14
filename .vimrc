@@ -389,6 +389,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Vimwiki settings
 autocmd BufWritePost *.wiki silent Vimwiki2HTML
 
+" InstantMarkdown settings
+let g:instant_markdown_autostart = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
