@@ -17,5 +17,8 @@ typeset -x GOPATH
 GOPATH=$HOME/src/gocode
 typeset -U PATH
 PATH="$GOPATH/bin:$PATH"
+# npm
+typeset -U PATH
+PATH="$HOME/.local/share/npm-packages/bin:$PATH"
 
 fpath+=~/.zfunc
