@@ -11,12 +11,13 @@ antigen use oh-my-zsh
 
 antigen theme agnoster
 
+antigen bundle cargo
 antigen bundle git-extras
 antigen bundle npm
 antigen bundle pip
 antigen bundle python
-antigen bundle wd
 antigen bundle thefuck
+antigen bundle wd
 antigen bundle dickeyxxx/gh zsh/gh
 
 antigen apply
