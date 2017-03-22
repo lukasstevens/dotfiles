@@ -268,6 +268,12 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" quickfix shortcuts
+map <leader>co :copen<cr>
+map <leader>cc :cclose<cr>
+map <leader>cn :cnext<cr>
+map <leader>cp :cprevious<cr>
+
 " Specify the behavior when switching between buffers 
 try
     set switchbuf=useopen,usetab,newtab
