@@ -375,6 +375,7 @@ let g:ycm_rust_src_path = $RUST_SRC_PATH
 au BufRead,BufNewFile *.rs set filetype=rust hidden
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
 autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
+autocmd FileType rust compiler cargo
 " let g:rustfmt_autosave = 1
 
 " NERDTree Settings
