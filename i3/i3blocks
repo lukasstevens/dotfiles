@@ -87,7 +87,7 @@ min_width=CPU 100.00%
 #
 # The battery instance defaults to 0.
 [battery]
-command=/home/lukas/src/github.com/lukas-123/i3blocks-scripts/battery.py
+command=/home/lukas/src/github.com/lukasstevens/i3blocks-scripts/battery.py
 interval=30
 
 # Date Time
