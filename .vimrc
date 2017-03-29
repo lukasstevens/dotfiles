@@ -17,14 +17,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'rdnetto/YCM-Generator'
 Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
-Plugin 'timonv/vim-cargo'
-Plugin 'LaTex-Box-Team/LaTeX-Box'
 Plugin 'wincent/command-t'
-Plugin 'tfnico/vim-gradle'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
@@ -32,7 +27,6 @@ Plugin 'suan/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
 
 " Original template from git@github.com:amix/vimrc
 " with some modifications from lukas-123
@@ -274,6 +268,12 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" quickfix shortcuts
+map <leader>co :copen<cr>
+map <leader>cc :cclose<cr>
+map <leader>cn :cnext<cr>
+map <leader>cp :cprevious<cr>
+
 " Specify the behavior when switching between buffers 
 try
     set switchbuf=useopen,usetab,newtab
@@ -379,6 +379,9 @@ autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 " Rust settings
 let g:ycm_rust_src_path = $RUST_SRC_PATH
 au BufRead,BufNewFile *.rs set filetype=rust hidden
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
+autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
+autocmd FileType rust compiler cargo
 " let g:rustfmt_autosave = 1
 
 " NERDTree Settings
