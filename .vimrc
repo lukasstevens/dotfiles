@@ -395,6 +395,9 @@ autocmd BufWritePost *.wiki silent Vimwiki2HTML
 " InstantMarkdown settings
 let g:instant_markdown_autostart = 0
 
+" A.vim alternate search paths
+let g:alternateSearchPath = g:alternateSearchPath . 'sfr:../include'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
