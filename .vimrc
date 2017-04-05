@@ -17,7 +17,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/a.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'wincent/command-t'
 Plugin 'tpope/vim-surround'
@@ -394,9 +393,6 @@ autocmd BufWritePost *.wiki silent Vimwiki2HTML
 
 " InstantMarkdown settings
 let g:instant_markdown_autostart = 0
-
-" A.vim alternate search paths
-let g:alternateSearchPath = 'sfr:../include'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
