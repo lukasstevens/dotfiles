@@ -1,4 +1,4 @@
-source /usr/share/zsh-antigen/antigen.zsh || echo "You need to install antigen first."
+source /usr/share/zsh-antigen/antigen.zsh &> /dev/null || $HOME/.local/share/zsh-antigen/antigen.zsh &> /dev/null || echo "You need to install antigen first."
 
 # Absolute path of this config
 SCRIPT_DIR=$(dirname $(realpath ${(%):-%x}))
