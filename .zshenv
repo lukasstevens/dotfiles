@@ -3,7 +3,9 @@ PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin
 typeset -U MANPATH
 MANPATH="/usr/local/man:$MANPATH"
 # virtualenv
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
+fi
 # virtualenv env variables
 typeset -x WORKON_HOME 
 WORKON_HOME=~/.virtualenvs
