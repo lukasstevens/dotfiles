@@ -24,8 +24,8 @@ typeset -U PATH
 PATH="$HOME/.local/share/npm-packages/bin:$PATH"
 # pass
 typeset -x PASSWORD_STORE_TOMB_FILE
-PASSWORD_STORE_TOMB_FILE="$HOME/ownCloud/.password.tomb"
+PASSWORD_STORE_TOMB_FILE="$HOME/ownCloud/password.tomb"
 typeset -x PASSWORD_STORE_TOMB_KEY
-PASSWORD_STORE_TOMB_KEY="$HOME/ownCloud/.password.tomb.key"
+PASSWORD_STORE_TOMB_KEY="$HOME/ownCloud/password.tomb.key"
 
 fpath+=~/.zfunc
