@@ -23,7 +23,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (atom-one-dark-theme use-package nlinum evil))))
+    (base16-theme atom-one-dark-theme use-package nlinum evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -49,6 +49,14 @@
   (nlinum-relative-on))
 
 ;; Color theme
-(use-package atom-one-dark-theme
+(use-package base16-theme
   :ensure t)
-(load-theme 'atom-one-dark t)
+(setq base16-theme-256-color-source "terminal")
+(load-theme 'base16-default-dark t)
+(set-face-background 'mode-line "black")
+(set-face-foreground 'linum "white")
+(set-face-background 'linum "brightblack")
+
+;(use-package atom-one-dark-theme
+;  :ensure t)
+;(load-theme 'atom-one-dark t)
