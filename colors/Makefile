@@ -2,11 +2,11 @@ builder=base16-builder
 brightness=-b dark
 name=my-base16
 scheme=-s $(name).corrected.yml
+targets= $(name).sh $(name).vim $(name)-theme.el
 
 .PHONY: all clean
 
-all: $(name).sh $(name).vim $(name)-theme.el
-
+all: $(targets)
 $(name)-theme.el: $(name).corrected.yml
 	$(builder) $(scheme) -t emacs $(brightness) > $(name)-theme.el
 $(name).sh: $(name).corrected.yml
@@ -18,4 +18,4 @@ $(name).corrected.yml: $(name).yml
 
 
 clean:
-	rm -rf $(name).sh $(name).vim $(name).corrected.yml
+	rm -rf $(targets) 
