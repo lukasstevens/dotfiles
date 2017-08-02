@@ -5,10 +5,10 @@ scheme=-s $(name).corrected.yml
 
 .PHONY: all clean
 
-all: $(name).sh $(name).vim $(name)-emacs
+all: $(name).sh $(name).vim $(name)-theme.el
 
-$(name)-emacs: $(name).corrected.yml
-	$(builder) $(scheme) -t emacs $(brightness) > $(name)-emacs
+$(name)-theme.el: $(name).corrected.yml
+	$(builder) $(scheme) -t emacs $(brightness) > $(name)-theme.el
 $(name).sh: $(name).corrected.yml
 	$(builder) $(scheme) -t shell $(brightness) > $(name).sh
 $(name).vim: $(name).corrected.yml
