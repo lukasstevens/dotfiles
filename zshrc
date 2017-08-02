@@ -1,10 +1,7 @@
 source /usr/share/zsh-antigen/antigen.zsh &> /dev/null || source $HOME/.local/share/zsh-antigen/antigen.zsh &> /dev/null || echo "You need to install antigen first."
 
 # Absolute path of this config
-SCRIPT_DIR=$(dirname $(realpath ${(%):-%x}))
-
-# Other paths
-CONFIG_DIR=$SCRIPT_DIR/.zshrc.d/
+script_dir=$(dirname $(realpath ${(%):-%x}))
 
 # Antigen plugins
 antigen use oh-my-zsh
@@ -25,11 +22,11 @@ antigen apply
 # User configuration
 
 # Shell coloring
-base16_shell=$SCRIPT_DIR/colors/my-base16.sh
+base16_shell=$script_dir/colors/my-base16.sh
 [[ -s $base16_shell ]] && source $base16_shell
 
 # Additional configuration
-source $CONFIG_DIR/*
+source $script_dir/zshrc.d/*
 
 # End user configuration
 
