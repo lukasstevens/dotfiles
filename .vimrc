@@ -380,11 +380,14 @@ autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 
 " Rust settings
 let g:ycm_rust_src_path = $RUST_SRC_PATH
-au BufRead,BufNewFile *.rs set filetype=rust hidden
+autocmd BufRead,BufNewFile *.rs set filetype=rust hidden
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
 autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
 autocmd FileType rust compiler cargo
 " let g:rustfmt_autosave = 1
+
+" craftr-build
+autocmd BufRead,BufNewFile Craftrfile set filetype=python hidden
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
