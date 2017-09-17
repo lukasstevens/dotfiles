@@ -18,7 +18,6 @@ link_names=(
 	"$HOME/.inputrc"
 	"$HOME/.vimrc"
 	"$HOME/.Xresources"
-	"$HOME/.xsessionrc"
 	"$HOME/.zshenv"
 	"$HOME/.zshrc")
 
@@ -29,7 +28,6 @@ file_names=(
 	"inputrc"
 	"vimrc"
 	"Xresources"
-	"xsessionrc"
 	"zshenv"
 	"zshrc")
 
@@ -39,3 +37,5 @@ do
     rm ${link_names[$i]}
     ln -s $script_path/${file_names[$i]} ${link_names[$i]}
 done
+
+echo ". $HOME/dotfiles/xsessionrc" > .xsessionrc
