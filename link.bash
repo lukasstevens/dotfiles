@@ -38,4 +38,4 @@ do
     ln -s $script_path/${file_names[$i]} ${link_names[$i]}
 done
 
-echo ". $HOME/dotfiles/xsessionrc" > .xsessionrc
+echo ". $HOME/dotfiles/xsessionrc" > "$HOME/.xsessionrc"
