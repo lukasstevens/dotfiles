@@ -8,6 +8,7 @@ rofi.color-active: #2f343f, #80cbc4, #2f343f, #446cb3, #80cbc4
 rofi.color-urgent: #2f343f, #ff1844, #2f343f, #446cb3, #ff1844
 rofi.font: Inconsolata 14
 rofi.eh: 2
+rofi.matching: fuzzy
 
 
 ! ------------------------------------------------------------------------------
