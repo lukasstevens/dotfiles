@@ -19,13 +19,9 @@ typeset -x GOPATH
 GOPATH=$HOME/src/gocode
 typeset -U PATH
 PATH="$GOPATH/bin:$PATH"
-# npm
-typeset -U PATH
-PATH="$HOME/.local/share/npm-packages/bin:$PATH"
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # pass
 typeset -x PASSWORD_STORE_TOMB_FILE
 PASSWORD_STORE_TOMB_FILE="$HOME/ownCloud/password.tomb"
