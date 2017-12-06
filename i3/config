@@ -193,10 +193,6 @@ exec --no-startup-id owncloud
 exec --no-startup-id nm-applet
 exec --no-startup-id compton
 
-# start programs with keypresses
-bindsym $mod+Shift+t exec --no-startup-id "keepass2 --auto-type"
-bindsym $mod+Shift+v exec --no-startup-id "keepass2 --auto-type-selected"
-
 # default Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D default sset Master 3%+ unmute; $signal"
