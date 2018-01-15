@@ -190,7 +190,7 @@ bar {
 }
 
 # startup programs
-exec --no-startup-id owncloud
+exec --no-startup-id nextcloud 
 exec --no-startup-id nm-applet
 exec --no-startup-id compton
 
