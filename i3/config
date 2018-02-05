@@ -229,4 +229,5 @@ exec_always feh --bg-scale http://www.hdwallpapers.in/walls/solid_abstract_color
 # HydraBot
 bindsym $mod+F1 exec curl -L --max-time 1 "http://hydra.stiglmair.com/commands?command=sounds%20nomana&userId=117645465612189702&token=$(cat ~/.hydrabottoken)"
 bindsym $mod+F2 exec curl -L --max-time 1 "http://hydra.stiglmair.com/commands?command=sounds%20sayan&userId=117645465612189702&token=$(cat ~/.hydrabottoken)"
+bindsym $mod+F3 exec curl -L --max-time 1 "http://hydra.stiglmair.com/commands?command=sounds%20bier&userId=117645465612189702&token=$(cat ~/.hydrabottoken)"
 
