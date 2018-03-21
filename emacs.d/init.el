@@ -43,12 +43,9 @@
 ;; Line numbers
 (use-package nlinum
   :ensure t
-  :config
-  (global-nlinum-mode t)
-  (nlinum-relative-setup-evil)
-  (nlinum-relative-on))
-
+  :init
+  (setq nlinum-relative-redisplay-delay 0)
+)
 ;; Color theme
-(use-package atom-one-dark-theme
-  :ensure t)
-(when (not window-system) (set-background-color "black"))
+;;(use-package atom-one-dark-theme
+;;  :ensure t)
