@@ -18,7 +18,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
 call plug#end()
 
 " Original template from git@github.com:amix/vimrc
