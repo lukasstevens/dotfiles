@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'sebastianmoarkow/deoplete-rust', { 'for': 'rust'}
+Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust'}
 Plug 'wincent/command-t'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
