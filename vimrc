@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'sebastianmoarkow/deoplete-rust', { 'for': 'rust'}
 Plug 'wincent/command-t'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -375,12 +376,11 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
 
 " Rust settings
-let g:ycm_rust_src_path = $RUST_SRC_PATH
 autocmd BufRead,BufNewFile *.rs set filetype=rust hidden
-"autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
-"autocmd BufWrite *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
 autocmd FileType rust compiler cargo
-" let g:rustfmt_autosave = 1
+let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
+let g:deoplete#sources#rust#documentation_max_height = 20
 
 " craftr-build
 autocmd BufRead,BufNewFile Craftrfile set filetype=python hidden
