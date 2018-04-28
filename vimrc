@@ -20,6 +20,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
+Plug 'lervag/vimtex', { 'for': 'tex' }
 call plug#end()
 
 " Original template from git@github.com:amix/vimrc
