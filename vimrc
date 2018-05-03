@@ -163,6 +163,7 @@ let base16colorspace=256
 try
     colorscheme my-base16
 catch
+    echom "colorscheme my-base16 not found."
 endtry
 
 " Set extra options when running in GUI mode
