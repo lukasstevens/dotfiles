@@ -128,6 +128,8 @@ bindsym $mod+z workspace back_and_forth
 # Move from monitor to monitor
 bindsym $mod+Control+l move workspace to output left
 bindsym $mod+Control+h move workspace to output right
+bindsym $mod+Control+j move workspace to output down 
+bindsym $mod+Control+k move workspace to output up 
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
