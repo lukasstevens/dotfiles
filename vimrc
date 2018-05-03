@@ -13,7 +13,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust'}
-Plug 'wincent/command-t'
+Plug 'wincent/command-t', {
+    \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+    \ }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
