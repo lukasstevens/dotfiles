@@ -370,8 +370,16 @@ function! Auto_complete_string()
     if pumvisible()
         return "\<C-n>"
     else
+        return "\<C-x>\<C-o>\<C-r>=Auto_complete_opened()\<CR>"
         return "\<C-x>\<C-o>\<C-r>\<CR>"
     end
+endfunction
+
+function! Auto_complete_opened()
+    if pumvisible()
+        return "\<Down>"
+    end
+    return ""
 endfunction
 
 inoremap <expr> <Nul> Auto_complete_string()
