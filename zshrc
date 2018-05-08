@@ -32,7 +32,7 @@ antigen bundle pip
 antigen bundle python
 antigen bundle thefuck
 antigen bundle wd
-antigen bundle dickeyxxx/gh zsh/gh
+antigen bundle jdxcode/gh zsh/gh
 
 antigen apply
 
@@ -46,5 +46,7 @@ base16_shell=$script_dir/colors/my-base16.sh
 source $script_dir/zshrc.d/*
 
 # OPAM configuration
-command -v opam &> /dev/null && eval `opam config env`
+if [ -x "$(command -v opam)" ]; then
+    eval `opam config env`
+fi
 
