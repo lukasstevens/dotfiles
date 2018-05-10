@@ -45,8 +45,3 @@ base16_shell=$script_dir/colors/my-base16.sh
 # Additional configuration
 source $script_dir/zshrc.d/*
 
-# OPAM configuration
-if [ -x "$(command -v opam)" ]; then
-    eval `opam config env`
-fi
-
