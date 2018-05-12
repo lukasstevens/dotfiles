@@ -36,8 +36,6 @@ antigen bundle jdxcode/gh zsh/gh
 
 antigen apply
 
-# User configuration
-
 # Shell coloring
 base16_shell=$script_dir/colors/my-base16.sh
 [[ -s $base16_shell ]] && source $base16_shell
