@@ -211,10 +211,9 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# scratchpart terminal 
+# scratchpad terminal 
 exec --no-startup-id gnome-terminal --role=scratchterm
-for_window [window_role="scratchterm"] floating enable
-for_window [window_role="scratchterm"] resize grow left 300, resize grow right 300, resize grow down 200, resize grow up 200, move scratchpad
+for_window [window_role="scratchterm"] floating enable, move scratchpad 
 bindsym $mod+t [window_role="scratchterm"] scratchpad show 
 
 # Assign windows to workspaces automatically
