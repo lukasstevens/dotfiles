@@ -216,6 +216,11 @@ exec --no-startup-id gnome-terminal --role=scratchterm
 for_window [window_role="scratchterm"] floating enable, move scratchpad 
 bindsym $mod+t [window_role="scratchterm"] scratchpad show 
 
+# keepassxc on scratchpad
+exec --no-startup-id keepassxc
+for_window [class="keepassxc"] move scratchpad
+bindsym $mod+p [class="keepassxc"] scratchpad show 
+
 # Assign windows to workspaces automatically
 assign [class="Thunderbird"] $w7
 assign [class="discord"] $w6
