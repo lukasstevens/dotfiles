@@ -25,5 +25,6 @@ PASSWORD_STORE_TOMB_FILE="$HOME/ownCloud/password.tomb"
 typeset -x PASSWORD_STORE_TOMB_KEY
 PASSWORD_STORE_TOMB_KEY="$HOME/ownCloud/password.tomb.key"
 
+eval `opam config env`
 
 fpath+=~/.zfunc
