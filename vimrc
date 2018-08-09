@@ -392,7 +392,7 @@ autocmd BufWritePost *.js silent !standard-format -w %
 set autoread
 
 " Ocaml settings
-let g:syntastic_ocaml_checkers = ['merlin']
+let g:syntastic_ocaml_checkers = ['merlin', 'camlp4']
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
