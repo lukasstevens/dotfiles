@@ -431,6 +431,8 @@ endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
 let g:syntastic_ocaml_checkers = ['merlin']
 
+autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
+
 " Rust settings
 autocmd BufRead,BufNewFile *.rs set filetype=rust hidden
 autocmd FileType rust compiler cargo
