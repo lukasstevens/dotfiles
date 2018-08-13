@@ -218,7 +218,8 @@ bindsym $mod+t [window_role="scratchterm"] scratchpad show
 
 # keepassxc on scratchpad
 exec --no-startup-id keepassxc
-for_window [class="keepassxc"] move scratchpad
+# The title regex keeps auto-type windows on current workspace
+for_window [class="keepassxc" title="^(?!Auto-Type)"] move scratchpad
 bindsym $mod+p [class="keepassxc"] scratchpad show 
 
 # Assign windows to workspaces automatically
