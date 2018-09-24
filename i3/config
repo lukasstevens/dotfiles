@@ -179,7 +179,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color     
 # finds out, if available)
 bar {
         tray_output primary
-        font pango:$font 11, pango:FontAwesome 11
+        font pango:$font 11.5
         position top 
         status_command i3blocks -c ~/.config/i3/i3blocks
 		colors {
@@ -192,19 +192,14 @@ bar {
 		}
 }
 
-# startup programs
-exec --no-startup-id nextcloud 
-exec --no-startup-id nm-applet
-exec --no-startup-id compton
-
 # default Audio controls
 set $signal pkill -SIGRTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D default sset Master 3%+ unmute; $signal"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -D default sset Master 3%- unmute; $signal"
 bindsym XF86AudioMute exec --no-startup-id "amixer -D default sset Master toggle; $signal"
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +100" 
-bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 100-"
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10" 
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -218,12 +213,13 @@ bindsym $mod+t [window_role="scratchterm"] scratchpad show
 
 # keepassxc on scratchpad
 exec --no-startup-id keepassxc
-# The title regex keeps auto-type windows on current workspace
-for_window [class="keepassxc" title="^(?!Auto-Type)"] move scratchpad
+# Keep dialog windows on current workspace
+for_window [class="keepassxc"] move scratchpad
+for_window [class="keepassxc" window_type="dialog"] scratchpad show
 bindsym $mod+p [class="keepassxc"] scratchpad show 
 
 # Assign windows to workspaces automatically
-assign [class="Thunderbird"] $w7
+assign [class="Thunderbird|Daily"] $w7
 assign [class="discord"] $w6
 assign [class="Firefox"] $w8
 assign [class="Telegram"] $w6
