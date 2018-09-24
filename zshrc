@@ -1,7 +1,4 @@
-source /usr/share/zsh-antigen/antigen.zsh &> /dev/null || source $HOME/.local/share/zsh-antigen/antigen.zsh &> /dev/null || echo "You need to install antigen first."
-
-# Absolute path of this config
-script_dir=$(dirname $(realpath ${(%):-%x}))
+source $ANTIGEN_DIR/antigen.zsh &> /dev/null || echo "You need to install antigen first."
 
 # Powerlevel9k settings
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
@@ -37,9 +34,30 @@ antigen bundle jdxcode/gh zsh/gh
 antigen apply
 
 # Shell coloring
-base16_shell=$script_dir/colors/my-base16.sh
-[[ -s $base16_shell ]] && source $base16_shell
+source $HOME/dotfiles/colors/my-base16.sh
 
-# Additional configuration
-source $script_dir/zshrc.d/*
+# Aliases
+alias xclip='xclip -selection c'
+alias setclip='xclip -selection c'
+alias getclip='xclip -selection clipboard -o'
 
+alias ll='ls -l'
+alias la='ls -la'
+alias lah='ls -lah'
+alias l='ls -CF'
+
+alias bm='wd add'
+alias to='wd'
+
+# go up directories
+..(){
+    cd ../$@
+}
+
+..2()
+{
+    cd ../../$@
+}
+
+# Use terminal mode for emacs
+alias tmacs='emacs -nw'

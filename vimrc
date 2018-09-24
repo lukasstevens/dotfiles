@@ -23,6 +23,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
 Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'LnL7/vim-nix', { 'for': 'nix' }
 call plug#end()
 
 " Original template from git@github.com:amix/vimrc
@@ -162,11 +163,11 @@ syntax enable
 set background=dark
 set t_Co=256
 let base16colorspace=256
-try
-    colorscheme my-base16
-catch
-    echom "colorscheme my-base16 not found."
-endtry
+"try
+"    colorscheme my-base16
+"catch
+"    echom "colorscheme my-base16 not found."
+"endtry
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -426,7 +427,11 @@ endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
 " ## added by OPAM user-setup for vim / ocp-indent ## 9ade0cc325114e0f2fd34d987d75a7ba ## you can edit, but keep this line
 if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/home/lukas/.opam/system/share/vim/syntax/ocp-indent.vim"
+    try
+        source "/home/lukas/.opam/system/share/vim/syntax/ocp-indent.vim"
+    catch
+        echom "ocp-indent not installed"
+    endtry
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
 let g:syntastic_ocaml_checkers = ['merlin']
