@@ -163,11 +163,11 @@ syntax enable
 set background=dark
 set t_Co=256
 let base16colorspace=256
-"try
-"    colorscheme my-base16
-"catch
-"    echom "colorscheme my-base16 not found."
-"endtry
+try
+    colorscheme my-base16
+catch
+    echom "colorscheme my-base16 not found."
+endtry
 
 " Set extra options when running in GUI mode
 if has("gui_running")
