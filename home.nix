@@ -7,6 +7,7 @@ in {
     [
       # Desktop programs
       # pkgs.alacritty
+      pkgs.evince
       pkgs.firefox
       pkgs.gnome3.gnome-terminal
       #(isabelle.overrideAttrs (oldAttrs: rec {
@@ -24,8 +25,9 @@ in {
       pkgs.thunderbird
 
       # Developer utilities
-      pkgs.cargo
       pkgs.cmake
+      pkgs.rustup
+      pkgs.texlive.combined.scheme-full
 
       # Command line utilities
       pkgs.antigen
@@ -43,6 +45,7 @@ in {
       # Window manager
       pkgs.base16-builder
       pkgs.gnome3.networkmanagerapplet
+      pkgs.hicolor-icon-theme
       pkgs.i3
       pkgs.i3lock
       pkgs.i3blocks
@@ -143,7 +146,7 @@ in {
 
     programs.home-manager = {
       enable = true;
-      path = "https://github.com/rycee/home-manager/archive/release-18.03.tar.gz";
+      path = "https://github.com/rycee/home-manager/archive/master.tar.gz";
     };
   }
 
