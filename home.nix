@@ -6,7 +6,7 @@ in {
   home.packages =
     [
       # Desktop programs
-      # pkgs.alacritty
+      pkgs.alacritty
       pkgs.evince
       pkgs.firefox
       pkgs.gnome3.gnome-terminal
@@ -65,7 +65,7 @@ in {
     ];
 
     home.sessionVariables = {
-      TERMINAL = "gnome-terminal";
+      TERMINAL = "alacritty";
       EDITOR = "vim";
       I3BLOCKS_SCRIPT_DIR = "${pkgs.i3blocks}/libexec/i3blocks/";
     };
