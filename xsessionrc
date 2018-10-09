@@ -1,1 +1,2 @@
 setxkbmap -option "lv3:caps_switch"
+export ANTIGEN_DIR=/usr/share/zsh-antigen
