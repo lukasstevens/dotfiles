@@ -459,6 +459,8 @@ autocmd BufWritePost *.wiki silent Vimwiki2HTML
 " InstantMarkdown settings
 let g:instant_markdown_autostart = 0
 
+" Disable latex checkers
+let g:syntastic_tex_checkers = []
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
