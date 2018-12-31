@@ -6,11 +6,6 @@ MANPATH="/usr/local/man:$MANPATH"
 if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
     source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
-# virtualenv env variables
-typeset -x WORKON_HOME 
-WORKON_HOME=~/.virtualenvs
-typeset -x VIRTUALENVWRAPPER_PYTHON 
-VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # Rust variables
 typeset -x RUST_SRC_PATH
 RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
