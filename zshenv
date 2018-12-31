@@ -1,25 +1,13 @@
 typeset -U PATH 
-PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:$PATH"
+PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
 typeset -U MANPATH
 MANPATH="/usr/local/man:$MANPATH"
-# virtualenv
-if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
-fi
 # Rust variables
 typeset -x RUST_SRC_PATH
 RUST_SRC_PATH=~/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
-# Go
-typeset -x GOPATH 
-GOPATH=$HOME/src/gocode
-typeset -U PATH
-PATH="$GOPATH/bin:$PATH"
-# pass
-typeset -x PASSWORD_STORE_TOMB_FILE
-PASSWORD_STORE_TOMB_FILE="$HOME/ownCloud/password.tomb"
-typeset -x PASSWORD_STORE_TOMB_KEY
-PASSWORD_STORE_TOMB_KEY="$HOME/ownCloud/password.tomb.key"
 
 eval `opam config env`
+
+eval "$(direnv hook zsh)"
 
 fpath+=~/.zfunc
