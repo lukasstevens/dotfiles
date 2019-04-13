@@ -10,4 +10,12 @@ eval `opam config env`
 
 eval "$(direnv hook zsh)"
 
+VIRTUALENVWRAPPER_PYTHON="$(which python3)"
+source "$(which virtualenvwrapper.sh)"
+
 fpath+=~/.zfunc
+
+# Workaround for vim + virtualenv: https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
