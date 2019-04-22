@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   configHome = ~/dotfiles;
@@ -21,6 +21,7 @@ in {
       #}))
       pkgs.jetbrains.idea-community
       pkgs.keepassxc
+      pkgs.lean
       pkgs.tdesktop
       pkgs.thunderbird
 
@@ -30,7 +31,6 @@ in {
       pkgs.texlive.combined.scheme-full
 
       # Command line utilities
-      pkgs.antigen
       pkgs.ffmpeg
       pkgs.thefuck
       pkgs.tree
@@ -86,6 +86,7 @@ in {
     home.file = {
       ".vimrc".source = "${configHome}/vimrc";
       ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
+      ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
     };
 
     services.network-manager-applet.enable = true;
@@ -108,7 +109,7 @@ in {
 
     qt = {
       enable = true;
-      useGtkTheme = true;
+      #platformTheme = "gtk";
     };
 
     xsession = {
@@ -133,7 +134,7 @@ in {
       }; 
       initExtra = (builtins.readFile (configHome + /zshrc)) + ''
         vim() {
-          nix-shell -p python36Packages.neovim --run "vim $@"
+          nix-shell -p python37Packages.pynvim --run "vim $@"
         }
       '';
     };
@@ -148,6 +149,13 @@ in {
       enable = true;
       path = "https://github.com/rycee/home-manager/archive/master.tar.gz";
     };
+
+    nixpkgs.config.allowUnfree = true;
+
+    programs.vscode = {
+      enable = true;
+    };
+
   }
 
 
