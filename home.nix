@@ -50,7 +50,6 @@ in {
       pkgs.i3lock
       pkgs.i3blocks
       pkgs.rofi
-      pkgs.xorg.xbacklight
 
       # Fonts
       pkgs.fira
