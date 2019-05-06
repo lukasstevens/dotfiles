@@ -90,6 +90,8 @@ in {
 
     services.network-manager-applet.enable = true;
 
+    services.nextcloud-client.enable = true;
+
     gtk = {
       enable = true;
       font = {
@@ -108,7 +110,7 @@ in {
 
     qt = {
       enable = true;
-      #platformTheme = "gtk";
+      platformTheme = "gtk";
     };
 
     xsession = {
@@ -122,8 +124,6 @@ in {
         config = null;
       };
     };
-
-    services.owncloud-client.enable = true;
 
     programs.zsh = {
       enable = true;
