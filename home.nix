@@ -41,6 +41,7 @@ in {
       pkgs.xclip
       pkgs.xorg.xprop
       pkgs.youtube-dl
+      pkgs.gnupg
 
       # Window manager
       pkgs.base16-builder
@@ -56,9 +57,10 @@ in {
       pkgs.fira-code
       pkgs.inconsolata
       pkgs.powerline-fonts
+      
     ];
 
-    fonts.fontconfig.enableProfileFonts = true;
+    fonts.fontconfig.enable = true;
 
     nixpkgs.overlays = [
     ];
@@ -91,6 +93,8 @@ in {
     services.network-manager-applet.enable = true;
 
     services.nextcloud-client.enable = true;
+
+    services.gpg-agent.enable = true;
 
     gtk = {
       enable = true;
