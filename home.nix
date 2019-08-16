@@ -57,6 +57,8 @@ in {
       pkgs.fira-code
       pkgs.inconsolata
       pkgs.powerline-fonts
+      pkgs.lmodern
+      pkgs.lmmath
       
     ];
 
@@ -80,6 +82,10 @@ in {
       enable = true;
       configFile."i3/i3blocks".source = "${configHome}/i3/i3blocks";
       configFile."alacritty/alacritty.yml".source = "${configHome}/alacritty.yml";
+      configFile."mimeapps.list".text="""
+      [Default Applications]
+      application/pdf=evince.desktop;
+      """;
     };
 
     xresources.extraConfig = (builtins.readFile (configHome + /Xresources));
