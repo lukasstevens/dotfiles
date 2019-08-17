@@ -26,6 +26,7 @@ antigen bundle cargo
 antigen bundle git-extras
 antigen bundle npm
 antigen bundle pip
+antigen bundle pyenv
 antigen bundle python
 antigen bundle thefuck
 antigen bundle wd
