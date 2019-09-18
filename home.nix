@@ -10,18 +10,10 @@ in {
       pkgs.evince
       pkgs.firefox
       pkgs.gnome3.gnome-terminal
-      #(isabelle.overrideAttrs (oldAttrs: rec {
-      #  name = "isabelle-2018";
-      #  dirname = "Isabelle2018";
-      #  src = fetchurl {
-      #    url = "http://isabelle.in.tum.de/website-${dirname}/dist/${dirname}_linux.tar.gz";
-      #    sha256 = "1928lwrw1v1p9s23kix30ncpqm8djmrnjixj82f3ni2a8sc3hrsp";
-      #  };
-      #  sourceRoot = "${dirname}";
-      #}))
       pkgs.jetbrains.idea-community
       pkgs.keepassxc
       pkgs.lean
+      pkgs.nextcloud-client
       pkgs.tdesktop
       pkgs.thunderbird
 
@@ -51,6 +43,7 @@ in {
       pkgs.i3lock
       pkgs.i3blocks
       pkgs.rofi
+      pkgs.glibcLocales
 
       # Fonts
       pkgs.fira
@@ -71,6 +64,7 @@ in {
       TERMINAL = "alacritty";
       EDITOR = "vim";
       I3BLOCKS_SCRIPT_DIR = "${pkgs.i3blocks}/libexec/i3blocks/";
+      LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
     home.keyboard = {
@@ -82,15 +76,18 @@ in {
       enable = true;
       configFile."i3/i3blocks".source = "${configHome}/i3/i3blocks";
       configFile."alacritty/alacritty.yml".source = "${configHome}/alacritty.yml";
-      configFile."mimeapps.list".text="""
+      configFile."mimeapps.list".text=''
       [Default Applications]
       application/pdf=evince.desktop;
-      """;
+      '';
     };
 
     xresources.extraConfig = (builtins.readFile (configHome + /Xresources));
 
     home.file = {
+      ".profile".source = "${configHome}/profile";
+      ".zprofile".source = "${configHome}/zprofile";
+      ".zshenv".source = "${configHome}/zshenv";
       ".vimrc".source = "${configHome}/vimrc";
       ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
@@ -125,9 +122,6 @@ in {
 
     xsession = {
       enable = true;
-      initExtra = ''
-        keepassxc &
-      '';
       windowManager.i3 = {
         enable = true;
         extraConfig = (builtins.readFile (configHome + /i3/config));
