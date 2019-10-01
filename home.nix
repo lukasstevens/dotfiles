@@ -78,7 +78,7 @@ in {
       configFile."alacritty/alacritty.yml".source = "${configHome}/alacritty.yml";
       configFile."mimeapps.list".text=''
       [Default Applications]
-      application/pdf=evince.desktop;
+      application/pdf=org.gnome.Evince.desktop;
       '';
     };
 
