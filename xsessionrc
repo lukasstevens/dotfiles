@@ -1,9 +1,0 @@
-setxkbmap -option "lv3:caps_switch"
-export ANTIGEN_DIR=/usr/share/zsh-antigen
-export I3BLOCKS_SCRIPT_DIR=/usr/share/i3blocks
-nm-applet &
-nextcloud &
-
-if [ -e "$HOME/.xsession-local" ]; then
-    . "$HOME/.xsession-local"
-fi
