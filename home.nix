@@ -1,3 +1,5 @@
+# Link this file to ~/.config/nixpkgs/home.nix to use it with home-manager
+
 { config, pkgs, ... }:
 
 let
