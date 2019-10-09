@@ -124,6 +124,7 @@ in {
 
     xsession = {
       enable = true;
+      initExtra = ". .xsessionrc";
       windowManager.i3 = {
         enable = true;
         extraConfig = (builtins.readFile (configHome + /i3/config));
