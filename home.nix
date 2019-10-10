@@ -26,6 +26,7 @@ in {
 
       # Command line utilities
       pkgs.ffmpeg
+      pkgs.rename
       pkgs.thefuck
       pkgs.tree
       (pkgs.vimHugeX.override {
