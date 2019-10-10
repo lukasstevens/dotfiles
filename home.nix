@@ -4,6 +4,7 @@
 
 let
   configHome = ~/dotfiles;
+  i3blocks-contrib = pkgs.callPackage ./nix/i3blocks {};
 in {
   home.packages =
     [
@@ -55,7 +56,6 @@ in {
       pkgs.powerline-fonts
       pkgs.lmodern
       pkgs.lmmath
-      
     ];
 
     fonts.fontconfig.enable = true;
@@ -66,7 +66,7 @@ in {
     home.sessionVariables = {
       TERMINAL = "alacritty";
       EDITOR = "vim";
-      I3BLOCKS_SCRIPT_DIR = "${pkgs.i3blocks}/libexec/i3blocks/";
+      I3BLOCKS_SCRIPT_DIR = "${i3blocks-contrib}";
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 

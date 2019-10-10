@@ -25,7 +25,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=$I3BLOCKS_SCRIPT_DIR/$BLOCK_NAME
+command=$I3BLOCKS_SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 align=center
@@ -36,7 +36,7 @@ align=center
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=Vol.
+label=Vol. 
 instance=Master
 interval=once
 signal=1
@@ -45,12 +45,12 @@ signal=1
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=R
+label=RAM 
 separator=false
 interval=30
 
 [memory]
-label=S
+label=Swap 
 instance=swap
 separator=false
 interval=30
@@ -61,7 +61,7 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=D
+label=Drive 
 #instance=/mnt/data
 interval=30
 
