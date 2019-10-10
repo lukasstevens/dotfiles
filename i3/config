@@ -207,7 +207,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # scratchpad terminal 
-exec --no-startup-id alacritty --title scratchterm
+exec --no-startup-id alacritty --title scratchterm --dimensions 100 30
 for_window [title="scratchterm"] floating enable, move scratchpad 
 bindsym $mod+t [title="scratchterm"] scratchpad show 
 
