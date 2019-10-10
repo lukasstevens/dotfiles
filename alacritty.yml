@@ -35,6 +35,12 @@ font:
 
 visual_bell:
     duration: 0
+
+url:
+    launcher:
+        program: xdg-open
+        args: []
+    modifiers: Control
        
 key_bindings:
     - { key: V,        mods: Control|Shift,    action: Paste               }
