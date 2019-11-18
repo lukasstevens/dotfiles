@@ -32,7 +32,7 @@ in {
       pkgs.thefuck
       pkgs.tree
       (pkgs.vimHugeX.override {
-          python = pkgs.python3;
+          python = pkgs.python37;
           ruby = pkgs.ruby;
       })
       pkgs.xclip
