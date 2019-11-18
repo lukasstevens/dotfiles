@@ -22,6 +22,7 @@ in {
 
       # Developer utilities
       pkgs.cmake
+      pkgs.python37
       pkgs.ruby
       pkgs.rustup
       pkgs.texlive.combined.scheme-full
