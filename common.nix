@@ -72,11 +72,7 @@ in {
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
-    home.keyboard = {
-      layout = "de";
-      options = [ "lv3:caps_switch" ];
-    };
-
+    
     xdg = {
       enable = true;
       configFile."i3/i3blocks".source = "${configHome}/i3/i3blocks";
@@ -127,7 +123,6 @@ in {
 
     xsession = {
       enable = true;
-      initExtra = ". .xsessionrc";
       windowManager.i3 = {
         enable = true;
         extraConfig = (builtins.readFile (configHome + /i3/config));
