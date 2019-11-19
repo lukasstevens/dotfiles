@@ -92,6 +92,7 @@ in {
       ".vimrc".source = "${configHome}/vimrc";
       ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
+      ".XCompose".source = "${configHome}/XCompose";
     };
 
     services.network-manager-applet.enable = true;

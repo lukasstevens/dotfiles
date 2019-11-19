@@ -5,7 +5,7 @@
   
   home.keyboard = {
     layout = "us";
-    options = [ "compose:caps_switch" ];
+    options = [ "compose:caps" ];
   };
 
   xsession.initExtra = ''
