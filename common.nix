@@ -4,7 +4,7 @@
 
 let
   configHome = ~/dotfiles;
-  i3blocks-contrib = pkgs.callPackage ./nix/i3blocks {};
+  i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks" {};
 in {
   home.packages =
     [
@@ -27,6 +27,7 @@ in {
       pkgs.texlive.combined.scheme-full
 
       # Command line utilities
+      pkgs.acpi
       pkgs.ffmpeg
       pkgs.rename
       pkgs.thefuck

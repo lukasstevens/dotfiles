@@ -87,7 +87,7 @@ min_width=CPU 100.00%
 #
 # The battery instance defaults to 0.
 [battery]
-interval=30
+interval=15
 
 # Date Time
 #
