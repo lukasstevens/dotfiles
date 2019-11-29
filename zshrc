@@ -29,6 +29,7 @@ antigen bundle npm
 antigen bundle pip
 antigen bundle pyenv
 antigen bundle python
+antigen bundle stack
 antigen bundle thefuck
 antigen bundle wd
 antigen bundle jdxcode/gh zsh/gh
