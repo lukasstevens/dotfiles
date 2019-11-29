@@ -25,6 +25,7 @@ Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'HE7086/cyp-vim-syntax'
 call plug#end()
 
 
