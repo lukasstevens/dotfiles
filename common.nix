@@ -89,6 +89,7 @@ in {
       ".profile".source = "${configHome}/profile";
       ".zprofile".source = "${configHome}/zprofile";
       ".zshenv".source = "${configHome}/zshenv";
+      ".bashrc".source = "${configHome}/bashrc";
       ".vimrc".source = "${configHome}/vimrc";
       ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
