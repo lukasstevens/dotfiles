@@ -214,7 +214,7 @@ catch
 endtry
 
 " Return to last edit position when opening files (You want this!)
- autocmd BufReadPost *
+autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal! g`\"" |
       \ endif
@@ -299,6 +299,9 @@ let g:syntastic_javascript_checkers = ['standard']
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd BufWritePost *.js silent !standard-format -w % 
 set autoread
+
+" Haskell settings
+autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
 
 " Ocaml settings
 "" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
