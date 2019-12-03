@@ -21,6 +21,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
+Plug 'dense-analysis/ale'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
@@ -256,16 +257,6 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Syntastic related settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " deoplete
 let g:deoplete#enable_at_startup = 1
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -291,12 +282,6 @@ endfunction
 
 inoremap <expr> <Nul> Auto_complete_string()
 inoremap <expr> <C-Space> Auto_complete_string()
-
-" JavaScript settings
-let g:syntastic_javascript_checkers = ['standard']
-autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
-autocmd BufWritePost *.js silent !standard-format -w % 
-set autoread
 
 " Haskell settings
 autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
@@ -367,9 +352,6 @@ autocmd BufWritePost *.wiki silent Vimwiki2HTML
 
 " InstantMarkdown settings
 let g:instant_markdown_autostart = 0
-
-" Disable latex checkers
-let g:syntastic_tex_checkers = []
 
 " Helper functions
 function! CmdLine(str)
