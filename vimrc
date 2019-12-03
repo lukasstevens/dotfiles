@@ -10,7 +10,6 @@ endif
 " plug.vim Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust'}
 Plug 'wincent/command-t', {
@@ -25,7 +24,6 @@ Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'LnL7/vim-nix', { 'for': 'nix' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'dense-analysis/ale'
 Plug 'HE7086/cyp-vim-syntax'
 call plug#end()
 
