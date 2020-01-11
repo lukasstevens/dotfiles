@@ -35,6 +35,12 @@
     wget
   ];
 
+  services.compton = {
+    enable = true;
+    backend = "glx";
+    vSync = true;
+  };
+
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   services.ntp.enable = true;
@@ -54,6 +60,11 @@
   services.xserver = {
     enable = true;
     layout = "de";
+    # For intel graphics
+    # videoDrivers = [ "intel" ];
+    # deviceSection = ''
+    #   Option "TearFree" "True"
+    # '';
     xkbOptions = "lv3:caps_switch";
     libinput.enable = true;
     displayManager.lightdm.enable = true;
