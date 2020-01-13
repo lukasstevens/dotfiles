@@ -9,7 +9,7 @@
   };
 
   xsession.initExtra = ''
-xrandr --output DP-1 --mode 2560x1440 --primary
-xrandr --output HDMI-1 --right-of DP-1 --auto
+xrandr --output DP1 --mode 2560x1440 --primary
+xrandr --output HDMI1 --right-of DP1 --auto
     '';
 }
