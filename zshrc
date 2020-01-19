@@ -23,7 +23,6 @@ antigen use oh-my-zsh
 antigen theme bhilburn/powerlevel9k powerlevel9k
 
 antigen bundle cargo
-antigen bundle fzf
 antigen bundle git-extras
 antigen bundle npm
 antigen bundle pip
