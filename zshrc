@@ -1,4 +1,4 @@
-source $ANTIGEN_DIR/antigen.zsh &> /dev/null || echo "You need to install antigen first."
+source "$ANTIGEN_DIR/antigen.zsh" &> /dev/null || echo "You need to install antigen first."
 
 # Powerlevel9k settings
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
@@ -36,7 +36,7 @@ antigen bundle jdxcode/gh zsh/gh
 antigen apply
 
 # Shell coloring
-source $HOME/dotfiles/colors/my-base16.sh
+source "$HOME/dotfiles/colors/my-base16.sh"
 
 # Aliases
 alias xclip='xclip -selection c'
