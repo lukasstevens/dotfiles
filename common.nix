@@ -5,6 +5,7 @@
 let
   configHome = ~/dotfiles;
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks" {};
+  signal-desktop = pkgs.callPackage "${configHome}/nix/signal-desktop"{};
 in {
   home.packages =
     [
@@ -17,6 +18,7 @@ in {
       pkgs.keepassxc
       pkgs.lean
       pkgs.nextcloud-client
+      signal-desktop
       pkgs.tdesktop
       pkgs.thunderbird
 
