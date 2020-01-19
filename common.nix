@@ -90,7 +90,6 @@ in {
     home.file = {
       ".profile".source = "${configHome}/profile";
       ".zprofile".source = "${configHome}/zprofile";
-      ".zshenv".source = "${configHome}/zshenv";
       ".bashrc".source = "${configHome}/bashrc";
       ".vimrc".source = "${configHome}/vimrc";
       ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
@@ -145,6 +144,11 @@ in {
           nix-shell -p python37Packages.pynvim --run "vim $@"
         }
       '';
+    };
+
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
     };
 
     programs.git = {
