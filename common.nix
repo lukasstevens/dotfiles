@@ -30,7 +30,7 @@ in {
 
       # Command line utilities
       pkgs.acpi
-      pkgs.ffmpeg
+      pkgs.ffmpeg-full
       pkgs.rename
       pkgs.thefuck
       pkgs.tree
