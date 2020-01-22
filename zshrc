@@ -4,6 +4,7 @@ source "$ANTIGEN_DIR/antigen.zsh" &> /dev/null || echo "You need to install anti
 P9K_DIR_SHORTEN_STRATEGY="truncate_middle"
 P9K_DIR_SHORTEN_LENGTH=4
 P9K_PROMPT_ON_NEWLINE=true
+P9K_GITSTATUS_DIR=$HOME/.antigen/bundles/romkatv/gitstatus
 P9K_LEFT_PROMPT_ELEMENTS=(context dir virtualenv gitstatus status)
 P9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time time)
 P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON=''
@@ -31,7 +32,9 @@ antigen bundle python
 antigen bundle stack
 antigen bundle thefuck
 antigen bundle wd
+
 antigen bundle jdxcode/gh zsh/gh
+antigen bundle romkatv/gitstatus
 
 antigen apply
 
