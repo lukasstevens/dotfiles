@@ -10,6 +10,6 @@
 
   xsession.initExtra = ''
 xrandr --output DP-1 --mode 3440x1440 --primary
-xrandr --output HDMI-4 --left-of DP-2 --auto
+xrandr --output HDMI-4 --left-of DP-1 --auto
     '';
 }
