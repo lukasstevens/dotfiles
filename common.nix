@@ -5,7 +5,10 @@
 let
   configHome = ~/dotfiles;
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks" {};
-  signal-desktop = pkgs.callPackage "${configHome}/nix/signal-desktop"{};
+  signal-desktop = pkgs.callPackage "${configHome}/nix/signal-desktop" {};
+  polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
+  isabelle-devel = pkgs.callPackage "${configHome}/nix/isabelle-devel" {
+    polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;   };
 in {
   home.packages =
     [
@@ -166,6 +169,14 @@ in {
 
     programs.vscode = {
       enable = true;
+      userSettings = {
+        "telemetry.enableCrashReporter" = false;
+        "telemetry.enableTelemetry" = false;
+        "update.mode" = "manual";
+        "isabelle.home" = "${isabelle-devel}";
+      };
+      extensions = [
+      ];
     };
 
   }
