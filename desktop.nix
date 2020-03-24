@@ -4,8 +4,8 @@
   imports = [ ~/dotfiles/common.nix ];
   
   home.keyboard = {
-    layout = "de";
-    options = [ "lvl3:caps" ];
+    layout = "us";
+    options = [ "compose:caps" ];
   };
 
   xsession.initExtra = ''
