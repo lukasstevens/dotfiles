@@ -23,8 +23,9 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
+  services.ntp.enable = true;
+
   environment.systemPackages = with pkgs; [
-    acpilight
     gcc
     gnumake
     git
@@ -35,6 +36,8 @@
     wget
   ];
 
+  programs.firejail.enable = true;
+
   services.compton = {
     enable = true;
     backend = "glx";
@@ -43,29 +46,37 @@
 
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
-  services.ntp.enable = true;
-
   services.printing.enable = true;
 
-  services.dnscrypt-proxy.enable = true;
+  services.dnscrypt-proxy2 = {
+    enable = true;
+    settings = {
+      ipv6_servers = true;
+      require_dnssec = true;
+      sources.public-resolvers = {
+        urls = [
+          "https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md"
+        ];
+        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
+        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+      };
+    };
+  };
+
+  systemd.services.dnscrypt-proxy2.serviceConfig = {
+    StateDirectory = "dnscrypt-proxy2";
+  };
+
+  # Enable backlight
+  hardware.brightnessctl.enable = true;
 
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable backlight
-  hardware.brightnessctl.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "de";
-    # For intel graphics
-    # videoDrivers = [ "intel" ];
-    # deviceSection = ''
-    #   Option "TearFree" "True"
-    # '';
-    xkbOptions = "lv3:caps_switch";
     libinput.enable = true;
     displayManager.lightdm.enable = true;
   };
@@ -88,5 +99,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "20.03"; # Did you read the comment?
 }
