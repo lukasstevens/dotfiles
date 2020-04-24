@@ -5,7 +5,7 @@
 
 let
   configHome = ~/dotfiles;
-  i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks" {};
+  i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
         name = "nixpkgs-master";
         url = https://github.com/NixOS/nixpkgs/archive/f74f2f354866c828248a419ef9a2cbddc793b7f9.tar.gz;
