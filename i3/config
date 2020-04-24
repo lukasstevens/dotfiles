@@ -214,9 +214,9 @@ bindsym $mod+t [title="scratchterm"] scratchpad show
 # keepassxc on scratchpad
 exec --no-startup-id keepassxc
 # Keep dialog windows on current workspace
-for_window [class="keepassxc"] move scratchpad
-for_window [class="keepassxc" window_type="dialog"] scratchpad show
-bindsym $mod+p [class="keepassxc"] scratchpad show 
+for_window [class="KeePassXC"] move scratchpad
+for_window [class="KeePassXC" window_type="dialog"] scratchpad show
+bindsym $mod+p [class="KeePassXC"] scratchpad show 
 
 # Assign windows to workspaces automatically
 assign [class="Thunderbird|Daily"] $w7
