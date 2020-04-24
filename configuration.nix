@@ -78,6 +78,7 @@
   services.xserver = {
     enable = true;
     libinput.enable = true;
+    desktopManager.xterm.enable = true;
     displayManager.lightdm.enable = true;
   };
 
