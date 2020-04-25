@@ -81,6 +81,10 @@ in {
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
+    home.keyboard = {
+      layout = "us";
+      options = [ "compose:caps" ];
+    };
     
     xdg = {
       enable = true;
