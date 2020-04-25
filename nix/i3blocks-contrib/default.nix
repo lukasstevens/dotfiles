@@ -1,16 +1,19 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenv, fetchFromGitHub, pkgs, ... }:
 
 stdenv.mkDerivation rec {
   name = "i3blocks-contrib-fork";
 
   src = fetchFromGitHub {
-    owner = "lukasstevens";
+    owner = "vivien";
     repo = "i3blocks-contrib";
-    rev = "f390e0ee829938016aa827488b51aee1d426ccd2";
-    sha256 = "0jrm5fp97r4311r0a0gl5m11z1h8ipy79lrq8yk25fvv58gpf9c8";
+    rev = "d600a2c481e489bacf1118e68063ccf3750da4a1";
+    sha256 = "16lka1iqp6m1n6wiv5sgqybx1agl80g3j1jkl2kk2xb4wdx4zbch";
   };
 
-  installPhase = "cp -r . $out";
+  installPhase = ''
+    make install PREFIX=$out
+    '';
+  propagatedBuildInputs = [ pkgs.perl ];
 
   meta = with stdenv.lib; {
     description = "i3blocks-contrib directory";

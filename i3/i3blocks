@@ -25,7 +25,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=$I3BLOCKS_SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
+command=$I3BLOCKS_SCRIPT_DIR/libexec/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 align=center
@@ -74,7 +74,7 @@ interval=5
 #
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-[cpu_usage]
+[cpu_usage2]
 label=CPU
 interval=10
 min_width=CPU 100.00%
