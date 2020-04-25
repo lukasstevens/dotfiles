@@ -78,7 +78,6 @@ in {
     home.sessionVariables = {
       TERMINAL = "alacritty";
       EDITOR = "vim";
-      I3BLOCKS_SCRIPT_DIR = "${i3blocks-contrib}";
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
@@ -89,7 +88,9 @@ in {
     
     xdg = {
       enable = true;
-      configFile."i3/i3blocks".source = "${configHome}/i3/i3blocks";
+      configFile."i3/i3blocks".text = ''
+        command=${i3blocks-contrib}/libexec/i3blocks/$BLOCK_NAME
+        '' + builtins.readFile (configHome + /i3/i3blocks);
       configFile."alacritty/alacritty.yml".source = "${configHome}/alacritty.yml";
       configFile."mimeapps.list".text=''
       [Default Applications]
