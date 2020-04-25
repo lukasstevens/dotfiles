@@ -1,7 +1,7 @@
 { stdenv, fetchFromGitHub, pkgs, ... }:
 
 stdenv.mkDerivation rec {
-  name = "i3blocks-contrib-fork";
+  name = "i3blocks-contrib";
 
   src = fetchFromGitHub {
     owner = "vivien";
