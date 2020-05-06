@@ -9,7 +9,7 @@ include "%L"
 <Multi_key> <U> <e> : "Ü"
 
 #typography
-<Multi_key> <-> <-> <->: "—"
+<Multi_key> <minus> <minus> <minus>: "—"
 
 #Mathbb
 <Multi_key> <b> <b> <R> : "ℝ"
@@ -82,7 +82,7 @@ include "%L"
 #math prefix
 <Multi_key> <m> <i> <n> <f> : "∞"
 <Multi_key> <m> <i> <n> : "∈"
-<Multi_key> <m> <o> <+> : "⊕"
+<Multi_key> <m> <o> <plus> : "⊕"
 <Multi_key> <m> <o> : "∘"
 
 <Multi_key> <m> <d>: "∂"
@@ -94,7 +94,7 @@ include "%L"
 <Multi_key> <s> <u> <m>: "∑"
 <Multi_key> <p> <r> <o> <d>: "∏"
 
-#math non-prefixed
+#math nonminusprefixed
 <Multi_key> <s> <q> <r> <t> : "√"
 <Multi_key> <i> <n> <f>: "∞"
 
@@ -102,8 +102,8 @@ include "%L"
 <Multi_key> <n> <e>: "≠"
 <Multi_key> <e> <q> <u>: "≡"
 <Multi_key> <s> <i> <m>: "∼"
-<Multi_key> <~> <=>: "≃"
-<Multi_key> <~> <~>: "≈"
+<Multi_key> <asciitilde> <equal>: "≃"
+<Multi_key> <asciitilde> <asciitilde>: "≈"
 
 <Multi_key> <d> <e> <f>: "≔"
 
@@ -117,7 +117,7 @@ include "%L"
 #arrows
 
 <Multi_key> <i> <f> <f> : "⟺"
-<Multi_key> <=> <>>: "⇒"
+<Multi_key> <equal> <greater>: "⇒"
 <Multi_key> <i> <n> <j>: "↪"
 <Multi_key> <m> <a> <p> <t> <o>: "↦"
 <Multi_key> <h> <a> <r> <p>: "⇀"
@@ -138,24 +138,24 @@ include "%L"
 <Multi_key> <n> <i> <n>: "∉"
 <Multi_key> <i> <n> <c> <l>: "⊂"
 
-<Multi_key> <o> <+> : "⊕"
-<Multi_key> <o> <*> : "⨂"
-<Multi_key> <o> <.> : "⨀"
+<Multi_key> <o> <plus> : "⊕"
+<Multi_key> <o> <asterisk> : "⨂"
+<Multi_key> <o> <period> : "⨀"
 
 <Multi_key> <o> <r>: "∨"
 <Multi_key> <a> <n> <d>: "∧"
 
-<Multi_key> <c> <+>: "⊕"
-<Multi_key> <c> <->: "⊖"
+<Multi_key> <c> <plus>: "⊕"
+<Multi_key> <c> <minus>: "⊖"
 <Multi_key> <c> <x>: "⊗"
-<Multi_key> <c> </>: "⊘"
+<Multi_key> <c> <slash>: "⊘"
 <Multi_key> <c> <d>: "⊙"
 <Multi_key> <c> <c>:"⊚"
-<Multi_key> <c> <*>: "⊛"
-<Multi_key> <c> <=>: "⊜"
+<Multi_key> <c> <asterisk>: "⊛"
+<Multi_key> <c> <equal>: "⊜"
 
 
-#math bracket-like
+#math bracketminuslike
 <Multi_key> <b> <r> <a>: "⟨"
 <Multi_key> <k> <e> <t>: "⟩"
 
