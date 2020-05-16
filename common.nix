@@ -92,6 +92,7 @@ in {
         command=${i3blocks-contrib}/libexec/i3blocks/$BLOCK_NAME
         '' + builtins.readFile (configHome + /i3/i3blocks);
       configFile."alacritty/alacritty.yml".source = "${configHome}/alacritty.yml";
+      configFile."nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       configFile."mimeapps.list".text=''
       [Default Applications]
       application/pdf=org.gnome.Evince.desktop;
@@ -104,7 +105,6 @@ in {
       ".profile".source = "${configHome}/profile";
       ".zprofile".source = "${configHome}/zprofile";
       ".bashrc".source = "${configHome}/bashrc";
-      ".nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
       ".XCompose".source = "${configHome}/XCompose";
     };
