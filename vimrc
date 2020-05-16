@@ -1,34 +1,5 @@
 set nocompatible              " be iMproved, required
 
-" Install plug.vim automatically
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" plug.vim Plugins
-call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust'}
-Plug 'wincent/command-t', {
-    \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-    \ }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc' " This requires 'neovim' on pip
-Plug 'dense-analysis/ale'
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'LnL7/vim-nix', { 'for': 'nix' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'HE7086/cyp-vim-syntax'
-call plug#end()
-
-
 let vimrcdir = fnamemodify(resolve(expand('<sfile>:p')),":h")
 
 " Sets how many lines of history VIM has to remember
@@ -53,7 +24,7 @@ command W w !sudo tee % > /dev/null
 autocmd InsertEnter,WinEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-" Set 7 lines above and below the cursor - when moving vertically using j/k
+" Set lines above and below the cursor - when moving vertically using j/k
 set scrolloff=10
 
 " Turn on the WiLd menu
@@ -250,9 +221,6 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
-
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>

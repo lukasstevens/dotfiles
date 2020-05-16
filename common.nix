@@ -9,9 +9,9 @@ let
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
         name = "nixpkgs-master";
-        url = https://github.com/NixOS/nixpkgs/archive/f74f2f354866c828248a419ef9a2cbddc793b7f9.tar.gz;
+        url = https://github.com/NixOS/nixpkgs/archive/9fbb82f46ef990d74a69692fa230e76d10e8f16d.tar.gz;
         # Hash obtained using `nix-prefetch-url --unpack <url>`
-        sha256 = "1jxb2kb83mrmzg06l7c1zw9pikk2l1lpg8dl0rvni65bgmlxf7xy";
+        sha256 = "1652ydrs0mn8afdvvvjddg3p8vxa8wjl05wvkd4c5c6pli8wpi3v";
       }) {};
   polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
   isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
@@ -31,7 +31,7 @@ in {
       pkgs.lean
       pkgs.nextcloud-client
       pkgs-master.signal-desktop
-	  pkgs-master.tdesktop
+      pkgs-master.tdesktop
       pkgs.thunderbird
 
       # Developer utilities
@@ -46,10 +46,6 @@ in {
       pkgs.rename
       pkgs.thefuck
       pkgs.tree
-      (pkgs.vimHugeX.override {
-          python = pkgs.python37;
-          ruby = pkgs.ruby;
-      })
       pkgs.xclip
       pkgs.xorg.xprop
       pkgs.youtube-dl
@@ -81,7 +77,7 @@ in {
 
     home.sessionVariables = {
       TERMINAL = "alacritty";
-      EDITOR = "vim";
+      EDITOR = "nvim";
       LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     };
 
@@ -108,8 +104,7 @@ in {
       ".profile".source = "${configHome}/profile";
       ".zprofile".source = "${configHome}/zprofile";
       ".bashrc".source = "${configHome}/bashrc";
-      ".vimrc".source = "${configHome}/vimrc";
-      ".vim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
+      ".nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
       ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
       ".XCompose".source = "${configHome}/XCompose";
     };
@@ -150,17 +145,38 @@ in {
       };
     };
 
+    programs.neovim = {
+      enable = true;
+      package = pkgs-master.neovim;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+      withPython3 = true;
+      withRuby = true;
+      configure = {
+          customRC = (builtins.readFile (configHome + /vimrc));
+
+           plug.plugins = with pkgs.vimPlugins; [
+                vim-nix
+                nerdtree
+                rust-vim
+                command-t
+                deoplete-nvim
+                ale
+                vimtex
+                haskell-vim
+           ];
+
+      };
+    };
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
       sessionVariables = {
         ANTIGEN_DIR = "${pkgs.antigen}/share/antigen/";
       }; 
-      initExtra = (builtins.readFile (configHome + /zshrc)) + ''
-        vim() {
-          nix-shell -p python37Packages.pynvim --run "vim $@"
-        }
-      '';
+      initExtra = (builtins.readFile (configHome + /zshrc));
     };
 
     programs.fzf = {
