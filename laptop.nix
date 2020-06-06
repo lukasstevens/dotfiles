@@ -1,6 +1,6 @@
 { ... }:
 
 {
-  imports = [ ~/dotfiles/common.nix ];
+  imports = [ ~/dotfiles/home.nix ];
   
 }
