@@ -7,14 +7,10 @@ window:
         y: 2
     decorations: "full"
 
-tabspaces: 4
-
 scrolling:
   history: 10000
 
   multiplier: 3
-
-  auto_scroll: false
 
 font:
     normal:
