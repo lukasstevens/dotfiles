@@ -198,8 +198,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -D default sset Master
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -D default sset Master 3%- unmute; $signal"
 bindsym XF86AudioMute exec --no-startup-id "amixer -D default sset Master toggle; $signal"
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10" 
-bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +10%" 
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 10%-"
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
