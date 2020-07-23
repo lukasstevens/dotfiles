@@ -190,6 +190,12 @@ in {
       userEmail = "mail@lukas-stevens.de";
     };
 
+    programs.mercurial = {
+      enable = true;
+      userName = "Lukas Stevens";
+      userEmail = "mail@lukas-stevens.de";
+    };
+
     programs.home-manager = {
       enable = true;
       path = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz";
