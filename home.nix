@@ -9,9 +9,9 @@ let
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
         name = "nixpkgs-master";
-        url = https://github.com/NixOS/nixpkgs/archive/9fbb82f46ef990d74a69692fa230e76d10e8f16d.tar.gz;
+        url = https://github.com/NixOS/nixpkgs/archive/a31736120c5de6e632f5a0ba1ed34e53fc1c1b00.tar.gz;
         # Hash obtained using `nix-prefetch-url --unpack <url>`
-        sha256 = "1652ydrs0mn8afdvvvjddg3p8vxa8wjl05wvkd4c5c6pli8wpi3v";
+        sha256 = "0xfjizw6w84w1fj47hxzw2vwgjlszzmsjb8k8cgqhb379vmkxjfl";
       }) {};
   polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
   isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
@@ -221,9 +221,12 @@ in {
         "telemetry.enableTelemetry" = false;
         "update.mode" = "manual";
         #"isabelle.home" = "${isabelle-devel}";
+        "haskell.indentationRules.enabled" = false;
+        "haskell.trace.server" = "messages";
       };
       extensions = [
         pkgs.vscode-extensions.justusadam.language-haskell
+        pkgs.vscode-extensions.vscodevim.vim
       ];
     };
 
