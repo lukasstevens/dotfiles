@@ -44,6 +44,7 @@ in {
       pkgs.cmake
       pkgs.ruby
       pkgs.rustup
+      pkgs.stack
       pkgs.texlive.combined.scheme-full
 
       # Command line utilities
@@ -150,27 +151,25 @@ in {
 
     programs.neovim = {
       enable = true;
-      package = pkgs-master.neovim;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
       withPython3 = true;
       withRuby = true;
-      configure = {
-          customRC = (builtins.readFile (configHome + /vimrc));
-
-           plug.plugins = with pkgs.vimPlugins; [
-                vim-nix
-                nerdtree
-                rust-vim
-                command-t
-                deoplete-nvim
-                ale
-                vimtex
-                haskell-vim
-           ];
-
-      };
+      extraConfig = builtins.readFile (configHome + /vimrc);
+      plugins = with pkgs.vimPlugins; [
+        vim-nix
+        nerdtree
+        rust-vim
+        command-t
+        deoplete-nvim
+        ale
+        {
+          plugin = vimtex;
+          config = "let g:tex_flavor = 'latex'";
+        }
+        haskell-vim
+      ];
     };
 
     programs.zsh = {
@@ -201,7 +200,7 @@ in {
 
     programs.home-manager = {
       enable = true;
-      path = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz";
+      path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
     };
 
     nixpkgs.config.allowUnfree = true;
