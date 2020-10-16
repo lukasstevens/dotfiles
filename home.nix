@@ -13,9 +13,13 @@ let
         # Hash obtained using `nix-prefetch-url --unpack <url>`
         sha256 = "0xfjizw6w84w1fj47hxzw2vwgjlszzmsjb8k8cgqhb379vmkxjfl";
       }) {};
-  polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
-  isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
-    polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
+  # polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
+  #isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
+  #  polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
+  #};
+  polyml-devel = pkgs.callPackage "${configHome}/nix/polyml-devel" {};
+  isabelle-devel = pkgs.callPackage "${configHome}/nix/isabelle-devel" {
+    polyml = polyml-devel; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
   };
 in {
 
@@ -26,7 +30,8 @@ in {
       pkgs.evince
       pkgs.firefox
       pkgs.gnome3.gnome-terminal
-      isabelle-2020
+      # isabelle-2020
+      isabelle-devel
       pkgs.jetbrains.idea-community
       pkgs.keepassxc
       pkgs.lean
