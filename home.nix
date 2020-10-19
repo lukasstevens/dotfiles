@@ -227,7 +227,7 @@ in {
         #"isabelle.home" = "${isabelle-devel}";
         "haskell.indentationRules.enabled" = false;
         "haskell.trace.server" = "messages";
-        "editor.fontFamily" = "Droid Sans Mono for Powerline, monospace";
+        "editor.fontFamily" = "Inconsolata for Powerline, monospace";
       };
       extensions = [
         pkgs.vscode-extensions.justusadam.language-haskell
