@@ -203,6 +203,7 @@ in {
       path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
     };
 
+
     programs.vscode = {
       enable = true;
       package = pkgs-master.vscodium;
@@ -213,14 +214,23 @@ in {
         "haskell.trace.server" = "messages";
         "editor.fontFamily" = "Inconsolata for Powerline, monospace";
       };
-      extensions = [
-        pkgs-master.vscode-extensions.haskell.haskell
-        pkgs-master.vscode-extensions.justusadam.language-haskell
-        pkgs-master.vscode-extensions.vscodevim.vim
-        pkgs-master.vscode-extensions.ms-vsliveshare.vsliveshare
-      ];
+      extensions =
+        let
+          vsliveshare = pkgs-master.callPackage ./nix/vsliveshare {
+            mktplcRef = {
+              name = "vsliveshare";
+              publisher = "ms-vsliveshare";
+              version = "1.0.3014";
+              sha256 = "0gibxf5lxn9vcqrvc93v19wa2v2grlbdjn578jrs9g8fbg50546f";
+            };
+          };
+        in [
+          pkgs-master.vscode-extensions.haskell.haskell
+          pkgs-master.vscode-extensions.justusadam.language-haskell
+          pkgs-master.vscode-extensions.vscodevim.vim
+          vsliveshare
+        ];
     };
-
   }
 
 
