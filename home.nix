@@ -9,9 +9,9 @@ let
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
         name = "nixpkgs-master";
-        url = https://github.com/NixOS/nixpkgs/archive/a31736120c5de6e632f5a0ba1ed34e53fc1c1b00.tar.gz;
+        url = https://github.com/NixOS/nixpkgs/archive/a2ee5cbb0513ee0623bc93aa1af74f172080ce6b.tar.gz;
         # Hash obtained using `nix-prefetch-url --unpack <url>`
-        sha256 = "0xfjizw6w84w1fj47hxzw2vwgjlszzmsjb8k8cgqhb379vmkxjfl";
+        sha256 = "18f09wck7h89y202hhf67iwqd6i6bhd47pz19mbc4q682x77q6fy";
       }) {};
   # polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
   #isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
@@ -203,26 +203,10 @@ in {
       path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
     };
 
-    nixpkgs.config.allowUnfree = true;
-
-    imports =
-      let
-        fix-vsliveshare = fetchTarball {
-          url = "https://github.com/msteen/nixos-vsliveshare/tarball/a54bfc74c5e7ae056f61abdb970c6cd6e8fb5e53";
-          sha256 = "0rvgp2k5fh1drmm8908ghzaz295b1q1ccw172850phn3chkw5kpx";
-        };
-      in [ "${fix-vsliveshare}/modules/vsliveshare/home.nix" ];
-
-    services.vsliveshare = {
-      enable = true;
-      extensionsDir = "$HOME/.vscode/extensions";
-    };
-
     programs.vscode = {
       enable = true;
+      package = pkgs-master.vscodium;
       userSettings = {
-        "telemetry.enableCrashReporter" = false;
-        "telemetry.enableTelemetry" = false;
         "update.mode" = "manual";
         #"isabelle.home" = "${isabelle-devel}";
         "haskell.indentationRules.enabled" = false;
@@ -230,8 +214,10 @@ in {
         "editor.fontFamily" = "Inconsolata for Powerline, monospace";
       };
       extensions = [
-        pkgs.vscode-extensions.justusadam.language-haskell
-        pkgs.vscode-extensions.vscodevim.vim
+        pkgs-master.vscode-extensions.haskell.haskell
+        pkgs-master.vscode-extensions.justusadam.language-haskell
+        pkgs-master.vscode-extensions.vscodevim.vim
+        pkgs-master.vscode-extensions.ms-vsliveshare.vsliveshare
       ];
     };
 
