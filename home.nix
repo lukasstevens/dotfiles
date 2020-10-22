@@ -190,6 +190,9 @@ in {
       enable = true;
       userName = "Lukas Stevens";
       userEmail = "mail@lukas-stevens.de";
+      extraConfig = {
+        pull.rebase = true;
+      };
     };
 
     programs.mercurial = {
