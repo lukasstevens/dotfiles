@@ -30,22 +30,12 @@ set scrolloff=10
 " Turn on the WiLd menu
 set wildmenu
 
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
-
 "Always show current position
 set ruler
-
+" Show line numbers
+set number
 " Height of the command bar
 set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -75,7 +65,6 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-
 " Don't redraw while executing macros (good performance config)
 set lazyredraw 
 
@@ -91,8 +80,6 @@ set tm=500
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-set number
-
 " Color theme
 set background=dark
 set t_Co=256
@@ -103,16 +90,8 @@ catch
     echom "colorscheme my-base16 not found."
 endtry
 
-if has("gui_running") " Set extra options when running in GUI mode
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
-
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
@@ -121,19 +100,12 @@ set nobackup
 set nowb
 set noswapfile
 
-
 " Use spaces instead of tabs
 set expandtab
 set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
-
 
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
@@ -144,12 +116,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -163,10 +129,12 @@ let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
+" A buffer becomes hidden when it is abandoned
+set hid
+" Close the current buffer
+map <leader>bd :Bclose<cr>
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
@@ -254,72 +222,14 @@ inoremap <expr> <C-Space> Auto_complete_string()
 " Haskell settings
 autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
 
-" Ocaml settings
-"" ## added by OPAM user-setup for vim / base ## 93ee63e278bdfc07d1139a748ed3fff2 ## you can edit, but keep this line
-"let s:opam_share_dir = system("opam config var share")
-"let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
-"
-"let s:opam_configuration = {}
-"
-"function! OpamConfOcpIndent()
-"  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
-"endfunction
-"let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
-"
-"function! OpamConfOcpIndex()
-"  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
-"endfunction
-"let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
-"
-"function! OpamConfMerlin()
-"  let l:dir = s:opam_share_dir . "/merlin/vim"
-"  execute "set rtp+=" . l:dir
-"endfunction
-"let s:opam_configuration['merlin'] = function('OpamConfMerlin')
-"
-"let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-"let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
-"let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
-"for tool in s:opam_packages
-"  " Respect package order (merlin should be after ocp-index)
-"  if count(s:opam_available_tools, tool) > 0
-"    call s:opam_configuration[tool]()
-"  endif
-"endfor
-"" ## end of OPAM user-setup addition for vim / base ## keep this line
-"" ## added by OPAM user-setup for vim / ocp-indent ## 9ade0cc325114e0f2fd34d987d75a7ba ## you can edit, but keep this line
-"if count(s:opam_available_tools,"ocp-indent") == 0
-"    try
-"        source "/home/lukas/.opam/system/share/vim/syntax/ocp-indent.vim"
-"    catch
-"        echom "ocp-indent not installed"
-"    endtry
-"endif
-"" ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
-"let g:syntastic_ocaml_checkers = ['merlin']
-
-autocmd FileType ocaml setlocal tabstop=2 shiftwidth=2 expandtab
-
 " Rust settings
 autocmd BufRead,BufNewFile *.rs set filetype=rust hidden
 autocmd FileType rust compiler cargo
-let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
-let g:deoplete#sources#rust#documentation_max_height = 20
-
-" craftr-build
-autocmd BufRead,BufNewFile Craftrfile set filetype=python hidden
 
 " NERDTree Settings
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Vimwiki settings
-autocmd BufWritePost *.wiki silent Vimwiki2HTML
-
-" InstantMarkdown settings
-let g:instant_markdown_autostart = 0
 
 " Helper functions
 function! CmdLine(str)
