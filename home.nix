@@ -62,13 +62,14 @@ in {
 
     # Window manager
     pkgs.base16-builder
+    pkgs.glibcLocales
     pkgs.gnome3.networkmanagerapplet
     pkgs.hicolor-icon-theme
     pkgs.i3
     pkgs.i3lock
     pkgs.i3blocks
+    pkgs.playerctl
     pkgs.rofi
-    pkgs.glibcLocales
 
     # Fonts
     pkgs.fira
