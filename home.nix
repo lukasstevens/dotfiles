@@ -176,7 +176,6 @@ in {
     userEmail = "mail@lukas-stevens.de";
   };
 
-
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -195,6 +194,11 @@ in {
       { plugin = vimtex; config = "let g:tex_flavor = 'latex'"; }
       haskell-vim
     ];
+  };
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = "AddKeysToAgent yes";
   };
 
   programs.vscode = {
