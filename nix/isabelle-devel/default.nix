@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "isabelle";
-  version = "16-Oct-2020";
+  version = "03-Nov-2020";
 
   dirname = "Isabelle_${version}";
 
   src = fetchurl {
       url = "https://isabelle.sketis.net/devel/release_snapshot/${dirname}_linux.tar.gz";
-      sha256 = "0x65knsg5mcadwnpj2v6pcb8i06lm6agmsbi7a1yx97nliih9ja9";
+      sha256 = "1f7dxs697m3qaxdr1c985gdzrs5zgxjg0qzgv7a4831k78qizywj";
     };
 
   buildInputs = [ perl polyml z3 ]

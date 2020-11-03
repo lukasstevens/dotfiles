@@ -34,7 +34,6 @@ in {
     pkgs.gnome3.gnome-terminal
     # isabelle-2020
     isabelle-devel
-    pkgs.jetbrains.idea-community
     pkgs.keepassxc
     pkgs.lean
     pkgs.nextcloud-client
