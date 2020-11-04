@@ -3,13 +3,13 @@
 
 stdenv.mkDerivation rec {
   pname = "isabelle";
-  version = "03-Nov-2020";
+  version = "04-Nov-2020";
 
   dirname = "Isabelle_${version}";
 
   src = fetchurl {
       url = "https://isabelle.sketis.net/devel/release_snapshot/${dirname}_linux.tar.gz";
-      sha256 = "1f7dxs697m3qaxdr1c985gdzrs5zgxjg0qzgv7a4831k78qizywj";
+      sha256 = "0av66496vbgqba1m13pqvclp63skhmrznds7pwvfl721fmdcwf87";
     };
 
   buildInputs = [ perl polyml z3 ]
@@ -59,6 +59,9 @@ stdenv.mkDerivation rec {
     mv $TMP/$dirname $out
     cd $out/$dirname
     bin/isabelle install $out/bin
+    mv $out/bin/isabelle $out/bin/isabelle-devel
+    mv $out/bin/isabelle_java $out/bin/isabelle-devel_java
+    mv $out/bin/isabelle_scala_script $out/bin/isabelle-devel_scala_script
   '';
 
   meta = {
