@@ -221,6 +221,7 @@ inoremap <expr> <C-Space> Auto_complete_string()
 
 " Haskell settings
 autocmd FileType haskell setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType rust compiler stack
 
 " Rust settings
 autocmd BufRead,BufNewFile *.rs set filetype=rust hidden
