@@ -3,7 +3,7 @@
 
 stdenv.mkDerivation rec {
   pname = "isabelle";
-  version = "04-Nov-2020";
+  version = "09-Nov-2020";
 
   dirname = "Isabelle_${version}";
 
