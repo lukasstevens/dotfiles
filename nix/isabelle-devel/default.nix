@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
       url = "https://isabelle.sketis.net/devel/release_snapshot/${dirname}_linux.tar.gz";
-      sha256 = "0av66496vbgqba1m13pqvclp63skhmrznds7pwvfl721fmdcwf87";
+      sha256 = "0asxivamb8jrv5if4yls5b0s56wjjl5y73gswahpkc10hjmj7k1y";
     };
 
   buildInputs = [ perl polyml z3 ]
