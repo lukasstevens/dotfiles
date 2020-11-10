@@ -220,8 +220,28 @@ in {
             sha256 = "0gibxf5lxn9vcqrvc93v19wa2v2grlbdjn578jrs9g8fbg50546f";
           };
         };
+
+        hoogle = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+          mktplcRef = {
+            name = "hoogle-vscode";
+            publisher = "jcanero";
+            version = "0.0.7";
+            sha256 = "0ndapfrv3j82792hws7b3zki76m2s1bfh9dss1xjgcal1aqajka1";
+          };
+        };
+
+        haskell-linter = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+          mktplcRef = {
+            name = "haskell-linter";
+            publisher = "hoovercj";
+            version = "0.0.6";
+            sha256 = "0fb71cbjx1pyrjhi5ak29wj23b874b5hqjbh68njs61vkr3jlf1j";
+          };
+        };
       in [
         pkgs-master.vscode-extensions.haskell.haskell
+        haskell-linter
+        hoogle
         pkgs-master.vscode-extensions.justusadam.language-haskell
         pkgs-master.vscode-extensions.vscodevim.vim
         vsliveshare
