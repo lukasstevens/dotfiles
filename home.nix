@@ -216,7 +216,7 @@ in {
           mktplcRef = {
             name = "vsliveshare";
             publisher = "ms-vsliveshare";
-            version = "1.0.3014";
+            version = "1.0.3121";
             sha256 = "0gibxf5lxn9vcqrvc93v19wa2v2grlbdjn578jrs9g8fbg50546f";
           };
         };
