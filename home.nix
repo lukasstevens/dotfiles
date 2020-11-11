@@ -209,6 +209,7 @@ in {
       "haskell.indentationRules.enabled" = false;
       "haskell.trace.server" = "messages";
       "editor.fontFamily" = "Inconsolata for Powerline, monospace";
+      "extensions.autoUpdate" = false;
     };
     extensions =
       let
@@ -217,7 +218,7 @@ in {
             name = "vsliveshare";
             publisher = "ms-vsliveshare";
             version = "1.0.3121";
-            sha256 = "0gibxf5lxn9vcqrvc93v19wa2v2grlbdjn578jrs9g8fbg50546f";
+            sha256 = "0jmbp2nph786n6gzd58yhmx22p2h87s98xq4shjn42blrkcgnb7z";
           };
         };
 
