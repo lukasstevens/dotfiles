@@ -231,17 +231,16 @@ in {
           };
         };
 
-        haskell-linter = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+        haskell-language-server = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
-            name = "haskell-linter";
-            publisher = "hoovercj";
-            version = "0.0.6";
-            sha256 = "0fb71cbjx1pyrjhi5ak29wj23b874b5hqjbh68njs61vkr3jlf1j";
+            name = "haskell";
+            publisher = "haskell";
+            version = "1.2.0";
+            sha256 = "0vxsn4s27n1aqp5pp4cipv804c9cwd7d9677chxl0v18j8bf7zly";
           };
         };
       in [
-        pkgs-master.vscode-extensions.haskell.haskell
-        haskell-linter
+        haskell-language-server
         hoogle
         pkgs-master.vscode-extensions.justusadam.language-haskell
         pkgs-master.vscode-extensions.vscodevim.vim
