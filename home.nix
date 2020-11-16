@@ -17,10 +17,10 @@ let
   isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
     polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
   };
-  polyml-devel = pkgs.callPackage "${configHome}/nix/polyml-devel" {};
-  isabelle-devel = pkgs.callPackage "${configHome}/nix/isabelle-devel" {
-    polyml = polyml-devel; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
-  };
+  #polyml-devel = pkgs.callPackage "${configHome}/nix/polyml-devel" {};
+  #isabelle-devel = pkgs.callPackage "${configHome}/nix/isabelle-devel" {
+  #  polyml = polyml-devel; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
+  #};
 in {
   programs.home-manager = {
     enable = true;
@@ -33,7 +33,7 @@ in {
     pkgs.firefox
     pkgs.gnome3.gnome-terminal
     isabelle-2020
-    isabelle-devel
+    # isabelle-devel
     pkgs.keepassxc
     pkgs.lean
     pkgs.nextcloud-client
