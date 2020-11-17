@@ -214,11 +214,11 @@ in {
     extensions =
       let
         vsliveshare = pkgs-master.callPackage ./nix/vsliveshare {
-          mktplcRef = {
+            mktplcRef = {
             name = "vsliveshare";
             publisher = "ms-vsliveshare";
-            version = "1.0.3121";
-            sha256 = "0jmbp2nph786n6gzd58yhmx22p2h87s98xq4shjn42blrkcgnb7z";
+            version = "1.0.2902";
+            sha256 = "0fx2vi0wxamcwqcgcx7wpg8hi7f1c2pibrmd2qy2whilpsv3gzmb";
           };
         };
 

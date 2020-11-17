@@ -83,7 +83,8 @@
     displayManager.lightdm.enable = true;
   };
 
-  security.pam.services.lightdm.enableKwallet = true;
+  services.gnome3.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   users.mutableUsers = false;
   users.extraUsers.lukas = {
