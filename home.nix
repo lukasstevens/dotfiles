@@ -173,6 +173,10 @@ in {
     enable = true;
     userName = "Lukas Stevens";
     userEmail = "mail@lukas-stevens.de";
+    extraConfig = '' 
+      [extensions]
+      rebase = 
+    '';
   };
 
   programs.neovim = {
