@@ -74,9 +74,10 @@ in {
     pkgs.fira
     pkgs.fira-code
     pkgs.inconsolata
-    pkgs.powerline-fonts
+    pkgs.league-of-moveable-type
     pkgs.lmodern
     pkgs.lmmath
+    pkgs.powerline-fonts
   ];
 
   fonts.fontconfig.enable = true;
