@@ -113,6 +113,9 @@ in {
     ".bashrc".source = "${configHome}/bashrc";
     ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
     ".XCompose".source = "${configHome}/XCompose";
+    ".vscode/argv.json".text = ''
+      { "enable-crash-reporter": false }
+    '';
   };
 
   services.network-manager-applet.enable = true;
@@ -211,6 +214,7 @@ in {
     enable = true;
     package = pkgs-master.vscode;
     userSettings = {
+      "telemetry.enableTelemetry" = false;
       "update.mode" = "manual";
       #"isabelle.home" = "${isabelle-devel}";
       "haskell.indentationRules.enabled" = false;
@@ -218,6 +222,14 @@ in {
       "editor.fontFamily" = "Inconsolata for Powerline, monospace";
       "extensions.autoUpdate" = false;
     };
+    keybindings = [
+      { key = "ctrl+`"; command = "terminal.focus"; }
+      { key = "ctrl+`"; command = "workbench.action.focusActiveEditorGroup"; when = "terminalFocus"; }
+      { key = "ctrl+h"; command = "workbench.action.navigateLeft"; }
+      { key = "ctrl+l"; command = "workbench.action.navigateRight"; }
+      { key = "ctrl+j"; command = "workbench.action.navigateDown"; }
+      { key = "ctrl+k"; command = "workbench.action.navigateUp"; }
+    ];
     extensions =
       let
         vsliveshare = pkgs-master.callPackage ./nix/vsliveshare {
