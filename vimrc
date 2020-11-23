@@ -106,6 +106,7 @@ set smarttab
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+set tabstop=4 shiftwidth=4
 
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
