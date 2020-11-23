@@ -202,7 +202,7 @@ in {
             owner = "HE7086";
             repo = "cyp-vim-syntax";
             rev = "a13fc823a490fca1150d36d449594ce0e0a33a79";
-            sha256 = "0h62v9z5bh9xmaq22pqdb3z79i84a5rknqm68mjpy7nq7s3q42fa";
+            sha256 = "1wadkvn4vkck9c11r2s33747qx3p1iwzrxfxzlchlw0vc5spr2f7";
           };
         };
       in
