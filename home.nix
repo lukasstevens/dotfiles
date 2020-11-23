@@ -193,16 +193,30 @@ in {
     withPython3 = true;
     withRuby = true;
     extraConfig = builtins.readFile (configHome + /vimrc);
-    plugins = with pkgs.vimPlugins; [
-      vim-nix
-      nerdtree
-      rust-vim
-      command-t
-      deoplete-nvim
-      ale
-      { plugin = vimtex; config = "let g:tex_flavor = 'latex'"; }
-      haskell-vim
-    ];
+    plugins =
+      let
+        cyp-syntax = pkgs.vimUtils.buildVimPlugin {
+          pname = "cyp-syntax";
+          version = "2019-11-30";
+          src = pkgs.fetchFromGitHub {
+            owner = "HE7086";
+            repo = "cyp-vim-syntax";
+            rev = "a13fc823a490fca1150d36d449594ce0e0a33a79";
+            sha256 = "0h62v9z5bh9xmaq22pqdb3z79i84a5rknqm68mjpy7nq7s3q42fa";
+          };
+        };
+      in
+        with pkgs.vimPlugins; [
+          vim-nix
+          nerdtree
+          rust-vim
+          command-t
+          deoplete-nvim
+          ale
+          { plugin = vimtex; config = "let g:tex_flavor = 'latex'"; }
+          haskell-vim
+          cyp-syntax
+        ];
   };
 
   programs.ssh = {
