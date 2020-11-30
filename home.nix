@@ -234,6 +234,7 @@ in {
       "haskell.trace.server" = "messages";
       "editor.fontFamily" = "Inconsolata for Powerline, monospace";
       "extensions.autoUpdate" = false;
+      "window.zoomLevel" = 1;
     };
     keybindings = [
       { key = "ctrl+`"; command = "terminal.focus"; }
