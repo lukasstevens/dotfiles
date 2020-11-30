@@ -110,7 +110,6 @@ in {
   home.file = {
     ".profile".source = "${configHome}/profile";
     ".zprofile".source = "${configHome}/zprofile";
-    ".bashrc".source = "${configHome}/bashrc";
     ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
     ".XCompose".source = "${configHome}/XCompose";
     ".vscode/argv.json".text = ''
@@ -272,7 +271,17 @@ in {
             sha256 = "0vxsn4s27n1aqp5pp4cipv804c9cwd7d9677chxl0v18j8bf7zly";
           };
         };
+
+        cyp = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+          mktplcRef = {
+            name = "vscode-cyp";
+            publisher = "jonhue";
+            version = "1.1.0";
+            sha256 = "19pyn7l6hjl4mrvqfd137mi06k33glb7xiq37kkqannzhbh7did3";
+          };
+        };
       in [
+        cyp
         haskell-language-server
         hoogle
         pkgs-master.vscode-extensions.justusadam.language-haskell
