@@ -179,6 +179,7 @@ in {
     extraConfig = '' 
       [extensions]
       rebase = 
+      strip =
       evolve = ${pkgs.python37Packages.hg-evolve}/lib/python3.7/site-packages/hgext3rd/evolve/__init__.py
       topic = ${pkgs.python37Packages.hg-evolve}/lib/python3.7/site-packages/hgext3rd/topic/__init__.py
     '';
