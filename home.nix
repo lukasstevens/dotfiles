@@ -1,18 +1,22 @@
 # Link this file to ~/.config/nixpkgs/home.nix to use it with home-manager
 
-{ config, pkgs
-, ... }:
+{ config, pkgs, ... }:
 
 let
   configHome = ~/dotfiles;
 
   i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
-    name = "nixpkgs-master";
-    url = https://github.com/NixOS/nixpkgs/archive/a2ee5cbb0513ee0623bc93aa1af74f172080ce6b.tar.gz;
-        # Hash obtained using `nix-prefetch-url --unpack <url>`
-        sha256 = "18f09wck7h89y202hhf67iwqd6i6bhd47pz19mbc4q682x77q6fy";
-      }) {};
+      name = "nixpkgs-master";
+      url = https://github.com/NixOS/nixpkgs/archive/a2ee5cbb0513ee0623bc93aa1af74f172080ce6b.tar.gz;
+      # Hash obtained using `nix-prefetch-url --unpack <url>`
+      sha256 = "18f09wck7h89y202hhf67iwqd6i6bhd47pz19mbc4q682x77q6fy";
+    }) {};
+  nur = import (builtins.fetchTarball {
+      name = "nur";
+      url = https://github.com/nix-community/NUR/archive/01aa1f5755d2c719320d128b021cd0926ab08ca0.tar.gz;
+      sha256 = "1sy3m58jjgak1gqpbhnlnld57gk4q3zxq4js0nkjb2n515fi6r14";
+    }) { inherit pkgs; };
   polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
   isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
     polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
@@ -27,57 +31,57 @@ in {
     path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
   };
 
-  home.packages = [
+  home.packages = with pkgs; [
     # Desktop programs
-    pkgs.evince
-    pkgs.firefox
-    pkgs.gnome3.gnome-terminal
+    evince
+    gnome3.gnome-terminal
     isabelle-2020
     # isabelle-devel
-    pkgs.keepassxc
-    pkgs.lean
-    pkgs.nextcloud-client
+    keepassxc
+    lean
+    nextcloud-client
     pkgs-master.signal-desktop
     pkgs-master.tdesktop
-    pkgs.thunderbird
+    thunderbird
 
     # Developer utilities
-    pkgs.cmake
-    pkgs.ruby
-    pkgs.rustup
-    pkgs.stack
-    pkgs.texlive.combined.scheme-full
+    cmake
+    ruby
+    rustup
+    stack
+    texlive.combined.scheme-full
 
     # Command line utilities
-    pkgs.acpi
-    pkgs.ffmpeg-full
-    pkgs.rename
-    pkgs.thefuck
-    pkgs.tree
-    pkgs.xclip
-    pkgs.xorg.xprop
-    pkgs.youtube-dl
-    pkgs.gnupg
+    acpi
+    ffmpeg-full
+    rename
+    thefuck
+    tree
+    youtube-dl
+    gnupg
 
     # Window manager
-    pkgs.base16-builder
-    pkgs.glibcLocales
-    pkgs.gnome3.networkmanagerapplet
-    pkgs.hicolor-icon-theme
-    pkgs.i3
-    pkgs.i3lock
-    pkgs.i3blocks
-    pkgs.playerctl
-    pkgs.rofi
+    base16-builder
+    glibcLocales
+    gnome3.networkmanagerapplet
+    hicolor-icon-theme
+    playerctl
+    swaylock
+    swayidle
+    wl-clipboard
+    mako
+    wofi 
+    qt5.qtwayland
 
     # Fonts
-    pkgs.fira
-    pkgs.fira-code
-    pkgs.inconsolata
-    pkgs.league-of-moveable-type
-    pkgs.lmodern
-    pkgs.lmmath
-    pkgs.powerline-fonts
+    fira
+    fira-code
+    font-awesome
+    inconsolata
+    league-of-moveable-type
+    lmodern
+    lmmath
+    powerline-fonts
   ];
 
   fonts.fontconfig.enable = true;
@@ -88,24 +92,13 @@ in {
     LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
 
-  home.keyboard = {
-    layout = "us";
-    options = [ "compose:caps" ];
-  };
-
   xdg = {
     enable = true;
     configFile."i3/i3blocks".text = ''
       command=${i3blocks-contrib}/libexec/i3blocks/$BLOCK_NAME
     '' + builtins.readFile (configHome + /i3/i3blocks);
     configFile."nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
-    configFile."mimeapps.list".text=''
-      [Default Applications]
-      application/pdf=org.gnome.Evince.desktop;
-    '';
   };
-
-  xresources.extraConfig = (builtins.readFile (configHome + /Xresources));
 
   home.file = {
     ".profile".source = "${configHome}/profile";
@@ -144,18 +137,44 @@ in {
     platformTheme = "gtk";
   };
 
-  xsession = {
+  wayland.windowManager.sway = {
     enable = true;
-    windowManager.i3 = {
-      enable = true;
-      extraConfig = builtins.readFile (configHome + /i3/config);
-      config = null;
-    };
+    xwayland = true;
+    wrapperFeatures.gtk = true;
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+      export XDG_SESSION_TYPE=wayland
+      export XDG_CURRENT_DESKTOP=sway
+      '';
+    config = import (configHome + /sway/settings.nix) pkgs;
+  };
+
+  nixpkgs.overlays = [ (self: super: {
+    waybar = super.waybar.override { pulseSupport = true; };
+  })];
+
+  programs.waybar = {
+    enable = true;
+    settings = import (configHome + /sway/waybar-settings.nix) pkgs;
   };
 
   programs.alacritty = {
     enable = true;
     settings = import (configHome + /alacritty-settings.nix);
+  };
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-wayland;
+    extensions = with nur.repos.rycee.firefox-addons; [
+      ublock-origin
+      umatrix
+      keepassxc-browser
+    ];
   };
 
   programs.fzf = {
