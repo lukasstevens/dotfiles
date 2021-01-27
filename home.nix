@@ -16,14 +16,6 @@ let
       url = https://github.com/nix-community/NUR/archive/01aa1f5755d2c719320d128b021cd0926ab08ca0.tar.gz;
       sha256 = "1sy3m58jjgak1gqpbhnlnld57gk4q3zxq4js0nkjb2n515fi6r14";
     }) { inherit pkgs; };
-  polyml = pkgs.callPackage "${configHome}/nix/polyml" {};
-  isabelle-2020 = pkgs.callPackage "${configHome}/nix/isabelle" {
-    polyml = polyml; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
-  };
-  #polyml-devel = pkgs.callPackage "${configHome}/nix/polyml-devel" {};
-  #isabelle-devel = pkgs.callPackage "${configHome}/nix/isabelle-devel" {
-  #  polyml = polyml-devel; java = pkgs.openjdk11; nettools = pkgs.nettools; z3 = pkgs.z3;
-  #};
 in {
   programs.home-manager = {
     enable = true;
@@ -34,7 +26,7 @@ in {
     # Desktop programs
     evince
     gnome3.gnome-terminal
-    isabelle-2020
+    isabelle
     # isabelle-devel
     keepassxc
     lean
