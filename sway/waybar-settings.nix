@@ -34,9 +34,9 @@
             default = ["" "" ""];
         };
         on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
-        on-click-right = "${pkgs.pamixer}/bin/pamixer --toggle-mute";
-        on-scroll-up = "${pkgs.pamixer}/bin/pamixer --unmute -i 1";
-        on-scroll-down = "${pkgs.pamixer}/bin/pamixer --unmute -d 1";
+        on-scroll-up = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +1%";
+        on-scroll-down = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -1%";
+        on-click-right = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
       };
       cpu = {
         format = "{usage}% ";

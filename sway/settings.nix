@@ -111,9 +111,9 @@ in
   
         "${modifier}+d" = "exec \"${menu} --show drun\"";
 
-        "XF86AudioRaiseVolume" = "exec --no-startup-id \"${pkgs.pamixer}/bin/pamixer --unmute -i 3\"";
-        "XF86AudioLowerVolume" = "exec --no-startup-id \"${pkgs.pamixer}/bin/pamixer --unmute -d 3\"";
-        "XF86AudioMute" = "exec --no-startup-id \"${pkgs.pamixer}/bin/pamixer --toggle-mute\"";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +3%\"";
+        "XF86AudioLowerVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%\"";
+        "XF86AudioMute" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle\"";
         "XF86MonBrightnessUp" = "exec --no-startup-id \"${pkgs.brightnessctl}/bin/brightnessctl set +10%\"";
         "XF86MonBrightnessDown" = "exec --no-startup-id \"${pkgs.brightnessctl}/bin/brightnessctl set 10%-\"";
         "XF86AudioPlay" = "exec --no-startup-id \"${pkgs.playerctl}/bin/playerctl play-pause\"";
