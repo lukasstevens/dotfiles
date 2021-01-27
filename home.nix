@@ -5,7 +5,6 @@
 let
   configHome = ~/dotfiles;
 
-  i3blocks-contrib = pkgs.callPackage "${configHome}/nix/i3blocks-contrib" {};
   pkgs-master = import (builtins.fetchTarball {
       name = "nixpkgs-master";
       url = https://github.com/NixOS/nixpkgs/archive/a2ee5cbb0513ee0623bc93aa1af74f172080ce6b.tar.gz;
@@ -94,9 +93,6 @@ in {
 
   xdg = {
     enable = true;
-    configFile."i3/i3blocks".text = ''
-      command=${i3blocks-contrib}/libexec/i3blocks/$BLOCK_NAME
-    '' + builtins.readFile (configHome + /i3/i3blocks);
     configFile."nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
   };
 
@@ -169,7 +165,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox;
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       umatrix
