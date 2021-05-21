@@ -2,12 +2,12 @@ builder=base16-builder
 brightness=-b dark
 name=my-base16
 scheme=-s $(name).corrected.yml
-targets= $(name).sh $(name).vim base16-$(name)-dark-theme.el
+targets= $(name).sh $(name).vim $(name)-dark-theme.el
 
 .PHONY: all clean
 
 all: $(targets)
-base16-$(name)-dark-theme.el: $(name).corrected.yml
+$(name)-dark-theme.el: $(name).corrected.yml
 	$(builder) $(scheme) -t emacs $(brightness) | tail -n +5 - > base16-$(name)-dark-theme.el
 $(name).sh: $(name).corrected.yml
 	$(builder) $(scheme) -t shell $(brightness) > $(name).sh
