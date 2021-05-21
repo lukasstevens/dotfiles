@@ -8,7 +8,7 @@ targets= $(name).sh $(name).vim $(name)-dark-theme.el
 
 all: $(targets)
 $(name)-dark-theme.el: $(name).corrected.yml
-	$(builder) $(scheme) -t emacs $(brightness) | tail -n +5 - > base16-$(name)-dark-theme.el
+	$(builder) $(scheme) -t emacs $(brightness) | tail -n +5 - > $(name)-dark-theme.el
 $(name).sh: $(name).corrected.yml
 	$(builder) $(scheme) -t shell $(brightness) > $(name).sh
 $(name).vim: $(name).corrected.yml
