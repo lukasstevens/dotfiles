@@ -3,6 +3,7 @@
 [
   {
     position = "top";
+    height = 22;
     modules-left = [ "sway/workspaces" "sway/mode" ];
     modules-center = [ "sway/window" ];
     modules-right = [ "backlight" "pulseaudio" "cpu" "memory" "battery" "network" "clock" "tray" ];

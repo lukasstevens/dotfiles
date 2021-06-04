@@ -16,7 +16,11 @@ let
   ];
 in
   rec {
-    fonts = [ "Inconsolata 12" ];
+    fonts = {
+      names = [ "Inconsolata" ];
+      style = "Regular";
+      size = 12.0;
+    };
   
     terminal = "${pkgs.alacritty}/bin/alacritty";
     menu = "${pkgs.wofi}/bin/wofi";
@@ -61,7 +65,11 @@ in
     bars = [
       {
         command = "${pkgs.waybar}/bin/waybar";
-        fonts = [ "pango:Inconsolata 10" "FontAwesome 10" ];
+        fonts = {
+          names = [ "Inconsolata" "FontAwesome" ];
+          style = "Regular";
+          size = 10.0;
+        };
         position = "top";
         trayOutput = "primary";
       }

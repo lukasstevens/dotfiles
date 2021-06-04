@@ -5,21 +5,19 @@
 let
   configHome = ~/dotfiles;
 
-  pkgs-master = import (builtins.fetchTarball {
-      name = "nixpkgs-master";
-      url = https://github.com/NixOS/nixpkgs/archive/a2ee5cbb0513ee0623bc93aa1af74f172080ce6b.tar.gz;
-      # Hash obtained using `nix-prefetch-url --unpack <url>`
-      sha256 = "18f09wck7h89y202hhf67iwqd6i6bhd47pz19mbc4q682x77q6fy";
-    }) {};
+  pkgs-unstable = import <nixos-unstable> {};
   nur = import (builtins.fetchTarball {
       name = "nur";
       url = https://github.com/nix-community/NUR/archive/01aa1f5755d2c719320d128b021cd0926ab08ca0.tar.gz;
       sha256 = "1sy3m58jjgak1gqpbhnlnld57gk4q3zxq4js0nkjb2n515fi6r14";
     }) { inherit pkgs; };
+
+  my-base16-theme = pkgs.callPackage ./nix/my-base16-theme {};
+
 in {
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-20.09.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-21.05.tar.gz";
   };
 
   home.packages = with pkgs; [
@@ -31,8 +29,8 @@ in {
     keepassxc
     lean
     nextcloud-client
-    pkgs-master.signal-desktop
-    pkgs-master.tdesktop
+    pkgs-unstable.signal-desktop
+    pkgs-unstable.tdesktop
     thunderbird
 
     # Developer utilities
@@ -77,6 +75,8 @@ in {
 
   fonts.fontconfig.enable = true;
 
+  home.sessionPath = [ "~/.local/bin" "~/.cargo/bin" ];
+
   home.sessionVariables = {
     TERMINAL = "alacritty";
     EDITOR = "nvim";
@@ -85,12 +85,10 @@ in {
 
   xdg = {
     enable = true;
-    configFile."nvim/colors/my-base16.vim".source = "${configHome}/colors/my-base16.vim";
+    configFile."nvim/colors/my-base16.vim".source = "${my-base16-theme}/share/my-base16.vim";
   };
 
   home.file = {
-    ".profile".source = "${configHome}/profile";
-    ".zprofile".source = "${configHome}/zprofile";
     ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
     ".XCompose".source = "${configHome}/XCompose";
     ".vscode/argv.json".text = ''
@@ -157,12 +155,12 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox;
-    extensions = with nur.repos.rycee.firefox-addons; [
-      ublock-origin
-      umatrix
-      keepassxc-browser
-    ];
+    #package = pkgs.firefox;
+    #extensions = with nur.repos.rycee.firefox-addons; [
+    #  ublock-origin
+    #  umatrix
+    #  keepassxc-browser
+    #];
   };
 
   programs.fzf = {
@@ -233,7 +231,7 @@ in {
 
   programs.vscode = {
     enable = true;
-    package = pkgs-master.vscode;
+    package = pkgs-unstable.vscodium;
     userSettings = {
       "telemetry.enableTelemetry" = false;
       "update.mode" = "manual";
@@ -254,7 +252,7 @@ in {
     ];
     extensions =
       let
-        vsliveshare = pkgs-master.callPackage ./nix/vsliveshare {
+        vsliveshare = pkgs-unstable.callPackage ./nix/vsliveshare {
           mktplcRef = {
             name = "vsliveshare";
             publisher = "ms-vsliveshare";
@@ -263,7 +261,7 @@ in {
           };
         };
 
-        hoogle = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+        hoogle = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "hoogle-vscode";
             publisher = "jcanero";
@@ -272,7 +270,7 @@ in {
           };
         };
 
-        haskell-language-server = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+        haskell-language-server = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "haskell";
             publisher = "haskell";
@@ -281,7 +279,7 @@ in {
           };
         };
 
-        cyp = pkgs-master.vscode-utils.buildVscodeMarketplaceExtension {
+        cyp = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "vscode-cyp";
             publisher = "jonhue";
@@ -293,20 +291,12 @@ in {
         cyp
         haskell-language-server
         hoogle
-        pkgs-master.vscode-extensions.justusadam.language-haskell
-        pkgs-master.vscode-extensions.vscodevim.vim
-        vsliveshare
+        pkgs-unstable.vscode-extensions.justusadam.language-haskell
+        pkgs-unstable.vscode-extensions.vscodevim.vim
+        # vsliveshare
       ];
   };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    sessionVariables = {
-      ANTIGEN_DIR = "${pkgs.antigen}/share/antigen/";
-    }; 
-    initExtra = (builtins.readFile (configHome + /zshrc));
-  };
+  programs.zsh = import (configHome + /zsh-settings.nix) { inherit my-base16-theme; };
 }
-
 
