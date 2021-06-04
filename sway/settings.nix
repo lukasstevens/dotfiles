@@ -33,7 +33,7 @@ in
 
     startup = [ 
       { command = "systemctl --user restart waybar"; always = true; }
-      { command = "${terminal} --title scratchterm --dimensions 100 30"; }
+      { command = "${terminal} --title scratchterm"; }
       { command = "${pkgs.keepassxc}/bin/keepassxc"; }
       { command = "${pkgs.nextcloud-client}/bin/nextcloud"; }
     ]; 

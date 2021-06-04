@@ -3,6 +3,7 @@
 {
   enable = true;
   enableCompletion = true;
+  defaultKeymap = "emacs";
   localVariables = {
     POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = "true";
     POWERLEVEL9K_DIR_SHORTEN_STRATEGY = "truncate_middle";

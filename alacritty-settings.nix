@@ -1,5 +1,6 @@
 {
   env.TERM = "xterm-256color";
+
   window = {
     padding = {
       x = 2;
@@ -7,10 +8,12 @@
     };
     decoration = "full";
   };
+  
   scrolling = {
     history = 10000;
     multiplier = 3;
   };
+
   font = {
     size = 12;
     normal = {
@@ -30,6 +33,7 @@
   bell = {
     duration = 0;
   };
+
   url = {
     launcher = {
       program = "xdg-open";
@@ -37,4 +41,5 @@
     };
     modifiers = "Control";
   };
+
 }
