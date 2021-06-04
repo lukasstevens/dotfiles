@@ -7,8 +7,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "lukasstevens";
     repo = "dotfiles";
-    rev = "e7a4a1139a1a714366f2fd4ba34b29b1c8363713";
-    sha256 = "1b7iqqr77f0k1qwv68jk71bpxlyyc446s1qsswr6fbjzlvh787pr";
+    rev = "05eccbf9b7fb11c5523e838fff19e06987234219";
+    sha256 = "1xl8smb1azxvxpvpxlk4ykp71kkbhjy2yjh64qhb3rhaqv7brz3b";
   };
 
   nativeBuildInputs = [

@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+syntax enable
 
 let vimrcdir = fnamemodify(resolve(expand('<sfile>:p')),":h")
 
