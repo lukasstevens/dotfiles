@@ -8,27 +8,32 @@ let
   pkgs-unstable = import <nixos-unstable> {};
   nur = import (builtins.fetchTarball {
       name = "nur";
-      url = https://github.com/nix-community/NUR/archive/01aa1f5755d2c719320d128b021cd0926ab08ca0.tar.gz;
-      sha256 = "1sy3m58jjgak1gqpbhnlnld57gk4q3zxq4js0nkjb2n515fi6r14";
+      url = https://github.com/nix-community/NUR/archive/1f71aa1e17f1bf65b55008d41ef32053b73e0484.tar.gz;
+      sha256 = "03lnipa0694jg4phymb0nyvnf8n8lzsja6a8cq8iy3rc1xr5d8z1";
     }) { inherit pkgs; };
 
   my-base16-theme = pkgs.callPackage ./nix/my-base16-theme {};
+
+  rpiplay = pkgs.callPackage ./nix/rpiplay {};
 
 in {
   programs.home-manager = {
     enable = true;
     path = "https://github.com/nix-community/home-manager/archive/release-21.05.tar.gz";
   };
+  home.stateVersion = "21.05";
+  home.username = "lukas";
+  home.homeDirectory = /home/lukas;
 
   home.packages = with pkgs; [
     # Desktop programs
     evince
     gnome3.gnome-terminal
-    isabelle
+    pkgs-unstable.isabelle
     # isabelle-devel
     keepassxc
     lean
-    nextcloud-client
+    pkgs-unstable.nextcloud-client
     pkgs-unstable.signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
@@ -44,6 +49,7 @@ in {
     acpi
     ffmpeg-full
     rename
+    rpiplay
     thefuck
     tree
     youtube-dl
@@ -98,7 +104,10 @@ in {
 
   services.network-manager-applet.enable = true;
 
-  services.nextcloud-client.enable = true;
+  services.nextcloud-client = {
+    enable = true;
+    package = pkgs-unstable.nextcloud-client;
+  };
 
   services.gpg-agent.enable = true;
 
@@ -155,12 +164,12 @@ in {
 
   programs.firefox = {
     enable = true;
-    #package = pkgs.firefox;
-    #extensions = with nur.repos.rycee.firefox-addons; [
-    #  ublock-origin
-    #  umatrix
-    #  keepassxc-browser
-    #];
+    package = pkgs.firefox-wayland;
+    extensions = with nur.repos.rycee.firefox-addons; [
+      ublock-origin
+      umatrix
+      keepassxc-browser
+    ];
   };
 
   programs.fzf = {
