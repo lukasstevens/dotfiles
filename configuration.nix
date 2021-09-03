@@ -30,7 +30,6 @@
     gcc
     gnumake
     git
-    kdeFrameworks.kwallet
     networkmanager
     tree
     vim
@@ -39,13 +38,9 @@
 
   programs.firejail.enable = true;
 
-  services.compton = {
-    enable = true;
-    backend = "glx";
-    vSync = true;
-  };
+  programs.adb.enable = true;
 
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
+  services.dbus.packages = [ pkgs.dconf ];
 
   services.printing.enable = true;
 
@@ -64,35 +59,52 @@
     };
   };
 
-  systemd.services.dnscrypt-proxy2.serviceConfig = {
-    StateDirectory = "dnscrypt-proxy2";
-  };
-
-  # Enable backlight
-  hardware.brightnessctl.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
+  # Enable pipewire 
+  security.rtkit.enable = true;
+  services.pipewire = {
     enable = true;
-    libinput.enable = true;
-    desktopManager.xterm.enable = true;
-    displayManager.lightdm.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+      userServices = true;
+    };
+  };
+
+  # Keyrings
   services.gnome3.gnome-keyring.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
+
+  programs.sway.enable = true;
 
   users.mutableUsers = false;
   users.extraUsers.lukas = {
     home = "/home/lukas";
     createHome = true;
     isNormalUser = true;
-    extraGroups = [ "audio" "wheel" "networkmanager" "video" "wireshark" ];
-    hashedPassword = "INSERT HASHED PASSWORD HERE";
+    extraGroups = [ "adbusers" "audio" "wheel" "networkmanager" "video" "wireshark" ];
+    hashedPassword = "$6$OrMJA8m9I$zzG6dHz/HO8mv8xIFU9yX5LweRLJY2GIzdQYa5RQXNFfSQCrTGwqhRpfXuG/qOqcYIEIL6jjeatS/CppqcbRy.";
     shell = pkgs.zsh;
   };
 
@@ -102,5 +114,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 }
