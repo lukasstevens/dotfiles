@@ -30,11 +30,11 @@
     in {
       enable = true;
       plugins = [
-        { name = "romkatv/powerlevel10k"; tags = [ "as:theme" ]; }
+        { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         { name = "jdxcode/gh"; tags = [ "as:plugin" "use:zsh/gh/gh.plugin.zsh" ]; }
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
       ] ++ oh-my-zsh-plugins [
-        "cargo" "git-extras" "npm" "pip" "pyenv" "python" "stack" "thefuck" "wd"
+        "cargo" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
       ];
     };
 
