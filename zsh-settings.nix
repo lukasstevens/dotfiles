@@ -2,8 +2,10 @@
 
 {
   enable = true;
+
   enableCompletion = true;
   defaultKeymap = "emacs";
+
   localVariables = {
     POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD = "true";
     POWERLEVEL9K_DIR_SHORTEN_STRATEGY = "truncate_middle";
@@ -51,6 +53,11 @@
     bm = "wd add";
     to = "wd";
   };
+
+  initExtraBeforeCompInit = ''
+    zstyle ':completion:*' menu select
+    zstyle ':completion:::::' completer _complete _approximate
+    '';
 
   initExtra = ''
     source ${my-base16-theme}/share/my-base16.sh
