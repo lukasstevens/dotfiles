@@ -39,10 +39,14 @@ in
     ]; 
   
     window.commands = [
-      { command = "floating enable, move scratchpad"; criteria = { title = "scratchterm"; }; }
-      { command = "move scratchpad"; criteria = { app_id = "KeePassXC"; }; }
-      { command = "floating enable, scratchpad show"; criteria = { app_id = "KeePassXC"; window_type = "dialog"; }; }
+      { command = "move scratchpad"; criteria = { title = "scratchterm"; }; }
+      { command = "move scratchpad"; criteria = { title = "KeePassXC"; app_id = "KeePassXC"; }; }
       { command = "move to workspace ${pkgs.lib.lists.elemAt workspaces 5}"; criteria = { class = "Spotify"; }; }
+    ];
+
+    floating.criteria = [
+      { app_id = "KeePassXC"; }
+      { title = "scratchterm"; }
     ];
 
     assigns = with pkgs.lib.lists; {
