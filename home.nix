@@ -92,6 +92,19 @@ in {
   xdg = {
     enable = true;
     configFile."nvim/colors/my-base16.vim".source = "${my-base16-theme}/share/my-base16.vim";
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
+        "application/pdf" = [ "org.gnome.Evince.desktop" ];
+        "image/jpeg" = [ "org.gnome.eog.desktop" ];
+        "image/png" = [ "org.gnome.eog.desktop" ];
+        "image/tiff" = [ "org.gnome.eog.desktop" ];
+        "image/bmp" = [ "org.gnome.eog.desktop" ];
+        "image/gif" = [ "org.gnome.eog.desktop" ];
+      };
+    };
   };
 
   home.file = {
