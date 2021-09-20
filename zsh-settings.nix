@@ -62,6 +62,14 @@
   initExtra = ''
     source ${my-base16-theme}/share/my-base16.sh
 
+    # Up arrow
+    bindkey '\e[A' up-line-or-history
+    bindkey '\eOA' up-line-or-history
+
+    # Down arrow
+    bindkey '\e[B' down-line-or-history
+    bindkey '\eOB' down-line-or-history
+
     # Go up directories
     ..(){
       cd ../$@
