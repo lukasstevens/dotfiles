@@ -35,10 +35,15 @@
         { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         { name = "jdxcode/gh"; tags = [ "as:plugin" "use:zsh/gh/gh.plugin.zsh" ]; }
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
+        { name = "marlonrichert/zsh-autocomplete"; tags = [ "as:plugin" "use:zsh-autocomplete.plugin.zsh" ]; }
       ] ++ oh-my-zsh-plugins [
         "cargo" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
       ];
     };
+
+  initExtraBeforeCompInit = '' 
+    zstyle ':autocomplete:*' widget-style menu-select
+    '';
 
   shellAliases = {
     setclip = "wl-copy";
@@ -53,11 +58,6 @@
     bm = "wd add";
     to = "wd";
   };
-
-  initExtraBeforeCompInit = ''
-    zstyle ':completion:*' menu select
-    zstyle ':completion:::::' completer _complete _approximate
-    '';
 
   initExtra = ''
     source ${my-base16-theme}/share/my-base16.sh
