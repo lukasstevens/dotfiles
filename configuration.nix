@@ -86,17 +86,6 @@
 
   # Keyrings
   services.gnome3.gnome-keyring.enable = true;
-  # Ugly hack to force gnome-keyring to set SSH_AUTH_SOCK
-  environment.etc = {
-    "profile.local" = {
-      text = ''
-        eval $(/run/wrappers/bin/gnome-keyring-daemon --start --daemonize)
-        export SSH_AUTH_SOCK
-        '';
-      mode = "0744";
-    };
-  };
-
 
   hardware.opengl = {
     enable = true;

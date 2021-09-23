@@ -122,8 +122,6 @@ in {
     package = pkgs-unstable.nextcloud-client;
   };
 
-  services.gpg-agent.enable = true;
-
   gtk = {
     enable = true;
     font = {
@@ -252,9 +250,16 @@ in {
     extraConfig = "AddKeysToAgent yes";
   };
 
+  programs.keychain = {
+    enable = true;
+    enableZshIntegration = true;
+    agents = [ "gpg" "ssh" ];
+    keys = [ "id_ed25519" ];
+  };
+
   programs.vscode = {
     enable = true;
-    package = pkgs-unstable.vscodium;
+    package = pkgs.vscodium;
     userSettings = {
       "telemetry.enableTelemetry" = false;
       "update.mode" = "manual";
