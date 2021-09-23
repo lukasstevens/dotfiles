@@ -175,7 +175,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox-esr-wayland;
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       umatrix
