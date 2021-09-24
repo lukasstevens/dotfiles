@@ -255,6 +255,7 @@ in {
     enableZshIntegration = true;
     agents = [ "gpg" "ssh" ];
     keys = [ "id_ed25519" ];
+    extraFlags = [ "--quiet" "--noask" "--timeout 20" ];
   };
 
   programs.vscode = {
