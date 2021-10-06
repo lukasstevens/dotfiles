@@ -8,8 +8,8 @@ let
   pkgs-unstable = import <nixos-unstable> {};
   nur = import (builtins.fetchTarball {
       name = "nur";
-      url = https://github.com/nix-community/NUR/archive/1f71aa1e17f1bf65b55008d41ef32053b73e0484.tar.gz;
-      sha256 = "03lnipa0694jg4phymb0nyvnf8n8lzsja6a8cq8iy3rc1xr5d8z1";
+      url = https://github.com/nix-community/NUR/archive/934348d0c74673a55748cde4ca0448f3912ad520.tar.gz;
+      sha256 = "0isygc2vqjysvl0nrfv8nzm3l3zl04zx598y01fsq5vpbnrprwgk";
     }) { inherit pkgs; };
 
   my-base16-theme = pkgs.callPackage ./nix/my-base16-theme {};
@@ -34,7 +34,7 @@ in {
     keepassxc
     lean
     pkgs-unstable.nextcloud-client
-    pkgs-unstable.signal-desktop
+    pkgs.signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
 
@@ -59,8 +59,10 @@ in {
     base16-builder
     glibcLocales
     gnome3.networkmanagerapplet
+    grim
     hicolor-icon-theme
     playerctl
+    slurp
     swaylock
     swayidle
     wl-clipboard
@@ -96,6 +98,8 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/htts" = [ "firefox.desktop" ];
         "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
         "application/pdf" = [ "org.gnome.Evince.desktop" ];
         "image/jpeg" = [ "org.gnome.eog.desktop" ];
@@ -175,7 +179,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-esr-wayland;
+    package = pkgs.firefox-wayland;
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       umatrix

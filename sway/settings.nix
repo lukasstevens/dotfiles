@@ -51,7 +51,7 @@ in
 
     assigns = with pkgs.lib.lists; {
       "${elemAt workspaces 7}" = [{ app_id = "thunderbird"; }];
-      "${elemAt workspaces 6}" = [{ class = "discord"; } { app_id = "telegramdesktop"; }];
+      "${elemAt workspaces 6}" = [{ class = "discord"; } { app_id = "telegramdesktop"; } { class = "Signal"; }];
       "${elemAt workspaces 8}" = [{ app_id = "firefox"; }];
       "${elemAt workspaces 5}" = [{ class = "Spotify"; }];
     };
@@ -134,5 +134,8 @@ in
 
         "${modifier}+a" = "focus parent";
         "${modifier}+s" = "focus child";
+
+        "Print" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\"";
+        "Shift+Print" = "exec ${pkgs.grim}/bin/grim -t png -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png";
       } // genMovementBindings // genWorkspaceBindings workspaces;
   }
