@@ -8,9 +8,9 @@ let
   pkgs-unstable = import <nixos-unstable> {};
   nur = import (builtins.fetchTarball {
       name = "nur";
-      url = https://github.com/nix-community/NUR/archive/934348d0c74673a55748cde4ca0448f3912ad520.tar.gz;
-      sha256 = "0isygc2vqjysvl0nrfv8nzm3l3zl04zx598y01fsq5vpbnrprwgk";
-    }) { inherit pkgs; };
+      url = https://github.com/nix-community/NUR/archive/9d5e21ac99f25994ce11807a8fe02ce608262c40.tar.gz;
+      sha256 = "1sjmsdf9p2gikmiypd060v8w4zj2wvzg7bnlbi419ibhn8hdmkqz";
+    }) { pkgs = pkgs-unstable; };
 
   my-base16-theme = pkgs.callPackage ./nix/my-base16-theme {};
 
@@ -31,10 +31,10 @@ in {
     gnome3.gnome-terminal
     pkgs-unstable.isabelle
     # isabelle-devel
-    keepassxc
+    pkgs-unstable.keepassxc
     lean
     pkgs-unstable.nextcloud-client
-    pkgs.signal-desktop
+    signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
 
@@ -81,6 +81,21 @@ in {
     powerline-fonts
   ];
 
+  nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.override { pulseSupport = true; };
+    })
+    (self: super: {
+      signal-desktop = super.signal-desktop.overrideAttrs (old: rec {
+        version = "5.25.0";
+        src = super.fetchurl {
+          url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_${version}_amd64.deb";
+          sha256 = "0ql9rzxrisqms3plcrmf3fjinpxba10asmpsxvhn0zlfajy47d0a";
+        };
+      });
+    })
+  ];
+
   fonts.fontconfig.enable = true;
 
   home.sessionPath = [ "~/.local/bin" "~/.cargo/bin" ];
@@ -99,7 +114,7 @@ in {
       enable = true;
       defaultApplications = {
         "x-scheme-handler/http" = [ "firefox.desktop" ];
-        "x-scheme-handler/htts" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
         "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
         "application/pdf" = [ "org.gnome.Evince.desktop" ];
         "image/jpeg" = [ "org.gnome.eog.desktop" ];
@@ -163,10 +178,6 @@ in {
     config = import (configHome + /sway/settings.nix) pkgs;
   };
 
-  nixpkgs.overlays = [ (self: super: {
-    waybar = super.waybar.override { pulseSupport = true; };
-  })];
-
   programs.waybar = {
     enable = true;
     settings = import (configHome + /sway/waybar-settings.nix) pkgs;
@@ -179,7 +190,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs-unstable.firefox-wayland;
     extensions = with nur.repos.rycee.firefox-addons; [
       ublock-origin
       umatrix
