@@ -115,6 +115,7 @@ in
         "${modifier}+Shift+space" = "floating toggle";
         "${modifier}+r" = "mode resize";
         "${modifier}+v" = "split toggle";
+        "${modifier}+w" = "layout toggle tabbed split";
         "${modifier}+e" = "layout toggle split";
   
         "${modifier}+Return" = "exec ${terminal}";
