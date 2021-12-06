@@ -27,7 +27,7 @@
 
   zplug =
     let
-      oh-my-zsh-plugin = name: { name = "plugins/${name}"; tags = [ "from:oh-my-zsh" ]; };
+      oh-my-zsh-plugin = name: { name = "plugins/${name}"; tags = [ "as:plugin" "from:oh-my-zsh" ]; };
       oh-my-zsh-plugins = names: builtins.map oh-my-zsh-plugin names;
     in {
       enable = true;
@@ -37,7 +37,7 @@
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
         { name = "marlonrichert/zsh-autocomplete"; tags = [ "as:plugin" "use:zsh-autocomplete.plugin.zsh" ]; }
       ] ++ oh-my-zsh-plugins [
-        "cargo" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
+        "cargo" "docker" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
       ];
     };
 
