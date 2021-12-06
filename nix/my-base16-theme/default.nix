@@ -1,4 +1,4 @@
-{ stdenv, base16-builder, fetchFromGitHub }:
+{ stdenv, base16-builder, colors }:
 
 stdenv.mkDerivation rec {
   pname = "my-base16-theme";
@@ -15,37 +15,37 @@ stdenv.mkDerivation rec {
     scheme: "my-base16"
     author: "Lukas Stevens (https://github.com/lukasstevens)"
     # Default Background
-    base00: "262528"
+    base00: "${colors.base00}"
     # Lighter Background
-    base01: "272935"
+    base01: "${colors.base01}"
     # Selection Background
-    base02: "3a4055"
+    base02: "${colors.base02}"
     # Comments, Invisibles, Line Highlighting
-    base03: "5a647e"
+    base03: "${colors.base03}"
     # Dark Foreground (Used for status bars)
-    base04: "d4cfc9"
+    base04: "${colors.base04}"
     # Default Foreground, Caret, Delimiters, Operators
-    base05: "e6e1dc"
+    base05: "${colors.base05}"
     # Light Foreground
-    base06: "f4f1ed"
+    base06: "${colors.base06}"
     # Light Foreground
-    base07: "f9f7f3"
+    base07: "${colors.base07}"
     # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base08: "de3e2f"
+    base08: "${colors.base08}"
     # Integers, Boolean, Constants, XML Attributes, Markup Link URL
-    base09: "59abe3"
+    base09: "${colors.base09}"
     # Classes, Markup Bold, Search Text Background
-    base0A: "f89406"
+    base0A: "${colors.base0A}"
     # Strings, Inherited Class, Markup Code, Diff Inserted
-    base0B: "6fd952"
+    base0B: "${colors.base0B}"
     # Support, Regex, Escape Characters, Markup Quotes
-    base0C: "1BBC9B"
+    base0C: "${colors.base0C}"
     # Functions, Methods, Attribute IDs, Headings
-    base0D: "4183d7"
+    base0D: "${colors.base0D}"
     # Keywords, Storage, Selector, Markup, Italic, Diff Changed
-    base0E: "b24edd"
+    base0E: "${colors.base0E}"
     # Deprecated, Opening/Closing Embedded Language Tags
-    base0F: "bc9458"
+    base0F: "${colors.base0F}"
     EOF
 
     HOME=$(mktemp -d)

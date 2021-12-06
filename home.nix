@@ -296,33 +296,6 @@ in {
     ];
     extensions =
       let
-        vsliveshare = pkgs-unstable.callPackage ./nix/vsliveshare {
-          mktplcRef = {
-            name = "vsliveshare";
-            publisher = "ms-vsliveshare";
-            version = "1.0.3121";
-            sha256 = "0jmbp2nph786n6gzd58yhmx22p2h87s98xq4shjn42blrkcgnb7z";
-          };
-        };
-
-        hoogle = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            name = "hoogle-vscode";
-            publisher = "jcanero";
-            version = "0.0.7";
-            sha256 = "0ndapfrv3j82792hws7b3zki76m2s1bfh9dss1xjgcal1aqajka1";
-          };
-        };
-
-        haskell-language-server = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            name = "haskell";
-            publisher = "haskell";
-            version = "1.2.0";
-            sha256 = "0vxsn4s27n1aqp5pp4cipv804c9cwd7d9677chxl0v18j8bf7zly";
-          };
-        };
-
         cyp = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "vscode-cyp";
@@ -333,11 +306,8 @@ in {
         };
       in [
         cyp
-        haskell-language-server
-        hoogle
         pkgs-unstable.vscode-extensions.justusadam.language-haskell
         pkgs-unstable.vscode-extensions.vscodevim.vim
-        # vsliveshare
       ];
   };
 
