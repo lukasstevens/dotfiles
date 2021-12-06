@@ -12,7 +12,26 @@ let
       sha256 = "1sjmsdf9p2gikmiypd060v8w4zj2wvzg7bnlbi419ibhn8hdmkqz";
     }) { pkgs = pkgs-unstable; };
 
-  my-base16-theme = pkgs.callPackage ./nix/my-base16-theme {};
+  colors = {
+    base00 = "262528"; # Default Background
+    base01 = "272935"; # Lighter Background
+    base02 = "3a4055"; # Selection Background
+    base03 = "5a647e"; # Comments, Invisibles, Line Highlighting
+    base04 = "d4cfc9"; # Dark Foreground (used for status bars)
+    base05 = "e6e1dc"; # Default Foreground, Caret, Delimiters, Operators
+    base06 = "f4f1ed"; # Light Foreground
+    base07 = "f9f7f3"; # Light Foreground
+    base08 = "de3e2f"; # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+    base09 = "59abe3"; # Integers, Booleans, Constants, XML Attributes, Markup Link URL
+    base0A = "f89406"; # Classes, Markup Bold, Search Text Background
+    base0B = "6fd952"; # Strings, Inherited Class, Markup Code, Diff Inserted
+    base0C = "1BBC9B"; # Support, Regex, Escape Characters, Markup Quotes
+    base0D = "4183d7"; # Functions, Methods, Attribute IDs, Headings
+    base0E = "b24edd"; # Keywords, Storage, Selector, Markup, Italic, Diff Changed
+    base0F = "bc9458"; # Deprecated, Opening/Closing Embedded Language Tags
+  };
+
+  my-base16-theme = pkgs.callPackage ./nix/my-base16-theme { colors = colors; };
 
   rpiplay = pkgs.callPackage ./nix/rpiplay {};
 
