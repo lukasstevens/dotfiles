@@ -1,4 +1,4 @@
-{ pkgs, ... } :
+{ pkgs, lib, ... } :
 
 let
   bgColor = "#2f343f";
@@ -108,7 +108,7 @@ in
       in {
         "${modifier}+Shift+r" = "reload";
         "${modifier}+Shift+e" = "exec \"${pkgs.sway}/bin/swaynag -t warning -m 'Do you want to exit sway?' -b 'Yes, exit sway.' 'swaymsg exit'\"";
-        "${modifier}+Shift+x" = "exec \"${pkgs.swaylock}/bin/swaylock --color 2f343f\"";
+        "${modifier}+Shift+x" = "exec \"${pkgs.swaylock}/bin/swaylock --color ${lib.strings.removePrefix "#" "${bgColor}"}\"";
   
         "${modifier}+Shift+q" = "kill";
         "${modifier}+f" = "fullscreen toggle";
