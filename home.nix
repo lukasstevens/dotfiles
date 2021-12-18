@@ -323,10 +323,12 @@ in {
             sha256 = "19pyn7l6hjl4mrvqfd137mi06k33glb7xiq37kkqannzhbh7did3";
           };
         };
-      in [
+      in with pkgs-unstable.vscode-extensions; [
         cyp
-        pkgs-unstable.vscode-extensions.justusadam.language-haskell
-        pkgs-unstable.vscode-extensions.vscodevim.vim
+        justusadam.language-haskell
+        vscodevim.vim
+        matklad.rust-analyzer
+        arrterian.nix-env-selector 
       ];
   };
 
