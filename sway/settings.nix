@@ -9,6 +9,8 @@ let
   blueAccent = "#446cb3";
   indicatorColor = "#2f343f";
 
+  stripHash = s: lib.strings.removePrefix "#" s;
+
   workspaces = [
     "10: home"
     "1" "2" "3" "4"
@@ -36,6 +38,7 @@ in
       { command = "${terminal} --title scratchterm"; }
       { command = "${pkgs.keepassxc}/bin/keepassxc"; }
       { command = "${pkgs.nextcloud-client}/bin/nextcloud"; }
+      { command = "swayidle -d -w \"swaylock --color ${stripHash bgColor}\""; }
     ]; 
   
     window.commands = [
@@ -107,8 +110,8 @@ in
           }) (zipLists (map toString (range 0 10)) wss);
       in {
         "${modifier}+Shift+r" = "reload";
-        "${modifier}+Shift+e" = "exec \"${pkgs.sway}/bin/swaynag -t warning -m 'Do you want to exit sway?' -b 'Yes, exit sway.' 'swaymsg exit'\"";
-        "${modifier}+Shift+x" = "exec \"${pkgs.swaylock}/bin/swaylock --color ${lib.strings.removePrefix "#" "${bgColor}"}\"";
+        "${modifier}+Shift+e" = "exec \"swaynag -t warning -m 'Do you want to exit sway?' -b 'Yes, exit sway.' 'swaymsg exit'\"";
+        "${modifier}+Shift+x" = "exec \"swaylock --color ${stripHash bgColor}\"";
   
         "${modifier}+Shift+q" = "kill";
         "${modifier}+f" = "fullscreen toggle";
