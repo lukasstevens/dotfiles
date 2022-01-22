@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ~/dotfiles/home.nix ];
+  imports = [ ./home.nix ];
   
   xsession.initExtra = ''
 xrandr --output DP1 --mode 2560x1440 --rate 59.95 --primary

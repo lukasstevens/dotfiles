@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ~/dotfiles/home.nix ];
+  imports = [ ./home.nix ];
   
   wayland.windowManager.sway.config.output = {
     DVI-D-1 = {

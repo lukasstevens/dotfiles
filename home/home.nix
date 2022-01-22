@@ -3,7 +3,7 @@
 { config, pkgs, ... }:
 
 let
-  configHome = ~/dotfiles;
+  configHome = ~/dotfiles/home;
 
   pkgs-unstable = import <nixos-unstable> {};
   nur = import (builtins.fetchTarball {
@@ -31,9 +31,9 @@ let
     base0F = "bc9458"; # Deprecated, Opening/Closing Embedded Language Tags
   };
 
-  my-base16-theme = pkgs.callPackage ./nix/my-base16-theme { colors = colors; };
+  my-base16-theme = pkgs.callPackage ../nix/my-base16-theme { colors = colors; };
 
-  rpiplay = pkgs.callPackage ./nix/rpiplay {};
+  rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
 in {
   programs.home-manager = {
