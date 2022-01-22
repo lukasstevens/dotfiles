@@ -38,7 +38,7 @@ let
 in {
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-21.05.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz";
   };
   home.stateVersion = "21.05";
   home.username = "lukas";
