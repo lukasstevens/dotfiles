@@ -70,6 +70,9 @@
     bindkey '\e[B' down-line-or-history
     bindkey '\eOB' down-line-or-history
 
+    # Delete key
+    bindkey "^[[3~" delete-char
+
     # Go up directories
     ..(){
       cd ../$@
