@@ -42,4 +42,8 @@
     modifiers = "Control";
   };
 
+  key_bindings = [
+    { key = "N"; mods = "Control"; action = "SpawnNewInstance"; }
+  ];
+
 }

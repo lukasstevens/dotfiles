@@ -267,6 +267,7 @@ in {
         };
       in
         with pkgs.vimPlugins; [
+          awesome-vim-colorschemes
           vim-nix
           nerdtree
           rust-vim
