@@ -37,7 +37,7 @@
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
         { name = "marlonrichert/zsh-autocomplete"; tags = [ "as:plugin" "use:zsh-autocomplete.plugin.zsh" ]; }
       ] ++ oh-my-zsh-plugins [
-        "cargo" "docker" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
+        "rust" "docker" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
       ];
     };
 
