@@ -41,6 +41,8 @@
     })
   ];
 
+  services.udev.packages = [ pkgs.platformio ];
+
   programs.adb.enable = true;
 
   programs.firejail.enable = true;
