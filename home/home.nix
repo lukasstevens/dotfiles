@@ -5,7 +5,20 @@
 let
   configHome = ~/dotfiles/home;
 
-  pkgs-unstable = import <nixos-unstable> {};
+  pkgs-unstable = import <nixos-unstable> {
+    overlays = [
+      (self: super: {
+        z3_4_4_0 = super.z3_4_4_0.overrideAttrs (old: rec {
+          src = super.fetchFromGitHub {
+            owner  = "Z3Prover";
+            repo   = "z3";
+            rev    = "0482e7fe727c75e259ac55a932b28cf1842c530e";
+            sha256 = "1m53avlljxqd2p8w266ksmjywjycsd23h224yn786qsnf36dr63x";
+          };
+        });
+      })
+    ];
+  };
   nur = import (builtins.fetchTarball {
       name = "nur";
       url = https://github.com/nix-community/NUR/archive/9d5e21ac99f25994ce11807a8fe02ce608262c40.tar.gz;
