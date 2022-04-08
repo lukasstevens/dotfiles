@@ -1,11 +1,11 @@
-{ stdenv, base16-builder, colors }:
+{ pkgs, stdenv, colors, base16-vim-template, base16-shell-template }:
 
 stdenv.mkDerivation rec {
   pname = "my-base16-theme";
-  version = "stable";
+  version = "latest";
 
   nativeBuildInputs = [
-    base16-builder
+    pkgs.flavours 
   ];
 
   src = ./.;
@@ -48,9 +48,8 @@ stdenv.mkDerivation rec {
     base0F: "${colors.base0F}"
     EOF
 
-    HOME=$(mktemp -d)
-    base16-builder -s my-base16.yml -b dark -t shell > my-base16.sh
-    base16-builder -s my-base16.yml -b dark -t vim > my-base16.vim
+    flavours build my-base16.yml ${base16-shell-template}/templates/default.mustache > my-base16.sh
+    flavours build my-base16.yml ${base16-vim-template}/templates/default.mustache > my-base16.vim
     '';
 
   installPhase = ''

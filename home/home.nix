@@ -6,16 +6,55 @@ let
   configHome = ~/dotfiles/home;
 
   pkgs-unstable = import <nixos-unstable> {
-    overlays = [
-      (self: super: {
-        z3_4_4_0 = super.z3_4_4_0.overrideAttrs (old: rec {
-          src = super.fetchFromGitHub {
-            owner  = "Z3Prover";
-            repo   = "z3";
-            rev    = "0482e7fe727c75e259ac55a932b28cf1842c530e";
-            sha256 = "1m53avlljxqd2p8w266ksmjywjycsd23h224yn786qsnf36dr63x";
-          };
-        });
+    overlays = [ 
+      (self: super: { 
+        isabelle = super.callPackage ../nix/isabelle {
+          polyml = super.polyml.overrideAttrs (_: {
+            pname = "polyml-for-isabelle";
+            version = "2021-1";
+            configureFlags = [ "--enable-intinf-as-int" "--with-gmp" "--disable-shared" ];
+            buildFlags = [ "compiler" ];
+            src = super.fetchFromGitHub {
+              owner = "polyml";
+              repo = "polyml";
+              rev = "39d96a2def903ed019c6855e3b688df5070d633a";
+              sha256 = "sha256-S7d2Vr/nB+rCX9d4qQj4f7edVZKocKIjc5rrx9A/B4Q=";
+            };
+          });
+          z3 = super.z3_4_4_0.overrideAttrs (old: rec {
+            src = super.fetchFromGitHub {
+              owner  = "Z3Prover";
+              repo   = "z3";
+              rev    = "0482e7fe727c75e259ac55a932b28cf1842c530e";
+              sha256 = "1m53avlljxqd2p8w266ksmjywjycsd23h224yn786qsnf36dr63x";
+            };
+          });
+          java = super.openjdk17;
+          naproche = super.naproche.overrideAttrs (_: {
+            prePatch = ''
+              cat >as.patch <<EOF
+                diff --git a/src/SAD/Core/Rewrite.hs b/src/SAD/Core/Rewrite.hs
+                index 04463ae..675a2ce 100644
+                --- a/src/SAD/Core/Rewrite.hs
+                +++ b/src/SAD/Core/Rewrite.hs
+                @@ -133,7 +133,7 @@ generateConditions pos verbositySetting rules w l r =
+                   where
+                     -- check for matching normalforms and output the paths to them
+                     simpPaths leftNormalForms rightNormalForms = do
+                -      leftPath@ ((simplifiedLeft , _):_) <- leftNormalForms
+                +      leftPath@((simplifiedLeft , _):_) <- leftNormalForms
+                       rightPath@((simplifiedRight, _):_) <- rightNormalForms
+                       guard (twins simplifiedLeft simplifiedRight)
+                       return (reverse leftPath, reverse rightPath)
+              EOF
+              hpack
+              '';
+            patches = [ "./as.patch" ];
+          });
+
+          inherit (super) veriT vampire eprover-ho isabelle-components isabelle;
+
+        };
       })
     ];
   };
@@ -44,7 +83,11 @@ let
     base0F = "bc9458"; # Deprecated, Opening/Closing Embedded Language Tags
   };
 
-  my-base16-theme = pkgs.callPackage ../nix/my-base16-theme { colors = colors; };
+  my-base16-theme = pkgs.callPackage ../nix/my-base16-theme {
+    colors = colors;
+    base16-shell-template = pkgs.callPackage ../nix/base16-shell-template {};
+    base16-vim-template = pkgs.callPackage ../nix/base16-vim-template {};
+  };
 
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
@@ -88,7 +131,6 @@ in {
     gnupg
 
     # Window manager
-    base16-builder
     glibcLocales
     gnome3.networkmanagerapplet
     grim
