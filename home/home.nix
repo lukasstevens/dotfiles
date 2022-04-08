@@ -224,6 +224,7 @@ in {
     enable = true;
     package = pkgs-unstable.firefox-wayland;
     extensions = with nur.repos.rycee.firefox-addons; [
+      i-dont-care-about-cookies
       ublock-origin
       umatrix
       keepassxc-browser
