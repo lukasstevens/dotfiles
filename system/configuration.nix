@@ -2,7 +2,6 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -12,6 +11,15 @@
   networking = {
     networkmanager.enable = true;
     networkmanager.dns = "none";
+
+    firewall = {
+      allowedTCPPorts = [
+        24727 # AusweisApp2
+      ];
+      allowedUDPPorts = [
+        24727 # AusweisApp2
+      ];
+    };
   };
 
   i18n = {
@@ -43,9 +51,13 @@
 
   services.udev.packages = [ pkgs.platformio ];
 
+  services.gvfs.enable = true;
+
   programs.adb.enable = true;
 
   programs.firejail.enable = true;
+
+  programs.kdeconnect.enable = true;
 
   services.dbus.packages = [ pkgs.dconf ];
 
@@ -58,7 +70,8 @@
       require_dnssec = true;
       sources.public-resolvers = {
         urls = [
-          "https://download.dnscrypt.info/resolvers-list/v2/public-resolvers.md"
+          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
         ];
         cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
