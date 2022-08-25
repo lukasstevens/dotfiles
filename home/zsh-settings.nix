@@ -35,14 +35,15 @@
         { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         { name = "jdxcode/gh"; tags = [ "as:plugin" "use:zsh/gh/gh.plugin.zsh" ]; }
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
-        { name = "marlonrichert/zsh-autocomplete"; tags = [ "as:plugin" "use:zsh-autocomplete.plugin.zsh" ]; }
       ] ++ oh-my-zsh-plugins [
-        "rust" "docker" "git-extras" "pip" "pyenv" "python" "stack" "thefuck" "wd"
+        "rust" "docker" "git-extras" "pip" "pyenv" "stack" "thefuck" "wd"
       ];
     };
 
   initExtraBeforeCompInit = '' 
-    zstyle ':autocomplete:*' widget-style menu-select
+    zstyle ':completion:*' completer _extensions _complete _approximate 
+    setopt AUTO_MENU
+    zstyle ':completion:*' menu select
     '';
 
   shellAliases = {
@@ -72,6 +73,9 @@
 
     # Delete key
     bindkey "^[[3~" delete-char
+
+    # Shift-Tab
+    bindkey '^[[Z' reverse-menu-complete
 
     # Go up directories
     ..(){

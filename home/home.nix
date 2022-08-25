@@ -94,9 +94,9 @@ let
 in {
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
   };
-  home.stateVersion = "21.05";
+  home.stateVersion = "21.11";
   home.username = "lukas";
   home.homeDirectory = /home/lukas;
 
@@ -132,7 +132,6 @@ in {
 
     # Window manager
     glibcLocales
-    gnome3.networkmanagerapplet
     grim
     hicolor-icon-theme
     playerctl
@@ -297,8 +296,8 @@ in {
       extensions = {
         rebase = "";
         strip = "";
-        evolve = "${pkgs.python37Packages.hg-evolve}/lib/python3.7/site-packages/hgext3rd/evolve/__init__.py";
-      topic = "${pkgs.python37Packages.hg-evolve}/lib/python3.7/site-packages/hgext3rd/topic/__init__.py";
+        evolve = "${pkgs.python38Packages.hg-evolve}/lib/python3.8/site-packages/hgext3rd/evolve/__init__.py";
+      topic = "${pkgs.python38Packages.hg-evolve}/lib/python3.8/site-packages/hgext3rd/topic/__init__.py";
       };
     };
   };
