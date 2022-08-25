@@ -122,6 +122,9 @@
 
   programs.sway.enable = true;
 
+  # Workaround for EDITOR being overwritten: https://github.com/nix-community/home-manager/issues/2751
+  programs.zsh.enable = true;
+
   users.mutableUsers = false;
   users.extraUsers.lukas = {
     home = "/home/lukas";
