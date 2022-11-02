@@ -8,12 +8,10 @@
 
   networking.hostName = "worknix";
 
-  services.timesyncd.servers = [
-    "ntp1.lrz.de"
-    "ntp2.lrz.de"
-    "ntp.lrz.de"
-    "ntp3.lrz.de"
-  ];
+  services.ntp = {
+    enable = true;
+    servers = [ "ntp1.in.tum.de" "ntp2.in.tum.de" ];
+  };
 
   networking.firewall = {
     allowedTCPPorts = [ 123 ];
