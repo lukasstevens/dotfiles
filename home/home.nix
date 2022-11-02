@@ -214,8 +214,6 @@ in {
     package = pkgs-unstable.nextcloud-client;
   };
 
-  services.kdeconnect.enable = true;
-
   gtk = {
     enable = true;
     font = {
