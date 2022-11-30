@@ -38,7 +38,6 @@ in
       { command = "${terminal} --title scratchterm"; }
       { command = "${pkgs.keepassxc}/bin/keepassxc"; }
       { command = "${pkgs.nextcloud-client}/bin/nextcloud"; }
-      { command = "swayidle -d -w \"swaylock --color ${stripHash bgColor}\""; }
     ]; 
   
     window.commands = [
@@ -111,7 +110,7 @@ in
       in {
         "${modifier}+Shift+r" = "reload";
         "${modifier}+Shift+e" = "exec \"swaynag -t warning -m 'Do you want to exit sway?' -b 'Yes, exit sway.' 'swaymsg exit'\"";
-        "${modifier}+Shift+x" = "exec \"swaylock --color ${stripHash bgColor}\"";
+        "${modifier}+Shift+x" = "exec \"${pkgs.swaylock}/bin/swaylock --color ${stripHash bgColor}\"";
   
         "${modifier}+Shift+q" = "kill";
         "${modifier}+f" = "fullscreen toggle";

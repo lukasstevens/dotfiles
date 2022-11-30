@@ -256,6 +256,14 @@ in {
     settings = import (configHome + /sway/waybar-settings.nix) pkgs;
   };
 
+  services.swayidle = {
+    enable = true;
+    events = [ 
+      { event = "before-sleep"; command = "loginctl lock-session"; }
+      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color 2f343f"; }
+    ];
+  };
+
   programs.alacritty = {
     enable = true;
     settings = import (configHome + /alacritty-settings.nix);
