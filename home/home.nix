@@ -169,6 +169,13 @@ in {
     })
   ];
 
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "flakes" "nix-command" ];
+    };
+  };
+
   fonts.fontconfig.enable = true;
 
   home.sessionPath = [ "~/.local/bin" "~/.cargo/bin" ];
