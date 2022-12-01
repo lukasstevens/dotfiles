@@ -236,7 +236,7 @@ in {
     enable = true;
     package = pkgs.firefox-wayland;
     extensions = with nur.repos.rycee.firefox-addons; [
-      i-dont-care-about-cookies
+      consent-o-matic
       ublock-origin
       umatrix
       keepassxc-browser
