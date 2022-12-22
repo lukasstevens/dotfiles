@@ -9,11 +9,6 @@ let
     overlays = [ 
     ];
   };
-  pkgs-isabelle-2022 = import (builtins.fetchTarball {
-    name = "pkgs-isabelle-2022";
-    url = https://github.com/jvanbruegge/nixpkgs/archive/isabelle-2022.tar.gz;
-    sha256 = "0jwbbvw5lw4z9rxsr7p6551sh6a73wy4gaq9qmc757qavj6y6ipk";
-    }) {};
   nur = import (builtins.fetchTarball {
       name = "nur";
       url = https://github.com/nix-community/NUR/archive/2a531b3ae63276d9054f861f71b7f66c95c2b0ec.tar.gz;
@@ -60,8 +55,7 @@ in {
     # Desktop programs
     evince
     gnome3.gnome-terminal
-    pkgs-isabelle-2022.isabelle
-    # isabelle-devel
+    pkgs-unstable.isabelle
     pkgs-unstable.keepassxc
     lean
     pkgs-unstable.nextcloud-client
