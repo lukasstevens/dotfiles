@@ -58,8 +58,6 @@
 
   programs.firejail.enable = true;
 
-  programs.kdeconnect.enable = true;
-
   services.dbus.packages = [ pkgs.dconf ];
 
   services.printing.enable = true;

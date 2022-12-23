@@ -171,6 +171,8 @@ in {
     package = pkgs-unstable.nextcloud-client;
   };
 
+  services.kdeconnect.enable = true;
+
   gtk = {
     enable = true;
     font = {
@@ -347,6 +349,7 @@ in {
       in with pkgs-unstable.vscode-extensions; [
         cyp
         justusadam.language-haskell
+        haskell.haskell
         vscodevim.vim
         matklad.rust-analyzer
         arrterian.nix-env-selector 
