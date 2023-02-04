@@ -168,6 +168,7 @@ in {
   services.nextcloud-client = {
     enable = true;
     package = pkgs.nextcloud-client;
+    startInBackground = true;
   };
 
   services.kdeconnect.enable = true;
