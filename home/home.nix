@@ -11,8 +11,8 @@ let
   };
   nur = import (builtins.fetchTarball {
       name = "nur";
-      url = https://github.com/nix-community/NUR/archive/2a531b3ae63276d9054f861f71b7f66c95c2b0ec.tar.gz;
-      sha256 = "1y7kv0x9wzzhvqpvf2f2wn4hlqlvizjfd1c9d49ngnr6pnv0jfp1";
+      url = https://github.com/nix-community/NUR/archive/854a244d72792711cd05ecbe35bccfd93bf33ab3.tar.gz;
+      sha256 = "08j6gbacilnwr50qskn4jw9pml3jm2sxl0jj3n8fdxiapxf5pps9";
     }) { pkgs = pkgs; };
 
   colors = {
