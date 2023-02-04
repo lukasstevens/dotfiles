@@ -58,7 +58,6 @@ in {
     pkgs-unstable.isabelle
     pkgs-unstable.keepassxc
     lean
-    pkgs-unstable.nextcloud-client
     signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
@@ -168,7 +167,7 @@ in {
 
   services.nextcloud-client = {
     enable = true;
-    package = pkgs-unstable.nextcloud-client;
+    package = pkgs.nextcloud-client;
   };
 
   services.kdeconnect.enable = true;
