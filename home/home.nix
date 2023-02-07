@@ -58,6 +58,7 @@ in {
     pkgs-unstable.isabelle
     pkgs-unstable.keepassxc
     lean
+    nextcloud-client
     signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
@@ -163,15 +164,40 @@ in {
     '';
   };
 
-  services.network-manager-applet.enable = true;
+  # Manually configure nm-applet to start after sway and use --indicator
+  systemd.user.services.network-manager-applet = {
+    Unit = {
+      Description = "Network Manager applet";
+      Requires = [ "tray.target" ];
+      After = [ "sway-session.target" "tray.target" ];
+    };
 
-  services.nextcloud-client = {
-    enable = true;
-    package = pkgs.nextcloud-client;
-    startInBackground = true;
+    Install = { WantedBy = [ "sway-session.target" ]; };
+
+    Service = {
+      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator";
+    };
   };
 
-  services.kdeconnect.enable = true;
+  # Manually configure nextcloud-client to start after sway
+  systemd.user.services.nextcloud-client = {
+    Unit = {
+      Description = "Nextcloud Client";
+      After = [ "sway-session.target" ];
+    };
+
+    Service = {
+      Environment = "PATH=${config.home.profileDirectory}/bin";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud";
+    };
+
+    Install = { WantedBy = [ "sway-session.target" ]; };
+  };
+
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   gtk = {
     enable = true;
@@ -196,6 +222,7 @@ in {
 
   wayland.windowManager.sway = {
     enable = true;
+    systemdIntegration = true;
     xwayland = true;
     wrapperFeatures.gtk = true;
     extraSessionCommands = ''
