@@ -59,7 +59,7 @@ in {
     pkgs-unstable.keepassxc
     lean
     nextcloud-client
-    signal-desktop
+    # signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
 
@@ -320,7 +320,7 @@ in {
           vim-nix
           nerdtree
           rust-vim
-          command-t
+          { plugin = command-t; config = "let g:CommandTPreferredImplementation = 'lua'"; }
           deoplete-nvim
           ale
           { plugin = vimtex; config = "let g:tex_flavor = 'latex'"; }
