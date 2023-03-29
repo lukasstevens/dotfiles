@@ -19,4 +19,18 @@
   };
   
   services.printing.drivers = [ pkgs.gutenprint pkgs.hplip ];
+
+  networking.extraHosts = ''
+    127.0.0.1 www.reddit.com
+    127.0.0.1 reddit.com
+    127.0.0.1 teddit.net
+    127.0.0.1 youtube.com
+    127.0.0.1 www.youtube.com
+    127.0.0.1 youtube.de
+    127.0.0.1 www.youtube.de
+    127.0.0.1 facebook.de
+    127.0.0.1 facebook.com
+    127.0.0.1 www.facebook.de
+    127.0.0.1 www.facebook.com
+    '';
 }
