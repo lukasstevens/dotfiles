@@ -323,7 +323,13 @@ in {
           { plugin = command-t; config = "let g:CommandTPreferredImplementation = 'lua'"; }
           deoplete-nvim
           ale
-          { plugin = vimtex; config = "let g:tex_flavor = 'latex'"; }
+          {
+            plugin = vimtex;
+            config = ''
+              let g:tex_flavor = 'latex'
+              let g:maplocalleader = '<'
+              '';
+          }
           haskell-vim
           cyp-syntax
         ];
