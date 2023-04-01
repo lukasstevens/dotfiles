@@ -1,4 +1,4 @@
-{ pkgs, lib, ... } :
+{ pkgs, lib, my-base16-theme, ... } :
 
 let
   bgColor = "#2f343f";
@@ -25,7 +25,7 @@ in
     };
   
     terminal = "${pkgs.alacritty}/bin/alacritty";
-    menu = "${pkgs.wofi}/bin/wofi";
+    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${my-base16-theme}/share/my-base16.rasi";
   
     modifier = "Mod4";
     left = "h";
@@ -122,7 +122,7 @@ in
         "${modifier}+t" = "[title=\"scratchterm\"] scratchpad show";
         "${modifier}+p" = "[app_id=\"KeePassXC\"] scratchpad show";
   
-        "${modifier}+d" = "exec \"${menu} --show drun\"";
+        "${modifier}+d" = "exec \"${menu} -show drun -show-icons\"";
 
         "XF86AudioRaiseVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +3%\"";
         "XF86AudioLowerVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%\"";

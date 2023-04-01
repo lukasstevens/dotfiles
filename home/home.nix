@@ -1,6 +1,6 @@
 # Link this file to ~/.config/nixpkgs/home.nix to use it with home-manager
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   configHome = ~/dotfiles/home;
@@ -38,6 +38,7 @@ let
     colors = colors;
     base16-shell-template = pkgs.callPackage ../nix/base16-shell-template {};
     base16-vim-template = pkgs.callPackage ../nix/base16-vim-template {};
+    base16-rofi-template = pkgs.callPackage ../nix/base16-rofi-template {};
   };
 
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
@@ -234,7 +235,7 @@ in {
       export XDG_SESSION_TYPE=wayland
       export XDG_CURRENT_DESKTOP=sway
       '';
-    config = import (configHome + /sway/settings.nix) pkgs;
+      config = import (configHome + /sway/settings.nix) { inherit pkgs lib my-base16-theme; };
   };
 
   programs.waybar = {

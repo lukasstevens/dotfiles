@@ -1,4 +1,4 @@
-{ pkgs, stdenv, colors, base16-vim-template, base16-shell-template }:
+{ pkgs, stdenv, colors, base16-vim-template, base16-shell-template, base16-rofi-template }:
 
 stdenv.mkDerivation rec {
   pname = "my-base16-theme";
@@ -50,11 +50,13 @@ stdenv.mkDerivation rec {
 
     flavours build my-base16.yml ${base16-shell-template}/templates/default.mustache > my-base16.sh
     flavours build my-base16.yml ${base16-vim-template}/templates/default.mustache > my-base16.vim
+    flavours build my-base16.yml ${base16-rofi-template}/templates/default.mustache > my-base16.rasi
     '';
 
   installPhase = ''
     mkdir -p $out/share
     cp my-base16.sh $out/share
     cp my-base16.vim $out/share
+    cp my-base16.rasi $out/share
     '';
 }
