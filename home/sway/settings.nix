@@ -1,13 +1,13 @@
-{ pkgs, lib, colors, my-base16-theme, ... } :
+{ pkgs, lib, config, ... } :
 
 let
-  bgColor = "#${colors.base00}";
-  inactiveBgColor = "#${colors.base01}";
-  textColor = "#${colors.base05}";
-  inactiveTextColor = "#${colors.base06}";
-  urgentBgColor = "#${colors.base04}";
-  blueAccent = "#${colors.base09}";
-  indicatorColor = "#${colors.base00}";
+  bgColor = "#${config.scheme.base00}";
+  inactiveBgColor = "#${config.scheme.base01}";
+  textColor = "#${config.scheme.base05}";
+  inactiveTextColor = "#${config.scheme.base06}";
+  urgentBgColor = "#${config.scheme.base04}";
+  blueAccent = "#${config.scheme.base09}";
+  indicatorColor = "#${config.scheme.base00}";
 
   stripHash = s: lib.strings.removePrefix "#" s;
 
@@ -25,7 +25,8 @@ in
     };
   
     terminal = "${pkgs.alacritty}/bin/alacritty";
-    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${my-base16-theme}/share/my-base16.rasi";
+
+    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${config.scheme { template = builtins.readFile ./rofi.mustache; }}";
   
     modifier = "Mod4";
     left = "h";

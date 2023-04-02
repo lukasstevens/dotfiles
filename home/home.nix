@@ -15,35 +15,13 @@ let
       sha256 = "08j6gbacilnwr50qskn4jw9pml3jm2sxl0jj3n8fdxiapxf5pps9";
     }) { pkgs = pkgs; };
 
-  colors = {
-    base00 = "262528"; # Default Background
-    base01 = "272935"; # Lighter Background
-    base02 = "3a4055"; # Selection Background
-    base03 = "5a647e"; # Comments, Invisibles, Line Highlighting
-    base04 = "d4cfc9"; # Dark Foreground (used for status bars)
-    base05 = "e6e1dc"; # Default Foreground, Caret, Delimiters, Operators
-    base06 = "f4f1ed"; # Light Foreground
-    base07 = "f9f7f3"; # Light Foreground
-    base08 = "de3e2f"; # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base09 = "59abe3"; # Integers, Booleans, Constants, XML Attributes, Markup Link URL
-    base0A = "f89406"; # Classes, Markup Bold, Search Text Background
-    base0B = "6fd952"; # Strings, Inherited Class, Markup Code, Diff Inserted
-    base0C = "1BBC9B"; # Support, Regex, Escape Characters, Markup Quotes
-    base0D = "4183d7"; # Functions, Methods, Attribute IDs, Headings
-    base0E = "b24edd"; # Keywords, Storage, Selector, Markup, Italic, Diff Changed
-    base0F = "bc9458"; # Deprecated, Opening/Closing Embedded Language Tags
-  };
-
-  my-base16-theme = pkgs.callPackage ../nix/my-base16-theme {
-    colors = colors;
-    base16-shell-template = pkgs.callPackage ../nix/base16-shell-template {};
-    base16-vim-template = pkgs.callPackage ../nix/base16-vim-template {};
-    base16-rofi-template = pkgs.callPackage ../nix/base16-rofi-template {};
-  };
-
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
 in {
+  imports = [
+    (builtins.getFlake "github:SenchoPens/base16.nix").homeManagerModule
+  ];
+
   programs.home-manager = {
     enable = true;
     path = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
@@ -139,7 +117,6 @@ in {
 
   xdg = {
     enable = true;
-    configFile."nvim/colors/my-base16.vim".source = "${my-base16-theme}/share/my-base16.vim";
     mime.enable = true;
     mimeApps = {
       enable = true;
@@ -164,6 +141,38 @@ in {
       { "enable-crash-reporter": false }
     '';
   };
+
+  scheme =
+    let
+      base16-themes = builtins.fetchTarball {
+        name = "base16-themes";
+        url = https://github.com/tinted-theming/base16-schemes/archive/42d74711418db38b08575336fc03f30bd3799d1d.tar.gz;
+        sha256 = "0dpjqv18kkdcv3c1fjky3ik9c08plf421gjn4861hvabvbsaaav5";
+      };
+    in #base16-themes + "/onedark.yaml";
+    {
+      slug = "lks-dark";
+      scheme = "Dark Theme by Lukas Stevens";
+      author = "Lukas Stevens";
+
+      base00 = "262528"; # Default Background
+      base01 = "272935"; # Lighter Background
+      base02 = "3a4055"; # Selection Background
+      base03 = "5a647e"; # Comments, Invisibles, Line Highlighting
+      base04 = "d4cfc9"; # Dark Foreground (used for status bars)
+      base05 = "e6e1dc"; # Default Foreground, Caret, Delimiters, Operators
+      base06 = "f4f1ed"; # Light Foreground
+      base07 = "f9f7f3"; # Light Foreground
+      base08 = "de3e2f"; # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+      base09 = "59abe3"; # Integers, Booleans, Constants, XML Attributes, Markup Link URL
+      base0A = "f89406"; # Classes, Markup Bold, Search Text Background
+      base0B = "6fd952"; # Strings, Inherited Class, Markup Code, Diff Inserted
+      base0C = "1BBC9B"; # Support, Regex, Escape Characters, Markup Quotes
+      base0D = "4183d7"; # Functions, Methods, Attribute IDs, Headings
+      base0E = "b24edd"; # Keywords, Storage, Selector, Markup, Italic, Diff Changed
+      base0F = "bc9458"; # Deprecated, Opening/Closing Embedded Language Tags
+    };
+
 
   # Manually configure nm-applet to start after sway and use --indicator
   systemd.user.services.network-manager-applet = {
@@ -235,7 +244,7 @@ in {
       export XDG_SESSION_TYPE=wayland
       export XDG_CURRENT_DESKTOP=sway
       '';
-      config = import (configHome + /sway/settings.nix) { inherit pkgs lib colors my-base16-theme; };
+      config = import (configHome + /sway/settings.nix) { inherit pkgs lib config; };
   };
 
   programs.waybar = {
@@ -247,7 +256,7 @@ in {
     enable = true;
     events = [ 
       { event = "before-sleep"; command = "loginctl lock-session"; }
-      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color ${colors.base00}"; }
+      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
     ];
   };
 
@@ -295,6 +304,14 @@ in {
     };
   };
 
+  xdg.configFile."nvim/colors/base16-scheme.vim".source = (config.scheme {
+    templateRepo = builtins.fetchTarball {
+      name = "base16-vim";
+      url = https://github.com/tinted-theming/base16-vim/archive/79d4fb4575b6e9fab785c44557529240c0b7093a.tar.gz;
+      sha256 = "15qkn0gkcshzi9lvm70ycx7flikc3c4g2c7sdyk0nvjxmiifxxvm";
+    };
+  });
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -302,7 +319,14 @@ in {
     vimdiffAlias = true;
     withPython3 = true;
     withRuby = true;
-    extraConfig = builtins.readFile (configHome + /vimrc);
+    extraConfig = builtins.readFile (configHome + /vimrc) + ''
+      let base16colorspace=256
+      try
+          colorscheme base16-scheme
+      catch
+          echom "colorscheme base16-scheme not found."
+      endtry
+      '';
     plugins =
       let
         cyp-syntax = pkgs.vimUtils.buildVimPlugin {
@@ -317,7 +341,7 @@ in {
         };
       in
         with pkgs.vimPlugins; [
-          awesome-vim-colorschemes
+
           vim-nix
           nerdtree
           rust-vim
@@ -390,6 +414,6 @@ in {
       ];
   };
 
-  programs.zsh = import (configHome + /zsh-settings.nix) { inherit my-base16-theme; };
+  programs.zsh = import (configHome + /zsh-settings.nix) { inherit config; };
 }
 

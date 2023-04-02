@@ -1,6 +1,12 @@
-{ my-base16-theme }:
+{ config }:
 
-{
+let
+  base16-shell = builtins.fetchTarball {
+    name = "base16-shell";
+    url = https://github.com/tinted-theming/base16-shell/archive/d0737249d4c8bb26dc047ea9fba0054ae7024c04.tar.gz;
+    sha256 = "1jc8anmvnrn9nw4fgmwp7w9i5naw4n4ixw82afdg9x6cyaxxr8sz";
+  };
+in {
   enable = true;
 
   enableCompletion = true;
@@ -61,7 +67,7 @@
   };
 
   initExtra = ''
-    source ${my-base16-theme}/share/my-base16.sh
+    source ${config.scheme { templateRepo = base16-shell; }}
 
     # Up arrow
     bindkey '\e[A' up-line-or-history
