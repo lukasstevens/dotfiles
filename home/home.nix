@@ -247,7 +247,7 @@ in {
     enable = true;
     events = [ 
       { event = "before-sleep"; command = "loginctl lock-session"; }
-      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color 2f343f"; }
+      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color ${colors.base00}"; }
     ];
   };
 
