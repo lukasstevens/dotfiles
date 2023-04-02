@@ -235,7 +235,7 @@ in {
       export XDG_SESSION_TYPE=wayland
       export XDG_CURRENT_DESKTOP=sway
       '';
-      config = import (configHome + /sway/settings.nix) { inherit pkgs lib my-base16-theme; };
+      config = import (configHome + /sway/settings.nix) { inherit pkgs lib colors my-base16-theme; };
   };
 
   programs.waybar = {

@@ -1,13 +1,13 @@
-{ pkgs, lib, my-base16-theme, ... } :
+{ pkgs, lib, colors, my-base16-theme, ... } :
 
 let
-  bgColor = "#2f343f";
-  inactiveBgColor = "#2f343f";
-  textColor = "#f3f4f5";
-  inactiveTextColor = "#676e7d";
-  urgentBgColor = "#e53935";
-  blueAccent = "#446cb3";
-  indicatorColor = "#2f343f";
+  bgColor = "#${colors.base00}";
+  inactiveBgColor = "#${colors.base01}";
+  textColor = "#${colors.base05}";
+  inactiveTextColor = "#${colors.base06}";
+  urgentBgColor = "#${colors.base04}";
+  blueAccent = "#${colors.base09}";
+  indicatorColor = "#${colors.base00}";
 
   stripHash = s: lib.strings.removePrefix "#" s;
 
