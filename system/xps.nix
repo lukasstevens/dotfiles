@@ -6,6 +6,8 @@
     ./configuration.nix
   ];
 
+  hardware.bluetooth.enable = true;
+
   networking.hostName = "nixps";
 
   networking.firewall = {
