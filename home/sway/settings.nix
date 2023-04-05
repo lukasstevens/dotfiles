@@ -6,7 +6,7 @@ let
   textColor = "#${config.scheme.base05}";
   inactiveTextColor = "#${config.scheme.base06}";
   urgentBgColor = "#${config.scheme.base04}";
-  blueAccent = "#${config.scheme.base09}";
+  blueAccent = "#${config.scheme.base0D}";
   indicatorColor = "#${config.scheme.base00}";
 
   stripHash = s: lib.strings.removePrefix "#" s;
@@ -26,7 +26,19 @@ in
   
     terminal = "${pkgs.alacritty}/bin/alacritty";
 
-    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${config.scheme { template = builtins.readFile ./rofi.mustache; }}";
+    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${config.scheme {
+      template = ''
+        * {
+          background: ${bgColor};
+          background-alt: ${inactiveBgColor};
+          foreground: ${textColor};
+          selected: ${blueAccent};
+          active:  #${config.scheme.base0A};
+          urgend: ${urgentBgColor};
+        }
+        '' +
+        builtins.readFile ./rofi.mustache;
+    }}";
   
     modifier = "Mod4";
     left = "h";
