@@ -34,7 +34,7 @@ in
           foreground: ${textColor};
           selected: ${blueAccent};
           active:  #${config.scheme.base0A};
-          urgend: ${urgentBgColor};
+          urgent: ${urgentBgColor};
         }
         '' +
         builtins.readFile ./rofi.mustache;
