@@ -24,7 +24,7 @@ in {
 
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
   };
   home.stateVersion = "21.11";
   home.username = "lukas";
