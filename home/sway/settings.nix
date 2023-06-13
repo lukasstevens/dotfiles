@@ -36,6 +36,16 @@ in
           active:  #${config.scheme.base0A};
           urgent: ${urgentBgColor};
         }
+        configuration {
+          modi: "drun,emoji,run,filebrowser";
+            show-icons:           false;
+            display-drun:         " Apps";
+            display-emoji:        "😎 Emoji";
+            display-run:          " Run";
+            display-filebrowser:  " Files";
+            /* display-window:    " Windows"; */
+        	  drun-display-format:  "{name}";
+        }
         '' +
         builtins.readFile ./rofi.mustache;
     }}";

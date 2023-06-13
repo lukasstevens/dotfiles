@@ -88,6 +88,11 @@ in {
       waybar = super.waybar.override { pulseSupport = true; };
     })
     (self: super: {
+      rofi-wayland = super.rofi-wayland.override {
+        plugins = [ super.rofi-emoji ];
+      };
+    })
+    (self: super: {
       signal-desktop = super.signal-desktop.overrideAttrs (old: rec {
         version = "5.25.0";
         src = super.fetchurl {
