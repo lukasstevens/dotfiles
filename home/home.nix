@@ -24,7 +24,7 @@ in {
 
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
   };
   home.stateVersion = "21.11";
   home.username = "lukas";
@@ -95,6 +95,9 @@ in {
           sha256 = "0ql9rzxrisqms3plcrmf3fjinpxba10asmpsxvhn0zlfajy47d0a";
         };
       });
+    })
+    (self: super: {
+      fcitx-engines = super.fcitx5;
     })
   ];
 
@@ -174,34 +177,11 @@ in {
     };
 
 
-  # Manually configure nm-applet to start after sway and use --indicator
-  systemd.user.services.network-manager-applet = {
-    Unit = {
-      Description = "Network Manager applet";
-      Requires = [ "tray.target" ];
-      After = [ "sway-session.target" "tray.target" ];
-    };
+  services.network-manager-applet.enable = true;
 
-    Install = { WantedBy = [ "sway-session.target" ]; };
-
-    Service = {
-      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator";
-    };
-  };
-
-  # Manually configure nextcloud-client to start after sway
-  systemd.user.services.nextcloud-client = {
-    Unit = {
-      Description = "Nextcloud Client";
-      After = [ "sway-session.target" ];
-    };
-
-    Service = {
-      Environment = "PATH=${config.home.profileDirectory}/bin";
-      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud";
-    };
-
-    Install = { WantedBy = [ "sway-session.target" ]; };
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
   };
 
   services.kdeconnect = {
@@ -268,12 +248,14 @@ in {
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-wayland;
-    extensions = with nur.repos.rycee.firefox-addons; [
-      consent-o-matic
-      ublock-origin
-      umatrix
-      keepassxc-browser
-    ];
+    profiles."lukas" = {
+      extensions = with nur.repos.rycee.firefox-addons; [
+        consent-o-matic
+        ublock-origin
+        umatrix
+        keepassxc-browser
+      ];
+    };
   };
 
   programs.fzf = {

@@ -38,17 +38,13 @@
     gnumake
     git
     networkmanager
-    openvpn_24
+    openvpn
     tree
     vim
     wget
   ];
 
-  nixpkgs.overlays = [
-    (self: super: {
-      networkmanager-openvpn = super.networkmanager-openvpn.override { openvpn = pkgs.openvpn_24; };
-    })
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.udev.packages = [ pkgs.platformio ];
 
