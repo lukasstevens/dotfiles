@@ -74,7 +74,7 @@ in
 
     assigns = with pkgs.lib.lists; {
       "${elemAt workspaces 7}" = [{ app_id = "thunderbird"; }];
-      "${elemAt workspaces 6}" = [{ class = "discord"; } { app_id = "telegramdesktop"; } { class = "Signal"; }];
+      "${elemAt workspaces 6}" = [{ class = "discord"; } { app_id = "org.telegram.desktop"; } { class = "Signal"; }];
       "${elemAt workspaces 8}" = [{ app_id = "firefox"; }];
       "${elemAt workspaces 5}" = [{ class = "Spotify"; }];
     };
