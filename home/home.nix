@@ -22,10 +22,7 @@ in {
     (builtins.getFlake "github:SenchoPens/base16.nix").homeManagerModule
   ];
 
-  programs.home-manager = {
-    enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
-  };
+  programs.home-manager.enable = true;
   home.stateVersion = "21.11";
   home.username = "lukas";
   home.homeDirectory = /home/lukas;
