@@ -240,7 +240,7 @@ in {
   services.swayidle = {
     enable = true;
     events = [ 
-      { event = "before-sleep"; command = "loginctl lock-session"; }
+      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
       { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
     ];
   };
