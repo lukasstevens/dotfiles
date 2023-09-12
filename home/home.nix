@@ -311,7 +311,6 @@ in {
         };
       in
         with pkgs.vimPlugins; [
-
           vim-nix
           nerdtree
           rust-vim
@@ -375,12 +374,16 @@ in {
           };
         };
       in with pkgs-unstable.vscode-extensions; [
+        arrterian.nix-env-selector 
+        kamikillerto.vscode-colorize
+        vscodevim.vim
+
         cyp
+
         justusadam.language-haskell
         haskell.haskell
-        vscodevim.vim
+
         matklad.rust-analyzer
-        arrterian.nix-env-selector 
       ];
   };
 
