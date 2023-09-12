@@ -9,6 +9,7 @@ let
     overlays = [ 
     ];
   };
+  pkgs-isabelle-2023 = import (fetchTarball "https://github.com/lukasstevens/nixpkgs/archive/031ceb10fc46790e7c5441f9632d48f80c1c19e3.tar.gz") {};
   nur = import <nur> { inherit pkgs; };
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
@@ -26,7 +27,8 @@ in {
     # Desktop programs
     evince
     gnome3.gnome-terminal
-    pkgs-unstable.isabelle
+    #pkgs-unstable.isabelle
+    pkgs-isabelle-2023.isabelle
     pkgs-unstable.keepassxc
     lean
     nextcloud-client
