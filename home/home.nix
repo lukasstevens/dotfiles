@@ -30,7 +30,7 @@ in {
     pkgs-unstable.keepassxc
     lean
     nextcloud-client
-    # signal-desktop
+    pkgs-unstable.signal-desktop
     pkgs-unstable.tdesktop
     thunderbird
 
@@ -83,15 +83,6 @@ in {
       rofi-wayland = super.rofi-wayland.override {
         plugins = [ super.rofi-emoji ];
       };
-    })
-    (self: super: {
-      signal-desktop = super.signal-desktop.overrideAttrs (old: rec {
-        version = "5.25.0";
-        src = super.fetchurl {
-          url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_${version}_amd64.deb";
-          sha256 = "0ql9rzxrisqms3plcrmf3fjinpxba10asmpsxvhn0zlfajy47d0a";
-        };
-      });
     })
     (self: super: {
       fcitx-engines = super.fcitx5;
