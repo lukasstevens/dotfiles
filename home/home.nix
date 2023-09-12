@@ -9,12 +9,7 @@ let
     overlays = [ 
     ];
   };
-  nur = import (builtins.fetchTarball {
-      name = "nur";
-      url = https://github.com/nix-community/NUR/archive/854a244d72792711cd05ecbe35bccfd93bf33ab3.tar.gz;
-      sha256 = "08j6gbacilnwr50qskn4jw9pml3jm2sxl0jj3n8fdxiapxf5pps9";
-    }) { pkgs = pkgs; };
-
+  nur = import <nur> { inherit pkgs; };
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
 in {
