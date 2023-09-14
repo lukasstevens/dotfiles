@@ -30,6 +30,7 @@ in {
     #pkgs-unstable.isabelle
     (pkgs-isabelle-2023.isabelle.withComponents (components: [
       components.isabelle-linter
+      (pkgs-isabelle-2023.callPackage ../nix/isabelle/components/afp.nix {})
     ]))
     pkgs-unstable.keepassxc
     lean
