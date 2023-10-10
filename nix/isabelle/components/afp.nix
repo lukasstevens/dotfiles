@@ -5,8 +5,8 @@ stdenv.mkDerivation rec {
   version = "2023";
 
   src = fetchTarball {
-    url = "https://foss.heptapod.net/isa-afp/afp-devel/-/archive/580c72858b498ea8ba763e81b56a567871257384/afp-devel-580c72858b498ea8ba763e81b56a567871257384.tar.gz";
-    sha256 = "1mjybqwwsafznim2lxvdzgqn34kd96agbf2q63zv4h260f81knlk";
+    url = "https://foss.heptapod.net/isa-afp/afp-2023/-/archive/b656d667755f1947ccfbf00c7f70ec6ca3d414a6/afp-2023-b656d667755f1947ccfbf00c7f70ec6ca3d414a6.tar.gz";
+    sha256 = "1nc9gjyjr6jmdhansix8kf66y9v5byi972p70wq9411k25rmf125";
   };
 
   nativeBuildInputs = [ isabelle ];
