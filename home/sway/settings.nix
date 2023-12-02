@@ -64,6 +64,8 @@ in
     window.commands = [
       { command = "move scratchpad"; criteria = { title = "scratchterm"; }; }
       { command = "move scratchpad"; criteria = { title = "KeePassXC"; app_id = "KeePassXC"; }; }
+      { command = "scratchpad show"; criteria = { title = "Unlock Database - KeePassXC"; app_id = "KeePassXC"; }; }
+      { command = "scratchpad show"; criteria = { title = "KeePassXC - Browser Access Request"; app_id = "KeePassXC"; }; }
       { command = "move to workspace ${pkgs.lib.lists.elemAt workspaces 5}"; criteria = { class = "Spotify"; }; }
     ];
 
