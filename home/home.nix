@@ -205,7 +205,7 @@ in {
 
   wayland.windowManager.sway = {
     enable = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     xwayland = true;
     wrapperFeatures.gtk = true;
     extraSessionCommands = ''
