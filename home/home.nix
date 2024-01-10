@@ -41,6 +41,8 @@ in {
 
     # Developer utilities
     cmake
+    haskell.compiler.ghc94
+    (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
     ruby
     rustup
     stack
