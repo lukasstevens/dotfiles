@@ -1,3 +1,4 @@
+{ pkgs, lib, ...}:
 {
   env.TERM = "xterm-256color";
 
@@ -6,7 +7,7 @@
       x = 2;
       y = 2;
     };
-    decoration = "full";
+    decoration = lib.mkIf pkgs.stdenv.isLinux "full";
   };
   
   scrolling = {
@@ -34,7 +35,7 @@
     duration = 0;
   };
 
-  url = {
+  url = lib.mkIf pkgs.stdenv.isLinux {
     launcher = {
       program = "xdg-open";
       args = [];

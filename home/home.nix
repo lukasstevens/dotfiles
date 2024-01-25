@@ -9,7 +9,6 @@ let
     overlays = [ 
     ];
   };
-  pkgs-isabelle-2023 = import (fetchTarball "https://github.com/lukasstevens/nixpkgs/archive/283d637a258184e8689fc5faafcbfce3429b43a3.tar.gz") {};
   nur = import <nur> { inherit pkgs; };
   rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
@@ -19,18 +18,36 @@ in {
   ];
 
   programs.home-manager.enable = true;
-  home.stateVersion = "21.11";
   home.username = "lukas";
   home.homeDirectory = /home/lukas;
-
   home.packages = with pkgs; [
+    rename
+    thefuck
+    tree
+    youtube-dl
+
+    haskell.compiler.ghc94
+    (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
+    stack
+
+    texlive.combined.scheme-full
+
+    # Fonts
+    fira
+    fira-code
+    font-awesome
+    inconsolata
+    league-of-moveable-type
+    lmodern
+    lmmath
+    powerline-fonts
+  ] ++ lib.optionals stdenv.isLinux [
     # Desktop programs
     evince
     gnome3.gnome-terminal
-    #pkgs-unstable.isabelle
-    (pkgs-isabelle-2023.isabelle.withComponents (components: [
+    (pkgs-unstable.isabelle.withComponents (components: [
       components.isabelle-linter
-      (pkgs-isabelle-2023.callPackage ../nix/isabelle/components/afp.nix {})
+      (pkgs-unstable.callPackage ../nix/isabelle/components/afp.nix {})
     ]))
     pkgs-unstable.keepassxc
     lean
@@ -41,21 +58,13 @@ in {
 
     # Developer utilities
     cmake
-    haskell.compiler.ghc94
-    (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
     ruby
     rustup
-    stack
-    texlive.combined.scheme-full
 
     # Command line utilities
     acpi
     ffmpeg-full
-    rename
     rpiplay
-    thefuck
-    tree
-    youtube-dl
     gnupg
 
     # Window manager
@@ -70,19 +79,12 @@ in {
     mako
     wofi 
     qt5.qtwayland
-
-    # Fonts
-    fira
-    fira-code
-    font-awesome
-    inconsolata
-    league-of-moveable-type
-    lmodern
-    lmmath
-    powerline-fonts
   ];
 
   nixpkgs.overlays = [
+    (self: super: {
+      fcitx-engines = super.fcitx5;
+    })
     (self: super: {
       waybar = super.waybar.override { pulseSupport = true; };
     })
@@ -90,9 +92,6 @@ in {
       rofi-wayland = super.rofi-wayland.override {
         plugins = [ super.rofi-emoji ];
       };
-    })
-    (self: super: {
-      fcitx-engines = super.fcitx5;
     })
   ];
 
@@ -103,20 +102,28 @@ in {
     };
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+  };
 
-  home.sessionPath = [ "~/.local/bin" "~/.cargo/bin" ];
+  home.sessionPath = [
+    "~/.local/bin"
+    "~/.cargo/bin"
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    "/opt/homebrew/bin"
+  ];
 
   home.sessionVariables = {
     TERMINAL = "alacritty";
     EDITOR = "nvim";
+  } // lib.optionalAttrs pkgs.stdenv.isLinux { 
     LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
 
   xdg = {
     enable = true;
-    mime.enable = true;
-    mimeApps = {
+    mime = lib.mkIf pkgs.stdenv.isLinux { enable = true; };
+    mimeApps = lib.mkIf pkgs.stdenv.isLinux {
       enable = true;
       defaultApplications = {
         "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -172,19 +179,21 @@ in {
     };
 
 
-  services.network-manager-applet.enable = true;
+  services.network-manager-applet = lib.mkIf pkgs.stdenv.isLinux {
+    enable = true;
+  };
 
-  services.nextcloud-client = {
+  services.nextcloud-client = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     startInBackground = true;
   };
 
-  services.kdeconnect = {
+  services.kdeconnect = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     indicator = true;
   };
 
-  gtk = {
+  gtk = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     font = {
       name = "DejaVu Sans 11";
@@ -200,12 +209,12 @@ in {
     };
   };
 
-  qt = {
+  qt = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     platformTheme = "gtk";
   };
 
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     systemd.enable = true;
     xwayland = true;
@@ -222,12 +231,12 @@ in {
       config = import (configHome + /sway/settings.nix) { inherit pkgs lib config; };
   };
 
-  programs.waybar = {
+  programs.waybar = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     settings = import (configHome + /sway/waybar-settings.nix) pkgs;
   };
 
-  services.swayidle = {
+  services.swayidle = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     events = [ 
       { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
@@ -237,10 +246,10 @@ in {
 
   programs.alacritty = {
     enable = true;
-    settings = import (configHome + /alacritty-settings.nix);
+    settings = import (configHome + /alacritty-settings.nix) { inherit pkgs lib; };
   };
 
-  programs.firefox = {
+  programs.firefox = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     package = pkgs.firefox-wayland;
     profiles."lukas" = {
