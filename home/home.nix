@@ -30,6 +30,8 @@ in {
     (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
     stack
 
+    dmtx-utils
+    imagemagick
     texlive.combined.scheme-full
 
     # Fonts
