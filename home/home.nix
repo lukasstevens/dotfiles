@@ -356,7 +356,7 @@ in {
     enable = true;
     enableZshIntegration = true;
     agents = [ "gpg" "ssh" ];
-    keys = [ "id_ed25519" ];
+    keys = [ "id_ed25519" "id_ecdsa" ];
     extraFlags = [ "--quiet" "--noask" "--timeout 20" ];
   };
 
