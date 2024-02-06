@@ -349,7 +349,7 @@ in {
 
   programs.ssh = {
     enable = true;
-    extraConfig = "AddKeysToAgent yes";
+    addKeysToAgent = "yes";
   };
 
   programs.keychain = {
@@ -357,7 +357,7 @@ in {
     enableZshIntegration = true;
     agents = [ "gpg" "ssh" ];
     keys = [ "id_ed25519" "id_ecdsa" ];
-    extraFlags = [ "--quiet" "--noask" "--timeout 20" ];
+    extraFlags =[ "--quiet" "--noask" "--timeout 20" ];
   };
 
   programs.vscode = {
