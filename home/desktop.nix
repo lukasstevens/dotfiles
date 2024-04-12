@@ -6,10 +6,10 @@
   home.stateVersion = "21.11";
   
   wayland.windowManager.sway.config.output = {
-    DVI-D-1 = {
+    DP-2 = {
       position = "0 360";
     };
-    DP-3 = {
+    DP-1 = {
       position = "1920 0";
     };
   };
