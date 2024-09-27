@@ -18,6 +18,8 @@
   users.extraUsers."lukas".extraGroups = [ "libvirtd" ];
   networking.firewall.checkReversePath = true;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   powerManagement.powerDownCommands =
     let
       behringer-id = "1397:0508";
