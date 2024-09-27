@@ -114,6 +114,8 @@
 
   hardware.i2c.enable = true;
 
+  programs.wireshark.enable = true;
+
   programs.sway.enable = true;
 
   # Workaround for EDITOR being overwritten: https://github.com/nix-community/home-manager/issues/2751
