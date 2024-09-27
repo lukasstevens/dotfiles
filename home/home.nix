@@ -24,7 +24,7 @@ in {
     rename
     thefuck
     tree
-    youtube-dl
+    yt-dlp
 
     haskell.compiler.ghc94
     (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
@@ -213,7 +213,7 @@ in {
 
   qt = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme.name = "gtk";
   };
 
   wayland.windowManager.sway = lib.mkIf pkgs.stdenv.isLinux {
@@ -293,8 +293,8 @@ in {
       extensions = {
         rebase = "";
         strip = "";
-        evolve = "${pkgs.python38Packages.hg-evolve}/lib/python3.8/site-packages/hgext3rd/evolve/__init__.py";
-      topic = "${pkgs.python38Packages.hg-evolve}/lib/python3.8/site-packages/hgext3rd/topic/__init__.py";
+        evolve = "${pkgs.python310Packages.hg-evolve}/lib/python3.10/site-packages/hgext3rd/evolve/__init__.py";
+        topic = "${pkgs.python310Packages.hg-evolve}/lib/python3.10/site-packages/hgext3rd/topic/__init__.py";
       };
     };
   };
@@ -408,7 +408,7 @@ in {
         justusadam.language-haskell
         haskell.haskell
 
-        matklad.rust-analyzer
+        rust-lang.rust-analyzer
       ];
   };
 
