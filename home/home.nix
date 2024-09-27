@@ -55,7 +55,7 @@ in {
     lean
     nextcloud-client
     pkgs-unstable.signal-desktop
-    pkgs-unstable.tdesktop
+    pkgs-unstable.telegram-desktop
     thunderbird
 
     # Developer utilities
