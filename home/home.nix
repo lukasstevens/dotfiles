@@ -246,6 +246,13 @@ in {
     ];
   };
 
+  services.wlsunset = {
+    temperature.day = "6500";
+    temperature.night = "3500";
+    latitude = "48.1";
+    longitude = "11.6";
+  };
+
   programs.alacritty = {
     enable = true;
     settings = import (configHome + /alacritty-settings.nix) { inherit pkgs lib; };
