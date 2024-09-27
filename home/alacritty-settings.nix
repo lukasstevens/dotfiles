@@ -7,7 +7,7 @@
       x = 2;
       y = 2;
     };
-    decoration = lib.mkIf pkgs.stdenv.isLinux "full";
+    decorations = lib.mkIf pkgs.stdenv.isLinux "Full";
   };
   
   scrolling = {
@@ -33,14 +33,6 @@
 
   bell = {
     duration = 0;
-  };
-
-  url = lib.mkIf pkgs.stdenv.isLinux {
-    launcher = {
-      program = "xdg-open";
-      args = [];
-    };
-    modifiers = "Control";
   };
 
 }
