@@ -91,6 +91,9 @@ in {
       waybar = super.waybar.override { pulseSupport = true; };
     })
     (self: super: {
+      rofi-emoji = super.rofi-emoji.override { rofi-unwrapped = super.rofi-wayland-unwrapped; };
+    })
+    (self: super: {
       rofi-wayland = super.rofi-wayland.override {
         plugins = [ super.rofi-emoji ];
       };
