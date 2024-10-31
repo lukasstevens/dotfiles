@@ -14,6 +14,11 @@
     8912 8930 # IsarLight
   ];
 
+  networking.extraHosts = ''
+    192.168.1.237 hass.nixpi.lan
+    192.168.1.237 zigbee.nixpi.lan
+    '';
+
   virtualisation.libvirtd.enable = true;
   users.extraUsers."lukas".extraGroups = [ "libvirtd" ];
   networking.firewall.checkReversePath = true;
