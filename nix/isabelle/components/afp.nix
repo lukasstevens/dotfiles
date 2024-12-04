@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   pname = "AFP";
-  version = "2023";
+  version = "2024";
 
   src = fetchTarball {
-    url = "https://foss.heptapod.net/isa-afp/afp-2023/-/archive/b656d667755f1947ccfbf00c7f70ec6ca3d414a6/afp-2023-b656d667755f1947ccfbf00c7f70ec6ca3d414a6.tar.gz";
-    sha256 = "1nc9gjyjr6jmdhansix8kf66y9v5byi972p70wq9411k25rmf125";
+    url = "https://foss.heptapod.net/isa-afp/afp-2024/-/archive/2e1718ddcc1f102feba1fa8f9fcb585fd79381ad/afp-2024-2e1718ddcc1f102feba1fa8f9fcb585fd79381ad.tar.gz";
+    sha256 = "14rzr7ckpbn113jv0igikq4bsf3ac0735p384nmn6agys5lrvkkh";
   };
 
   nativeBuildInputs = [ isabelle ];
