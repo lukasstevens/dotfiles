@@ -46,7 +46,6 @@ in {
   ] ++ lib.optionals stdenv.isLinux [
     # Desktop programs
     evince
-    gnome3.gnome-terminal
     (pkgs-unstable.isabelle.withComponents (components: [
       components.isabelle-linter
       (pkgs-unstable.callPackage ../nix/isabelle/components/afp.nix {})
@@ -91,11 +90,8 @@ in {
       waybar = super.waybar.override { pulseSupport = true; };
     })
     (self: super: {
-      rofi-emoji = super.rofi-emoji.override { rofi-unwrapped = super.rofi-wayland-unwrapped; };
-    })
-    (self: super: {
       rofi-wayland = super.rofi-wayland.override {
-        plugins = [ super.rofi-emoji ];
+        plugins = [ super.rofi-emoji-wayland ];
       };
     })
   ];
@@ -206,7 +202,7 @@ in {
     };
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.gnome3.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     theme = {
       name = "Arc-Dark";

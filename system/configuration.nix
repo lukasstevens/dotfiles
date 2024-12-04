@@ -107,10 +107,7 @@
   # Keyrings
   services.gnome.gnome-keyring.enable = true;
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
+  hardware.opengl.enable = true;
 
   hardware.i2c.enable = true;
 
