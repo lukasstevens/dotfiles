@@ -1,12 +1,13 @@
-{ stdenv, lib, isabelle }:
+{ pkgs, stdenv, lib, isabelle }:
 
 stdenv.mkDerivation rec {
   pname = "AFP";
-  version = "2024";
+  version = "2025";
 
-  src = fetchTarball {
-    url = "https://foss.heptapod.net/isa-afp/afp-2024/-/archive/2e1718ddcc1f102feba1fa8f9fcb585fd79381ad/afp-2024-2e1718ddcc1f102feba1fa8f9fcb585fd79381ad.tar.gz";
-    sha256 = "14rzr7ckpbn113jv0igikq4bsf3ac0735p384nmn6agys5lrvkkh";
+  src = pkgs.fetchhg {
+    url = "https://foss.heptapod.net/isa-afp/afp-2025";
+    rev = "9dbcfccef70b13348a1a994faf454056968a429a";
+    sha256 = "sha256-pshGU4KGldF1y6Zy16wqFO1bMaUDGldXTyoR5SdwAYk=";
   };
 
   nativeBuildInputs = [ isabelle ];
@@ -20,6 +21,7 @@ stdenv.mkDerivation rec {
     dir=$out/Isabelle${isabelle.version}/contrib/${pname}-${version}
     mkdir -p $dir
     cp -r thys/* $dir/
+    rm -rf $dir/Go/test
   '';
 
   meta = with lib; {
