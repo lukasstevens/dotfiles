@@ -45,7 +45,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.udev.packages = [ pkgs.platformio ];
+  services.udev.packages = [ pkgs.platformio pkgs.openocd ];
 
   services.gvfs.enable = true;
 
