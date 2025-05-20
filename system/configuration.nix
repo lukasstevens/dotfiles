@@ -90,7 +90,7 @@
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     publish = {
       enable = true;
       addresses = true;
@@ -107,7 +107,7 @@
   # Keyrings
   services.gnome.gnome-keyring.enable = true;
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   hardware.i2c.enable = true;
 
