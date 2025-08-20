@@ -261,7 +261,7 @@ in {
     enable = true;
     package = pkgs.firefox-wayland;
     profiles."lukas" = {
-      extensions = with nur.repos.rycee.firefox-addons; [
+      extensions.packages = with nur.repos.rycee.firefox-addons; [
         consent-o-matic
         ublock-origin
         umatrix
@@ -369,48 +369,50 @@ in {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    userSettings = {
-      "telemetry.enableTelemetry" = false;
-      "update.mode" = "manual";
-      #"isabelle.home" = "${isabelle-devel}";
-      "haskell.indentationRules.enabled" = false;
-      "haskell.trace.server" = "messages";
-      "editor.fontFamily" = "Inconsolata for Powerline, monospace";
-      "extensions.autoUpdate" = false;
-      "window.zoomLevel" = 1;
-    };
-    keybindings = [
-      { key = "ctrl+`"; command = "terminal.focus"; }
-      { key = "ctrl+`"; command = "workbench.action.focusActiveEditorGroup"; when = "terminalFocus"; }
-      { key = "ctrl+h"; command = "workbench.action.navigateLeft"; }
-      { key = "ctrl+l"; command = "workbench.action.navigateRight"; }
-      { key = "ctrl+j"; command = "workbench.action.navigateDown"; }
-      { key = "ctrl+k"; command = "workbench.action.navigateUp"; }
-    ];
-    extensions =
-      let
-        cyp = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            name = "vscode-cyp";
-            publisher = "jonhue";
-            version = "1.1.0";
-            sha256 = "19pyn7l6hjl4mrvqfd137mi06k33glb7xiq37kkqannzhbh7did3";
-          };
-        };
-      in with pkgs-unstable.vscode-extensions; [
-        arrterian.nix-env-selector 
-        kamikillerto.vscode-colorize
-        vscodevim.vim
-
-        cyp
-
-        justusadam.language-haskell
-        haskell.haskell
-
-        rust-lang.rust-analyzer
+    profiles.default = {
+      userSettings = {
+        "telemetry.enableTelemetry" = false;
+        "update.mode" = "manual";
+        #"isabelle.home" = "${isabelle-devel}";
+        "haskell.indentationRules.enabled" = false;
+        "haskell.trace.server" = "messages";
+        "editor.fontFamily" = "Inconsolata for Powerline, monospace";
+        "extensions.autoUpdate" = false;
+        "window.zoomLevel" = 1;
+      };
+      keybindings = [
+        { key = "ctrl+`"; command = "terminal.focus"; }
+        { key = "ctrl+`"; command = "workbench.action.focusActiveEditorGroup"; when = "terminalFocus"; }
+        { key = "ctrl+h"; command = "workbench.action.navigateLeft"; }
+        { key = "ctrl+l"; command = "workbench.action.navigateRight"; }
+        { key = "ctrl+j"; command = "workbench.action.navigateDown"; }
+        { key = "ctrl+k"; command = "workbench.action.navigateUp"; }
       ];
+      extensions =
+        let
+          cyp = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
+            mktplcRef = {
+              name = "vscode-cyp";
+              publisher = "jonhue";
+              version = "1.1.0";
+              sha256 = "19pyn7l6hjl4mrvqfd137mi06k33glb7xiq37kkqannzhbh7did3";
+            };
+          };
+        in with pkgs-unstable.vscode-extensions; [
+          arrterian.nix-env-selector 
+          kamikillerto.vscode-colorize
+          vscodevim.vim
+
+          cyp
+
+          justusadam.language-haskell
+          haskell.haskell
+
+          rust-lang.rust-analyzer
+        ];
+    };
   };
 
-  programs.zsh = import (configHome + /zsh-settings.nix) { inherit config; };
+  programs.zsh = import (configHome + /zsh-settings.nix) { inherit config lib; };
 }
 

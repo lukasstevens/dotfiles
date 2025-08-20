@@ -1,4 +1,4 @@
-{ config }:
+{ config, lib, ... }:
 
 let
   base16-shell = builtins.fetchTarball {
@@ -46,49 +46,52 @@ in {
       ];
     };
 
-  initExtraBeforeCompInit = '' 
-    zstyle ':completion:*' completer _extensions _complete _approximate 
-    setopt AUTO_MENU
-    zstyle ':completion:*' menu select
-    '';
+  initContent =
+    let
+      initExtraBeforeCompInit = lib.mkOrder 550 '' 
+        zstyle ':completion:*' completer _extensions _complete _approximate 
+        setopt AUTO_MENU
+        zstyle ':completion:*' menu select
+        '';
 
-  shellAliases = {
-    setclip = "wl-copy";
-    getclip = "wl-paste";
+      shellAliases = {
+        setclip = "wl-copy";
+        getclip = "wl-paste";
 
-    ls = "ls --color=auto";
-    ll = "ls -l";
-    la = "ls -la";
-    lah = "ls -lah";
-    l = "ls -CF";
+        ls = "ls --color=auto";
+        ll = "ls -l";
+        la = "ls -la";
+        lah = "ls -lah";
+        l = "ls -CF";
 
-    bm = "wd add";
-    to = "wd";
-  };
+        bm = "wd add";
+        to = "wd";
+      };
 
-  initExtra = ''
-    source ${config.scheme { templateRepo = base16-shell; }}
+      initExtra = lib.mkOrder 1000 ''
+        source ${config.scheme { templateRepo = base16-shell; }}
 
-    # Up arrow
-    bindkey '\e[A' up-line-or-history
-    bindkey '\eOA' up-line-or-history
+        # Up arrow
+        bindkey '\e[A' up-line-or-history
+        bindkey '\eOA' up-line-or-history
 
-    # Down arrow
-    bindkey '\e[B' down-line-or-history
-    bindkey '\eOB' down-line-or-history
+        # Down arrow
+        bindkey '\e[B' down-line-or-history
+        bindkey '\eOB' down-line-or-history
 
-    # Delete key
-    bindkey "^[[3~" delete-char
+        # Delete key
+        bindkey "^[[3~" delete-char
 
-    # Shift-Tab
-    bindkey '^[[Z' reverse-menu-complete
+        # Shift-Tab
+        bindkey '^[[Z' reverse-menu-complete
 
-    # Go up directories
-    ..(){
-      cd ../$@
-    }
-    ..2(){
-      cd ../../$@
-    }
-    '';
+        # Go up directories
+        ..(){
+          cd ../$@
+        }
+        ..2(){
+          cd ../../$@
+        }
+        '';
+    in lib.mkMerge [initExtraBeforeCompInit initExtra];
 }
