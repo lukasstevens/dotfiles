@@ -10,7 +10,6 @@ let
     ];
   };
   nur = import <nur> { inherit pkgs; };
-  rpiplay = pkgs.callPackage ../nix/rpiplay {};
 
 in {
   imports = [
@@ -22,12 +21,11 @@ in {
   home.homeDirectory = /home/lukas;
   home.packages = with pkgs; [
     rename
-    thefuck
     tree
     yt-dlp
 
-    haskell.compiler.ghc94
-    (haskell-language-server.override { supportedGhcVersions = [ "94" ]; })
+    haskell.compiler.ghc9122
+    (haskell-language-server.override { supportedGhcVersions = [ "9122" ]; })
     stack
 
     dmtx-utils
@@ -65,7 +63,6 @@ in {
     # Command line utilities
     acpi
     ffmpeg-full
-    rpiplay
     gnupg
 
     # Window manager
@@ -90,8 +87,8 @@ in {
       waybar = super.waybar.override { pulseSupport = true; };
     })
     (self: super: {
-      rofi-wayland = super.rofi-wayland.override {
-        plugins = [ super.rofi-emoji-wayland ];
+      rofi = super.rofi.override {
+        plugins = [ super.rofi-emoji ];
       };
     })
   ];
@@ -259,7 +256,7 @@ in {
 
   programs.firefox = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox;
     profiles."lukas" = {
       extensions.packages = with nur.repos.rycee.firefox-addons; [
         consent-o-matic
@@ -277,9 +274,11 @@ in {
 
   programs.git = {
     enable = true;
-    userName = "Lukas Stevens";
-    userEmail = "mail@lukas-stevens.de";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Lukas Stevens";
+        email = "mail@lukas-stevens.de";
+      };
       pull.rebase = true;
     };
   };
@@ -292,8 +291,6 @@ in {
       extensions = {
         rebase = "";
         strip = "";
-        evolve = "${pkgs.python310Packages.hg-evolve}/lib/python3.10/site-packages/hgext3rd/evolve/__init__.py";
-        topic = "${pkgs.python310Packages.hg-evolve}/lib/python3.10/site-packages/hgext3rd/topic/__init__.py";
       };
     };
   };
@@ -355,13 +352,24 @@ in {
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      forwardAgent = false;
+      addKeysToAgent = "yes";
+      compression = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      hashKnownHosts = false;
+      userKnownHostsFile = "~/.ssh/known_hosts";
+      controlMaster = "no";
+      controlPath = "~/.ssh/master-%r@%n:%p";
+      controlPersist = "no";
+    };
   };
 
   programs.keychain = {
     enable = true;
     enableZshIntegration = true;
-    agents = [ "gpg" "ssh" ];
     keys = [ "id_ed25519" "id_ecdsa" ];
     extraFlags =[ "--quiet" "--noask" "--timeout 20" ];
   };

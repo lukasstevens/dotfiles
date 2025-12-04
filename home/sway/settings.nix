@@ -26,7 +26,7 @@ in
   
     terminal = "${pkgs.alacritty}/bin/alacritty";
 
-    menu = "${pkgs.rofi-wayland}/bin/rofi -config ${config.scheme {
+    menu = "${pkgs.rofi}/bin/rofi -config ${config.scheme {
       template = ''
         * {
           background: ${bgColor};

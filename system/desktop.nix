@@ -17,7 +17,13 @@
   networking.extraHosts = ''
     192.168.1.237 hass.nixpi.lan
     192.168.1.237 zigbee.nixpi.lan
-    '';
+    ''
+    + ''
+    0.0.0.0 www.reddit.com
+    0.0.0.0 reddit.com
+    0.0.0.0 old.reddit.com
+    ''
+    ;
 
   virtualisation.libvirtd.enable = true;
   users.extraUsers."lukas".extraGroups = [ "libvirtd" ];
