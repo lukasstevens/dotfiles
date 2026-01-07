@@ -9,8 +9,28 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    networkmanager.enable = true;
-    networkmanager.dns = "none";
+    networkmanager = {
+      enable = true;
+      dns = "none";
+      plugins = with pkgs; [ networkmanager-openvpn networkmanager-openconnect ];
+      ensureProfiles = {
+        profiles."UCPH_VPN" = {
+          connection = {
+            id = "UCPH_VPN";
+            type = "vpn";
+          };
+          vpn = rec {
+            gateway = "vpn.ku.dk";
+            remote = gateway;
+
+            service-type = "org.freedesktop.NetworkManager.openconnect";
+            protocol = "anyconnect";
+            useragent = "AnyConnect";
+            authtype = "password";
+          };
+        };
+      };
+    };
 
     firewall = {
       allowedTCPPorts = [
