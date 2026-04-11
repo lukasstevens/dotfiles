@@ -8,6 +8,8 @@
 
   hardware.bluetooth.enable = true;
 
+  services.blueman.enable = true;
+
   networking.hostName = "nixps";
 
   networking.firewall = {
