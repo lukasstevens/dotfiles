@@ -2,12 +2,12 @@
 
 stdenv.mkDerivation rec {
   pname = "AFP";
-  version = "2025";
+  version = "2025-2";
 
   src = pkgs.fetchhg {
-    url = "https://foss.heptapod.net/isa-afp/afp-2025";
-    rev = "9dbcfccef70b13348a1a994faf454056968a429a";
-    sha256 = "sha256-pshGU4KGldF1y6Zy16wqFO1bMaUDGldXTyoR5SdwAYk=";
+    url = "https://foss.heptapod.net/isa-afp/afp-2025-2";
+    rev = "d73fde1397faa1257158b1f704d42975616d2d3f";
+    sha256 = "sha256-xbWPBv0RpPXJ5qccmLk+u5AHIyOUOJ1jDaze88Nu0yw=";
   };
 
   nativeBuildInputs = [ isabelle ];
