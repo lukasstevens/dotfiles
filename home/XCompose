@@ -8,6 +8,10 @@ include "%L"
 <Multi_key> <u> <e> : "ü"
 <Multi_key> <U> <e> : "Ü"
 
+# Nordic
+<Multi_key> <E> <a> : "Æ"
+<Multi_key> <e> <a> : "æ"
+
 #typography
 <Multi_key> <minus> <minus> <minus>: "—"
 
