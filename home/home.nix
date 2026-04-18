@@ -319,36 +319,22 @@ in {
           echom "colorscheme base16-scheme not found."
       endtry
       '';
-    plugins =
-      let
-        cyp-syntax = pkgs.vimUtils.buildVimPlugin {
-          pname = "cyp-syntax";
-          version = "2019-11-30";
-          src = pkgs.fetchFromGitHub {
-            owner = "HE7086";
-            repo = "cyp-vim-syntax";
-            rev = "a13fc823a490fca1150d36d449594ce0e0a33a79";
-            sha256 = "1wadkvn4vkck9c11r2s33747qx3p1iwzrxfxzlchlw0vc5spr2f7";
-          };
-        };
-      in
-        with pkgs.vimPlugins; [
-          vim-nix
-          nerdtree
-          rust-vim
-          { plugin = command-t; config = "let g:CommandTPreferredImplementation = 'lua'"; }
-          deoplete-nvim
-          ale
-          {
-            plugin = vimtex;
-            config = ''
-              let g:tex_flavor = 'latex'
-              let g:maplocalleader = '<'
-              '';
-          }
-          haskell-vim
-          cyp-syntax
-        ];
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      nerdtree
+      rust-vim
+      { plugin = command-t; config = "let g:CommandTPreferredImplementation = 'lua'"; }
+      deoplete-nvim
+      ale
+      {
+        plugin = vimtex;
+        config = ''
+          let g:tex_flavor = 'latex'
+          let g:maplocalleader = '<'
+          '';
+      }
+      haskell-vim
+    ];
   };
 
   programs.opencode-bwrap = {
@@ -402,28 +388,16 @@ in {
         { key = "ctrl+j"; command = "workbench.action.navigateDown"; }
         { key = "ctrl+k"; command = "workbench.action.navigateUp"; }
       ];
-      extensions =
-        let
-          cyp = pkgs-unstable.vscode-utils.buildVscodeMarketplaceExtension {
-            mktplcRef = {
-              name = "vscode-cyp";
-              publisher = "jonhue";
-              version = "1.1.0";
-              sha256 = "19pyn7l6hjl4mrvqfd137mi06k33glb7xiq37kkqannzhbh7did3";
-            };
-          };
-        in with pkgs-unstable.vscode-extensions; [
-          arrterian.nix-env-selector 
-          kamikillerto.vscode-colorize
-          vscodevim.vim
+      extensions = with pkgs-unstable.vscode-extensions; [
+        arrterian.nix-env-selector 
+        kamikillerto.vscode-colorize
+        vscodevim.vim
 
-          cyp
+        justusadam.language-haskell
+        haskell.haskell
 
-          justusadam.language-haskell
-          haskell.haskell
-
-          rust-lang.rust-analyzer
-        ];
+        rust-lang.rust-analyzer
+      ];
     };
   };
 
