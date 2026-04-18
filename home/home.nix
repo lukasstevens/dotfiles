@@ -46,7 +46,7 @@ in {
     evince
     (pkgs-unstable.isabelle.withComponents (components: [
       components.isabelle-linter
-      (pkgs-unstable.callPackage ../nix/isabelle/components/afp.nix {})
+      (pkgs-unstable.callPackage ../pkgs/isabelle/components/afp.nix {})
     ]))
     pkgs-unstable.keepassxc
     lean
