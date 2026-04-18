@@ -14,6 +14,7 @@ let
 in {
   imports = [
     (builtins.getFlake "github:SenchoPens/base16.nix").homeManagerModule
+    ./modules/opencode-bwrap.nix
   ];
 
   programs.home-manager.enable = true;
@@ -348,6 +349,11 @@ in {
           haskell-vim
           cyp-syntax
         ];
+  };
+
+  programs.opencode-bwrap = {
+    enable = true;
+    exposeAsDefault = true;
   };
 
   programs.ssh = {
