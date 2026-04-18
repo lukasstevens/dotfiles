@@ -243,11 +243,12 @@ in {
     ];
   };
 
-  services.wlsunset = {
-    temperature.day = "6500";
-    temperature.night = "3500";
-    latitude = "48.1";
-    longitude = "11.6";
+  services.wlsunset = lib.mkIf pkgs.stdenv.isLinux {
+    enable = true;
+    temperature.day = 6500;
+    temperature.night = 3500;
+    latitude = "55.4";
+    longitude = "12.3";
   };
 
   programs.alacritty = {
