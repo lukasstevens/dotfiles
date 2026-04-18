@@ -243,6 +243,12 @@ in {
     ];
   };
 
+  services.swayosd = lib.mkIf pkgs.stdenv.isLinux {
+    enable = true;
+    stylePath = "${pkgs.arc-theme}/share/themes/Arc-Dark/gtk-3.0/gtk-dark.css";
+    topMargin = 0.5;
+  };
+
   services.wlsunset = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     temperature.day = 6500;

@@ -130,6 +130,7 @@ in
             "${modifier}+Shift+${ews.fst}" = "move container to workspace ${ews.snd}";
 
           }) (zipLists (map toString (range 0 10)) wss);
+        swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
       in {
         "${modifier}+Shift+r" = "reload";
         "${modifier}+Shift+e" = "exec \"swaynag -t warning -m 'Do you want to exit sway?' -b 'Yes, exit sway.' 'swaymsg exit'\"";
@@ -149,14 +150,15 @@ in
   
         "${modifier}+d" = "exec \"${menu} -show drun -show-icons\"";
 
-        "XF86AudioRaiseVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +3%\"";
-        "XF86AudioLowerVolume" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ false; ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -3%\"";
-        "XF86AudioMute" = "exec --no-startup-id \"${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle\"";
-        "XF86MonBrightnessUp" = "exec --no-startup-id \"${pkgs.brightnessctl}/bin/brightnessctl set +10%\"";
-        "XF86MonBrightnessDown" = "exec --no-startup-id \"${pkgs.brightnessctl}/bin/brightnessctl set 10%-\"";
-        "XF86AudioPlay" = "exec --no-startup-id \"${pkgs.playerctl}/bin/playerctl play-pause\"";
-        "XF86AudioNext" = "exec --no-startup-id \"${pkgs.playerctl}/bin/playerctl next\"";
-        "XF86AudioPrev" = "exec --no-startup-id \"${pkgs.playerctl}/bin/playerctl previous\"";
+        "XF86AudioRaiseVolume" = "exec --no-startup-id \"${swayosd-client} --output-volume +3\"";
+        "XF86AudioLowerVolume" = "exec --no-startup-id \"${swayosd-client} --output-volume -3\"";
+        "XF86AudioMute" = "exec --no-startup-id \"${swayosd-client} --output-volume mute-toggle\"";
+        "XF86AudioMicMute" = "exec --no-startup-id \"${swayosd-client} --input-volume mute-toggle\"";
+        "XF86MonBrightnessUp" = "exec --no-startup-id \"${swayosd-client} --brightness +10 --device intel_backlight\"";
+        "XF86MonBrightnessDown" = "exec --no-startup-id \"${swayosd-client} --brightness -10 --device intel_backlight\"";
+        "XF86AudioPlay" = "exec --no-startup-id \"${swayosd-client} --playerctl play-pause\"";
+        "XF86AudioNext" = "exec --no-startup-id \"${swayosd-client} --playerctl next\"";
+        "XF86AudioPrev" = "exec --no-startup-id \"${swayosd-client} --playerctl previous\"";
 
         "${modifier}+a" = "focus parent";
         "${modifier}+s" = "focus child";
