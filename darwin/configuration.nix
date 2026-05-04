@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nur ? import <nur> { inherit pkgs; },... }:
+{ config, pkgs, lib, inputs,... }:
 let
   spaces = [
     { label = "10_home"; }
@@ -16,7 +16,7 @@ let
   bgColor = "0xff272935";
   accentColor = "0xff88b6df";
 
-  nix-rosetta-builder = builtins.getFlake "github:cpick/nix-rosetta-builder";
+  #########nix-rosetta-builder = builtins.getFlake "github:cpick/nix-rosetta-builder";
 
   hostPlatform = "aarch64-darwin";
   pkgs-darwin = import (builtins.fetchTarball {
@@ -26,7 +26,7 @@ let
 in
 {
   imports = [
-    nix-rosetta-builder.darwinModules.default
+    inputs.nix-rosetta-builder.darwinModules.default
   ];
 
   # List packages installed in system profile. To search by name, run:
@@ -42,7 +42,7 @@ in
       (self: super: {
         haskell = super.haskell // {
           compiler = super.haskell.compiler // {
-            ghc884 = self.nur.repos.mpickering.ghc.ghc884;
+            ghc884 = self.inputs.nur.repos.mpickering.ghc.ghc884;
           };
         };
       })
