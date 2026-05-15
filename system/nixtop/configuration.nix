@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-
-  imports = [
-    ./configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "nixtop";
 

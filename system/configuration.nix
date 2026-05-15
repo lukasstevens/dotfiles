@@ -119,9 +119,14 @@
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = false;
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = false;
+    };
+    libvirtd = {
+      enable = true;
+    };
   };
 
   # Keyrings
@@ -135,6 +140,8 @@
 
   programs.sway.enable = true;
 
+  programs.virt-manager.enable = true;
+
   # Workaround for EDITOR being overwritten: https://github.com/nix-community/home-manager/issues/2751
   programs.zsh.enable = true;
 
@@ -144,11 +151,9 @@
     createHome = true;
     isNormalUser = true;
     extraGroups = [ "adbusers" "audio" "i2c" "networkmanager" "video" "wheel" "wireshark" ];
-    hashedPassword = lib.removeSuffix "\n" (builtins.readFile /etc/nixos/hashed_password_lukas);
+    hashedPasswordFile = "/etc/nixos/hashed_password_lukas";
     shell = pkgs.zsh;
   };
-
-  system.copySystemConfiguration = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

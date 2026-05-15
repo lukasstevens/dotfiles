@@ -1,25 +1,13 @@
 # Link this file to ~/.config/nixpkgs/home.nix to use it with home-manager
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, base16, firefox-addons, ... }:
 
-let
-  configHome = ~/dotfiles/home;
-
-  pkgs-unstable = import <nixos-unstable> {
-    overlays = [ 
-    ];
-  };
-  nur = import <nur> { inherit pkgs; };
-
-in {
+{
   imports = [
-    (builtins.getFlake "github:SenchoPens/base16.nix").homeManagerModule
+    base16.homeManagerModule
     ./modules/opencode-bwrap.nix
   ];
 
-  programs.home-manager.enable = true;
-  home.username = "lukas";
-  home.homeDirectory = /home/lukas;
   home.packages = with pkgs; [
     rename
     tree
@@ -45,15 +33,15 @@ in {
   ] ++ lib.optionals stdenv.isLinux [
     # Desktop programs
     evince
-    (pkgs-unstable.isabelle.withComponents (components: [
+    (pkgs.unstable.isabelle.withComponents (components: [
       components.isabelle-linter
-      (pkgs-unstable.callPackage ../pkgs/isabelle/components/afp.nix {})
+      (pkgs.unstable.callPackage ../pkgs/isabelle/components/afp.nix {})
     ]))
-    pkgs-unstable.keepassxc
+    pkgs.unstable.keepassxc
     lean
     nextcloud-client
-    pkgs-unstable.signal-desktop
-    pkgs-unstable.telegram-desktop
+    pkgs.unstable.signal-desktop
+    pkgs.unstable.telegram-desktop
     thunderbird
 
     # Developer utilities
@@ -80,22 +68,7 @@ in {
     qt5.qtwayland
   ];
 
-  nixpkgs.overlays = [
-    (self: super: {
-      fcitx-engines = super.fcitx5;
-    })
-    (self: super: {
-      waybar = super.waybar.override { pulseSupport = true; };
-    })
-    (self: super: {
-      rofi = super.rofi.override {
-        plugins = [ super.rofi-emoji ];
-      };
-    })
-  ];
-
   nix = {
-    package = pkgs.nix;
     settings = {
       experimental-features = [ "flakes" "nix-command" ];
     };
@@ -116,7 +89,7 @@ in {
     TERMINAL = "alacritty";
     EDITOR = "nvim";
   } // lib.optionalAttrs pkgs.stdenv.isLinux { 
-    LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+    #LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
   };
 
   xdg = {
@@ -140,7 +113,7 @@ in {
 
   home.file = {
     ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
-    ".XCompose".source = "${configHome}/XCompose";
+    ".XCompose".source = ./XCompose;
     ".vscode/argv.json".text = ''
       { "enable-crash-reporter": false }
     '';
@@ -227,12 +200,12 @@ in {
       export XDG_SESSION_TYPE=wayland
       export XDG_CURRENT_DESKTOP=sway
       '';
-      config = import (configHome + /sway/settings.nix) { inherit pkgs lib config; };
+      config = import ./sway/settings.nix { inherit pkgs lib config; };
   };
 
   programs.waybar = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
-    settings = import (configHome + /sway/waybar-settings.nix) pkgs;
+    settings = import ./sway/waybar-settings.nix pkgs;
   };
 
   services.swayidle = lib.mkIf pkgs.stdenv.isLinux {
@@ -259,14 +232,14 @@ in {
 
   programs.alacritty = {
     enable = true;
-    settings = import (configHome + /alacritty-settings.nix) { inherit pkgs lib; };
+    settings = import ./alacritty-settings.nix { inherit pkgs lib; };
   };
 
   programs.firefox = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     package = pkgs.firefox;
     profiles."lukas" = {
-      extensions.packages = with nur.repos.rycee.firefox-addons; [
+      extensions.packages = with firefox-addons.packages.${pkgs.system}; [
         consent-o-matic
         ublock-origin
         umatrix
@@ -318,7 +291,7 @@ in {
     vimdiffAlias = true;
     withPython3 = true;
     withRuby = true;
-    extraConfig = builtins.readFile (configHome + /vimrc) + ''
+    extraConfig = builtins.readFile ./vimrc + ''
       let base16colorspace=256
       try
           colorscheme base16-scheme
@@ -395,7 +368,7 @@ in {
         { key = "ctrl+j"; command = "workbench.action.navigateDown"; }
         { key = "ctrl+k"; command = "workbench.action.navigateUp"; }
       ];
-      extensions = with pkgs-unstable.vscode-extensions; [
+      extensions = with pkgs.unstable.vscode-extensions; [
         arrterian.nix-env-selector 
         kamikillerto.vscode-colorize
         vscodevim.vim
@@ -408,6 +381,6 @@ in {
     };
   };
 
-  programs.zsh = import (configHome + /zsh-settings.nix) { inherit config lib; };
+  programs.zsh = import ./zsh-settings.nix { inherit config lib; };
 }
 

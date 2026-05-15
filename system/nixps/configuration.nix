@@ -1,10 +1,9 @@
 { ... }:
 
 {
+  imports = [ ./hardware-configuration.nix ];
 
-  imports = [
-    ./configuration.nix
-  ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hardware.bluetooth.enable = true;
 
