@@ -68,13 +68,15 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
 
+                backupFileExtension = "bak";
+
                 extraSpecialArgs = {
                   inherit nixpkgs username hostname;
                   inherit (inputs) base16 firefox-addons;
                 };
 
                 users."lukas" = {
-                  imports = [./home/home.nix] ++ extraHomeConfigurations;
+                  imports = [ ./home/home-common.nix ] ++ extraHomeConfigurations;
                 };
               };
             }
@@ -87,7 +89,7 @@
           hostname = "nixps";
 
           extraConfigurations = [ ./system/nixps/configuration.nix ];
-          extraHomeConfigurations = [ ./home/xps.nix ];
+          extraHomeConfigurations = [ ./home/home-linux.nix ./home/xps.nix ];
         };
 
         nixtop = mkHost {
@@ -95,7 +97,7 @@
           hostname = "nixtop";
 
           extraConfigurations = [ ./system/nixtop/configuration.nix ];
-          extraHomeConfigurations = [ ./home/desktop.nix ];
+          extraHomeConfigurations = [ ./home/home-linux.nix ./home/desktop.nix ];
         };
 
         # TODO: add darwin
