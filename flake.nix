@@ -76,7 +76,7 @@
                 };
 
                 users."lukas" = {
-                  imports = [ ./home/home-common.nix ] ++ extraHomeConfigurations;
+                  imports = [ ./home/common.nix ] ++ extraHomeConfigurations;
                 };
               };
             }
@@ -89,7 +89,7 @@
           hostname = "nixps";
 
           extraConfigurations = [ ./system/nixps/configuration.nix ];
-          extraHomeConfigurations = [ ./home/home-linux.nix ./home/xps.nix ];
+          extraHomeConfigurations = [ ./home/linux.nix ./home/devices/nixps.nix ];
         };
 
         nixtop = mkHost {
@@ -97,7 +97,7 @@
           hostname = "nixtop";
 
           extraConfigurations = [ ./system/nixtop/configuration.nix ];
-          extraHomeConfigurations = [ ./home/home-linux.nix ./home/desktop.nix ];
+          extraHomeConfigurations = [ ./home/linux.nix ./home/devices/nixtop.nix ];
         };
 
         # TODO: add darwin
