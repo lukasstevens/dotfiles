@@ -4,11 +4,11 @@
   home.stateVersion = "21.11";
   
   wayland.windowManager.sway.config.output = {
-    DP-2 = {
-      position = "0 360";
+    DP-4 = {
+      position = "2560 0";
     };
-    DP-1 = {
-      position = "1920 0";
+    DP-3 = {
+      position = "0 0";
     };
   };
 }
