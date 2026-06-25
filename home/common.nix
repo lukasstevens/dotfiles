@@ -1,4 +1,4 @@
-{ config, pkgs, lib, base16, firefox-addons, ... }:
+{ config, pkgs, lib, base16, ... }:
 
 {
   imports = [
@@ -9,10 +9,6 @@
     rename
     tree
     yt-dlp
-
-    haskell.compiler.ghc9122
-    (haskell-language-server.override { supportedGhcVersions = [ "9122" ]; })
-    stack
 
     dmtx-utils
     imagemagick
@@ -147,27 +143,27 @@
       endtry
       '';
     plugins = with pkgs.vimPlugins; [
-      vim-nix
-      nerdtree
-      rust-vim
-      { plugin = command-t; config = "let g:CommandTPreferredImplementation = 'lua'"; }
-      deoplete-nvim
-      ale
+      { plugin = vim-nix; type = "viml"; }
+      { plugin = nerdtree; type = "viml"; }
+      { plugin = command-t; type = "lua"; }
+      nvim-cmp
+      cmp-nvim-lsp
+      { plugin = ale; type = "viml"; }
       {
         plugin = vimtex;
+        type = "viml";
         config = ''
           let g:tex_flavor = 'latex'
           let g:maplocalleader = '<'
           '';
       }
-      haskell-vim
     ];
   };
 
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks."*" = {
+    settings."*" = {
       forwardAgent = false;
       addKeysToAgent = "yes";
       compression = false;
@@ -188,9 +184,8 @@
     extraFlags =[ "--quiet" "--noask" "--timeout 20" ];
   };
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
-    package = pkgs.vscodium;
     profiles.default = {
       userSettings = {
         "telemetry.enableTelemetry" = false;

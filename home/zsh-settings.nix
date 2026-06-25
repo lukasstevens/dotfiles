@@ -8,6 +8,7 @@ let
   };
 in {
   enable = true;
+  dotDir = config.home.homeDirectory;
 
   enableCompletion = true;
   defaultKeymap = "emacs";
@@ -42,7 +43,7 @@ in {
         { name = "jdxcode/gh"; tags = [ "as:plugin" "use:zsh/gh/gh.plugin.zsh" ]; }
         { name = "jdxcode/gh"; tags = [ "as:command" "use:zsh/gh/_gh" ]; }
       ] ++ oh-my-zsh-plugins [
-        "docker" "git-extras" "pip" "pyenv" "stack" "wd"
+        "docker" "git-extras" "pip" "pyenv" "wd"
       ];
     };
 

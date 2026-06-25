@@ -76,6 +76,7 @@
   };
 
   gtk = {
+    gtk4.theme = config.gtk.theme;
     enable = true;
     font = {
       name = "DejaVu Sans 11";
@@ -120,10 +121,10 @@
 
   services.swayidle = {
     enable = true;
-    events = [ 
-      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
-      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; }
-    ];
+    events = { 
+      "before-sleep" = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}";
+      "lock" = "${pkgs.swaylock}/bin/swaylock --color ${config.scheme.base00}"; 
+     };
   };
 
   services.swayosd = {
@@ -143,6 +144,7 @@
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     profiles."lukas" = {
       extensions.packages = with firefox-addons.packages.${pkgs.system}; [
         consent-o-matic

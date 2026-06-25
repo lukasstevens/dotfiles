@@ -53,6 +53,7 @@
   services.timesyncd.enable = true;
 
   environment.systemPackages = with pkgs; [
+    android-tools
     gcc
     gnumake
     git
@@ -68,8 +69,6 @@
   services.udev.packages = [ pkgs.platformio pkgs.openocd ];
 
   services.gvfs.enable = true;
-
-  programs.adb.enable = true;
 
   programs.firejail.enable = true;
 
