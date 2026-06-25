@@ -144,8 +144,10 @@
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;
-    configPath = "${config.xdg.configHome}/mozilla/firefox";
+    configPath = ".mozilla/firefox";
     profiles."lukas" = {
+      id = 0;
+      isDefault = true;
       extensions.packages = with firefox-addons.packages.${pkgs.system}; [
         consent-o-matic
         ublock-origin
