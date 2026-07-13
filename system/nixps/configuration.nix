@@ -17,6 +17,7 @@
     ];
     allowedUDPPorts = [
       6000 6001 7011 # rpiplay
+      6454 # Art-Net
     ];
   };
 }
