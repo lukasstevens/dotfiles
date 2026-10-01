@@ -3,15 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    nixpkgs-unstable.url = "github.com/NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs-unstable.url = "github.com/NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur = {
-      url = "github.com/nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    #nur = {
+    #  url = "github.com/nix-community/NUR";
+    #  inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #};
     nix-rosetta-builder = {
       url = "github:cpick/nix-rosetta-builder";
       inputs.nixpkgs.follows = "nixpkgs";
