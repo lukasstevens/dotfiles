@@ -35,13 +35,13 @@ in
       "lima-1.2.2"
     ];
     overlays = [
-      (self: super: {
-        haskell = super.haskell // {
-          compiler = super.haskell.compiler // {
-            ghc884 = self.inputs.nur.repos.mpickering.ghc.ghc884;
-          };
-        };
-      })
+      #(self: super: {
+      #  haskell = super.haskell // {
+      #    compiler = super.haskell.compiler // {
+      #      ghc884 = self.inputs.nur.repos.mpickering.ghc.ghc884;
+      #    };
+      #  };
+      #})
     ];
   };
 
