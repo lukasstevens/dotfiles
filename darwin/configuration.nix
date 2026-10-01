@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 let
   spaces = [
     { label = "10_home"; }
@@ -16,7 +16,6 @@ let
   bgColor = "0xff272935";
   accentColor = "0xff88b6df";
 
-  hostPlatform = "aarch64-darwin";
 in
 {
   imports = [
@@ -30,7 +29,6 @@ in
   documentation.man.enable = true;
 
   nixpkgs = {
-    hostPlatform = hostPlatform;
     config.permittedInsecurePackages = [
       "lima-1.2.2"
     ];
@@ -45,10 +43,6 @@ in
     ];
   };
 
-  # Use a custom configuration.nix location.
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-
   # Auto upgrade nix package and the daemon service.
   # nix.package = pkgs.nix;
  
@@ -56,7 +50,7 @@ in
     enable = true;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@admin" "lukas" ];
+      trusted-users = [ "root" "@admin" username ];
     };
   };
   ids.uids.nixbld = 3000;
@@ -67,20 +61,14 @@ in
 
   homebrew = {
     enable = true;
+    # Docker Desktop needs its VM; Karabiner needs its privileged installer;
+    # Nextcloud's Nix package currently supports Linux only.
     casks = [
-      "alacritty"
       "docker"
-      "firefox"
-      "font-hack-nerd-font"
-      "isabelle"
       "karabiner-elements"
-      "keepassxc"
       "nextcloud"
-      "signal"
-      "telegram"
-      "thunderbird"
-      "vscodium"
     ];
+    onActivation.cleanup = "none";
   };
 
   services.yabai = {
@@ -217,7 +205,7 @@ in
         ${super} + ${mod1} - j : yabai -m space --display south && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
         ${super} + ${mod1} - h : yabai -m space --display west  && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
         ${super} + ${mod1} - l : yabai -m space --display east  && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
-        ${super} - return : open -na /Applications/Alacritty.app
+        ${super} - return : open -na "/Users/${username}/Applications/Home Manager Apps/Alacritty.app"
         '' +
         lib.strings.concatImapStrings (i: s:
           ''
@@ -230,16 +218,10 @@ in
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  users.users.lukas = {
-    name = "lukas";
-    home = "/Users/lukas";
+  users.users.${username} = {
+    name = username;
+    home = "/Users/${username}";
   };
 
-  system.primaryUser = "lukas";
-
-  #home-manager.users.lukas = import ~/dotfiles/home/home.nix;
-  #home-manager.users.lukas = { pkgs, ...}: {
-  #  programs.zsh.enable = true;
-  #  home.stateVersion = "23.11";
-  #};
+  system.primaryUser = username;
 }

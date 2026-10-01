@@ -47,6 +47,15 @@ in {
       ];
     };
 
+  shellAliases = {
+    ll = "ls -l";
+    la = "ls -la";
+    lah = "ls -lah";
+    l = "ls -CF";
+    bm = "wd add";
+    to = "wd";
+  };
+
   initContent =
     let
       initExtraBeforeCompInit = lib.mkOrder 550 '' 
@@ -54,20 +63,6 @@ in {
         setopt AUTO_MENU
         zstyle ':completion:*' menu select
         '';
-
-      shellAliases = {
-        setclip = "wl-copy";
-        getclip = "wl-paste";
-
-        ls = "ls --color=auto";
-        ll = "ls -l";
-        la = "ls -la";
-        lah = "ls -lah";
-        l = "ls -CF";
-
-        bm = "wd add";
-        to = "wd";
-      };
 
       initExtra = lib.mkOrder 1000 ''
         source ${config.scheme { templateRepo = base16-shell; }}

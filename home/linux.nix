@@ -11,12 +11,8 @@
       components.isabelle-linter
       (pkgs.unstable.callPackage ../pkgs/isabelle/components/afp.nix {})
     ]))
-    pkgs.unstable.keepassxc
     lean
     nextcloud-client
-    pkgs.unstable.signal-desktop
-    pkgs.unstable.telegram-desktop
-    thunderbird
 
     # Developer utilities
     cmake
@@ -41,6 +37,19 @@
     wofi 
     qt5.qtwayland
   ];
+
+  fonts.fontconfig.enable = true;
+
+  home.file = {
+    ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
+    ".XCompose".source = ./XCompose;
+  };
+
+  programs.zsh.shellAliases = {
+    setclip = "wl-copy";
+    getclip = "wl-paste";
+    ls = "ls --color=auto";
+  };
 
   xdg = {
     mime.enable = true; 
@@ -141,21 +150,7 @@
     longitude = "12.3";
   };
 
-  programs.firefox = {
-    enable = true;
-    package = pkgs.firefox;
-    configPath = ".mozilla/firefox";
-    profiles."lukas" = {
-      id = 0;
-      isDefault = true;
-      extensions.packages = with firefox-addons.packages.${pkgs.system}; [
-        consent-o-matic
-        ublock-origin
-        umatrix
-        keepassxc-browser
-      ];
-    };
-  };
+  programs.firefox.configPath = ".mozilla/firefox";
 
   programs.opencode-bwrap = {
     enable = true;

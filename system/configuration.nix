@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   imports = [
@@ -145,12 +145,12 @@
   programs.zsh.enable = true;
 
   users.mutableUsers = false;
-  users.extraUsers.lukas = {
-    home = "/home/lukas";
+  users.extraUsers.${username} = {
+    home = "/home/${username}";
     createHome = true;
     isNormalUser = true;
     extraGroups = [ "adbusers" "audio" "i2c" "networkmanager" "video" "wheel" "wireshark" ];
-    hashedPasswordFile = "/etc/nixos/hashed_password_lukas";
+    hashedPasswordFile = "/etc/nixos/hashed_password_${username}";
     shell = pkgs.zsh;
   };
 

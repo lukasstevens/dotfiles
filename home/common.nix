@@ -1,5 +1,8 @@
-{ config, pkgs, lib, base16, ... }:
+{ config, pkgs, lib, base16, firefox-addons, ... }:
 
+let
+  desktopPkgs = if pkgs.stdenv.hostPlatform.isLinux then pkgs.unstable else pkgs;
+in
 {
   imports = [
     base16.homeManagerModule
@@ -13,6 +16,12 @@
     dmtx-utils
     imagemagick
     texlive.combined.scheme-full
+
+    # Desktop applications supported on both Linux and macOS.
+    desktopPkgs.keepassxc
+    desktopPkgs.signal-desktop
+    desktopPkgs.telegram-desktop
+    thunderbird
 
     # Fonts
     fira
@@ -31,10 +40,6 @@
     };
   };
 
-  fonts.fontconfig = {
-    enable = true;
-  };
-
   home.sessionPath = [
     "~/.local/bin"
     "~/.cargo/bin"
@@ -48,8 +53,6 @@
   xdg.enable = true;
 
   home.file = {
-    ".latexmkrc".text = "$pdf_previewer = 'start evince';\n";
-    ".XCompose".source = ./XCompose;
     ".vscode/argv.json".text = ''
       { "enable-crash-reporter": false }
     '';
@@ -89,6 +92,21 @@
   programs.alacritty = {
     enable = true;
     settings = import ./alacritty-settings.nix { inherit pkgs lib; };
+  };
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox;
+    profiles."lukas" = {
+      id = 0;
+      isDefault = true;
+      extensions.packages = with firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+        consent-o-matic
+        ublock-origin
+        umatrix
+        keepassxc-browser
+      ];
+    };
   };
 
   programs.fzf = {
