@@ -18,9 +18,12 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }: {
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-rosetta-builder, ... }: {
     darwinConfigurations."Lukass-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ ./configuration.nix ];
+      modules = [
+        ./configuration.nix
+        nix-rosetta-builder.darwinModules.default
+      ];
       specialArgs = { inherit inputs; };
     };
   };

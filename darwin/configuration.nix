@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs,... }:
+{ config, pkgs, lib, ... }:
 let
   spaces = [
     { label = "10_home"; }
@@ -16,17 +16,10 @@ let
   bgColor = "0xff272935";
   accentColor = "0xff88b6df";
 
-  #########nix-rosetta-builder = builtins.getFlake "github:cpick/nix-rosetta-builder";
-
   hostPlatform = "aarch64-darwin";
-  pkgs-darwin = import (builtins.fetchTarball {
-    url = "https://github.com/nixos/nixpkgs/archive/ef75ab5e7c190297eef7eb6d1ea9d2a6c6ab7ef0.tar.gz";
-    sha256 = "05adwpbjgi9qqpvrjh9slah6sz0qki11pa4ld0zgnkh87d3j2h9f";
-  }) { inherit hostPlatform; };
 in
 {
   imports = [
-    inputs.nix-rosetta-builder.darwinModules.default
   ];
 
   # List packages installed in system profile. To search by name, run:
@@ -38,6 +31,9 @@ in
 
   nixpkgs = {
     hostPlatform = hostPlatform;
+    config.permittedInsecurePackages = [
+      "lima-1.2.2"
+    ];
     overlays = [
       (self: super: {
         haskell = super.haskell // {
@@ -58,16 +54,13 @@ in
  
   nix = {
     enable = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    #linux-builder = {
-    #  enable = true;
-    #  package = pkgs-darwin.darwin.linux-builder;
-    #};
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@admin" "lukas" ];
+    };
   };
   ids.uids.nixbld = 3000;
   nix-rosetta-builder.onDemand = true;
-
-
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
@@ -76,6 +69,7 @@ in
     enable = true;
     casks = [
       "alacritty"
+      "docker"
       "firefox"
       "font-hack-nerd-font"
       "isabelle"
