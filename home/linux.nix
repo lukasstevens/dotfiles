@@ -7,10 +7,6 @@
   home.packages = with pkgs; [
     # Desktop programs
     evince
-    (pkgs.unstable.isabelle.withComponents (components: [
-      components.isabelle-linter
-      (pkgs.unstable.callPackage ../pkgs/isabelle/components/afp.nix {})
-    ]))
     lean
     nextcloud-client
 

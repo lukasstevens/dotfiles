@@ -6,6 +6,8 @@ in
 {
   imports = [
     base16.homeManagerModule
+    ./isabelle.nix
+    ./pi.nix
   ];
 
   home.packages = with pkgs; [

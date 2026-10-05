@@ -72,7 +72,6 @@
               nixpkgs.overlays = [ unstableOverlay linuxOverlay ];
               networking.hostName = hostname;
             }
-            ./system/configuration.nix
             home-manager.nixosModules.home-manager
             (mkHomeManager { inherit hostname extraHomeConfigurations; })
           ] ++ extraConfigurations;
@@ -87,7 +86,6 @@
               nixpkgs.overlays = [ unstableOverlay ];
               networking.hostName = hostname;
             }
-            ./darwin/configuration.nix
             nix-rosetta-builder.darwinModules.default
             home-manager.darwinModules.home-manager
             (mkHomeManager { inherit hostname extraHomeConfigurations; })
@@ -113,7 +111,7 @@
       darwinConfigurations."Lukass-MacBook-Pro" = mkDarwinHost {
         system = "aarch64-darwin";
         hostname = "Lukass-MacBook-Pro";
-        extraConfigurations = [];
+        extraConfigurations = [ ./system/darwin/configuration.nix ];
         extraHomeConfigurations = [ ./home/darwin.nix ./home/devices/mac.nix ];
       };
     };
