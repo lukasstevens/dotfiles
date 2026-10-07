@@ -145,7 +145,9 @@
   programs.zsh.enable = true;
 
   users.mutableUsers = false;
-  users.extraUsers.${username} = {
+  users.groups.lukas = {};
+  users.users.${username} = {
+    group = "lukas";
     home = "/home/${username}";
     createHome = true;
     isNormalUser = true;
