@@ -1,34 +1,30 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.programs.opencode-bwrap;
+  cfg = config.programs.pi-bwrap;
   home = config.home.homeDirectory;
   mkLauncher = import ./bwrap-launcher.nix { inherit pkgs lib; };
   wrapped = mkLauncher {
-    name = if cfg.exposeAsDefault then "opencode" else "opencode-bwrap";
-    command = "${cfg.package}/bin/opencode";
+    name = if cfg.exposeAsDefault then "pi" else "pi-bwrap";
+    command = "${cfg.package}/bin/pi";
     inherit home;
-    writablePaths = [
-      "${home}/.local/share/opencode"
-      "${home}/.local/state/opencode"
-      "${home}/.cache/opencode"
-      "${home}/.config/opencode"
-    ];
+    # Share the actual Pi agent directory, including credentials and extensions.
+    writablePaths = [ "${home}/.pi/agent" ];
     extraPackages = [ cfg.package ] ++ cfg.extraPackages;
     inherit (cfg) extraEnvironment;
   };
 in
 {
-  options.programs.opencode-bwrap = {
-    enable = lib.mkEnableOption "OpenCode in a bubblewrap sandbox";
+  options.programs.pi-bwrap = {
+    enable = lib.mkEnableOption "Pi in a bubblewrap sandbox";
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.opencode;
-      description = "OpenCode package to run inside the sandbox.";
+      default = pkgs.callPackage ../../pkgs/pi {};
+      description = "Pi package to run inside the sandbox.";
     };
     exposeAsDefault = lib.mkOption {
       type = lib.types.bool;
-      default = true;
-      description = "Install the wrapper as opencode rather than opencode-bwrap.";
+      default = false;
+      description = "Install the wrapper as pi rather than pi-bwrap.";
     };
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
@@ -42,7 +38,6 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    # Only install the wrapper: it already references bubblewrap and cfg.package.
     home.packages = [ wrapped ];
   };
 }

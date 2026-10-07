@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/opencode-bwrap.nix
+    ./modules/pi-bwrap.nix
   ];
 
   home.packages = with pkgs; [
@@ -147,6 +148,11 @@
   };
 
   programs.firefox.configPath = ".mozilla/firefox";
+
+  programs.pi-bwrap = {
+    enable = true;
+    exposeAsDefault = true;
+  };
 
   programs.opencode-bwrap = {
     enable = true;

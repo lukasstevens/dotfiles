@@ -9,7 +9,11 @@ let
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
 in
 {
-  home.packages = [ pi ];
+  # On Linux the sandbox module can own the `pi` executable. Keep the native
+  # package on macOS and when the wrapper is disabled or separately named.
+  home.packages = lib.optional (!(lib.attrByPath
+    [ "programs" "pi-bwrap" "enable" ] false config
+    && lib.attrByPath [ "programs" "pi-bwrap" "exposeAsDefault" ] false config)) pi;
   home.sessionPath = lib.mkBefore [ "${config.home.profileDirectory}/bin" ];
 
   home.file.".pi/agent/skills/isabelle-pide-mcp".source = "${pideMcp.src}/.agents/skills";
