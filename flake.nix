@@ -72,6 +72,7 @@
               nixpkgs.overlays = [ unstableOverlay linuxOverlay ];
               networking.hostName = hostname;
             }
+            ./system/configuration.nix
             home-manager.nixosModules.home-manager
             (mkHomeManager { inherit hostname extraHomeConfigurations; })
           ] ++ extraConfigurations;
