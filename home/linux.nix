@@ -1,10 +1,5 @@
 { config, pkgs, lib, base16, firefox-addons, ... }:
 {
-  imports = [
-    ./modules/opencode-bwrap.nix
-    ./modules/pi-bwrap.nix
-  ];
-
   home.packages = with pkgs; [
     # Desktop programs
     evince
@@ -14,6 +9,7 @@
 
     # Developer utilities
     cmake
+    opencode
     ruby
     rustup
 
@@ -149,14 +145,4 @@
   };
 
   programs.firefox.configPath = ".mozilla/firefox";
-
-  programs.pi-bwrap = {
-    enable = true;
-    exposeAsDefault = true;
-  };
-
-  programs.opencode-bwrap = {
-    enable = true;
-    exposeAsDefault = true;
-  };
 }
