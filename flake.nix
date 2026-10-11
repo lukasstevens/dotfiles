@@ -5,6 +5,17 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nix-packages = {
+      url = "github:lukasstevens/nix-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
+    };
+
+    agent-sandbox = {
+      url = "github:archie-judd/agent-sandbox.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,7 +80,7 @@
           specialArgs = { inherit username hostname; };
           modules = [
             {
-              nixpkgs.overlays = [ unstableOverlay linuxOverlay ];
+              nixpkgs.overlays = [ unstableOverlay inputs.nix-packages.overlays.default linuxOverlay ];
               networking.hostName = hostname;
             }
             ./system/configuration.nix
@@ -84,7 +95,7 @@
           modules = [
             {
               nixpkgs.hostPlatform = system;
-              nixpkgs.overlays = [ unstableOverlay ];
+              nixpkgs.overlays = [ unstableOverlay inputs.nix-packages.overlays.default ];
               networking.hostName = hostname;
             }
             nix-rosetta-builder.darwinModules.default
@@ -93,6 +104,43 @@
           ] ++ extraConfigurations;
         };
     in {
+      devShells = nixpkgs.lib.genAttrs
+        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ]
+        (system:
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = [ inputs.nix-packages.overlays.default ];
+            };
+            sbx = inputs.agent-sandbox.lib.${system};
+            pi-sandboxed = sbx.mkSandbox {
+              pkg = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
+              binName = "pi";
+              outName = "pi-sandboxed";
+              allowedPackages = sbx.commonTools;
+              # Subagents use UNIX sockets for local process communication.
+              allowUnixSockets = true;
+              rwDirs = [
+                "$HOME/.local/state/pi/dotfiles"
+                "$HOME/src/github.com/lukasstevens/nix-packages"
+              ];
+              # Separate state avoids inheriting the global MCP configuration.
+              env = {
+                PI_CODING_AGENT_DIR = "$HOME/.local/state/pi/dotfiles";
+                ANTHROPIC_API_KEY = "\${ANTHROPIC_API_KEY:-}";
+                OPENAI_API_KEY = "\${OPENAI_API_KEY:-}";
+                GEMINI_API_KEY = "\${GEMINI_API_KEY:-}";
+              };
+            };
+          in {
+            default = pkgs.mkShell {
+              packages = [ pi-sandboxed ];
+              shellHook = ''
+                mkdir -p "$HOME/.local/state/pi/dotfiles"
+              '';
+            };
+          });
+
       nixosConfigurations = {
         nixps = mkHost {
           system = "x86_64-linux";

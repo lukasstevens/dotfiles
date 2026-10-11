@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  pi = pkgs.callPackage ../pkgs/pi {};
-  subagents = pkgs.callPackage ../pkgs/pi-subagents {};
-  subagentsPath = "${subagents}/lib/node_modules/pi-subagents";
-  isabelle = pkgs.callPackage ../pkgs/isabelle/with-mcp.nix {};
+  pi = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
+  isabelle = pkgs.isabelle-with-mcp;
   pideMcp = isabelle.pideMcp;
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
 in
@@ -33,12 +31,14 @@ in
         fi
       }
 
-      merge_pi_config "$HOME/.pi/agent/settings.json" --arg package ${lib.escapeShellArg subagentsPath} '
+      # Selected extensions now load through the composed launcher. Remove old
+      # managed entries while preserving unrelated user packages and settings.
+      merge_pi_config "$HOME/.pi/agent/settings.json" '
         def packageSource: if type == "string" then . else .source // "" end;
         .packages = (
           ((.packages // []) | map(select(
             (packageSource | test("^(npm:)?pi-mcp-(extension|adapter)(@|$)|^(npm:)?pi-subagents(@|$)|/pi-subagents$")) | not
-          ))) + [$package]
+          )))
         )
       '
 

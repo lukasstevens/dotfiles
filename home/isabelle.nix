@@ -1,5 +1,5 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ (pkgs.callPackage ../pkgs/isabelle/with-mcp.nix {}) ];
+  home.packages = [ pkgs.isabelle-with-mcp ];
 }
