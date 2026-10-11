@@ -118,8 +118,12 @@
               binName = "pi";
               outName = "pi-sandboxed";
               allowedPackages = sbx.commonTools;
+              allowNix = true;
               # Subagents use UNIX sockets for local process communication.
               allowUnixSockets = true;
+              allowedDomains = {
+                "*" = "*";
+              };
               rwDirs = [
                 "$HOME/.local/state/pi/dotfiles"
                 "$HOME/src/github.com/lukasstevens/nix-packages"
