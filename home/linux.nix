@@ -10,6 +10,7 @@
     evince
     lean
     nextcloud-client
+    qpwgraph
 
     # Developer utilities
     cmake
