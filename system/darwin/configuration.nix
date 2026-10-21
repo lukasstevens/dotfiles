@@ -80,7 +80,6 @@ in
       window_placement = "second_child";
       layout = "bsp";
       window_shadow = "float";
-      external_bar = "all:26:0";
     };
     extraConfig =
       lib.strings.concatImapStrings (i: s: 
@@ -102,88 +101,6 @@ in
         ) (s.assigns or [])) spaces;
   };
 
-  services.sketchybar = {
-    enable = false;
-    config =
-      let
-        sketchybar_src = pkgs.fetchFromGitHub {
-            owner = "FelixKratz";
-            repo = "SketchyBar";
-            rev = "v2.19.4";
-            hash = "sha256-6MqTyCqFv5suQgQ5a9t1mDA2njjFFgk67Kp7xO5OXoA=";
-          };
-        resetSpace = pkgs.writeScript "reset_space.bash" ''
-          #!/usr/bin/env bash
-          label=$(${pkgs.sketchybar}/bin/sketchybar --query $NAME | ${pkgs.jq}/bin/jq -r '.icon.value')
-          read -d "\n" display focus visible <<< \
-            $(${pkgs.yabai}/bin/yabai -m query --spaces --space $label | ${pkgs.jq}/bin/jq -r '.display,."has-focus",."is-visible"')
-          space=(
-            display=$display
-            background.drawing=$(if $visible; then echo on; else echo off; fi)
-            background.color=$(if $focus; then echo ${accentColor}; else echo ${bgColor}; fi)
-            background.border_color=$(if $visible; then echo ${accentColor}; else echo ${bgColor}; fi)
-          )
-          ${pkgs.sketchybar}/bin/sketchybar --set $NAME "''${space[@]}"
-          '';
-      in
-        ''
-        default=(
-          padding_left=4
-          padding_right=4
-          icon.font="Hack Nerd Font:Bold:17.0"
-          label.font="Hack Nerd Font:Bold:14.0"
-          icon.color=0xffffffff
-          label.color=0xffffffff
-          icon.padding_left=2
-          icon.padding_right=2
-          label.padding_left=2
-          label.padding_right=2
-        )
-        sketchybar --default "''${default[@]}"
-        sketchybar --bar color="${bgColor}"
-        sketchybar --add event reset_spaces
-        for label in $(yabai -m query --spaces | ${pkgs.jq}/bin/jq -r '.[] | .label')
-        do
-          id=$(yabai -m query --spaces --space "$label" | ${pkgs.jq}/bin/jq -r '.id') 
-          space=(
-            icon="$label"
-            icon.padding_left=7
-            icon.padding_right=7
-            label.drawing=off
-            background.corner_radius=2
-            background.border_width=2
-            background.height=24
-            script=${resetSpace}
-            click_script="${pkgs.yabai}/bin/yabai -m space --focus $label"
-          )
-          sketchybar --add item "space.$id" left \
-            --subscribe "space.$id" reset_spaces space_change display_change \
-            --set "space.$id" "''${space[@]}"
-        done
-        sketchybar --trigger reset_spaces
-
-        sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
-           --add item front_app left \
-           --set front_app icon.drawing=off script="${sketchybar_src}/plugins/front_app.sh" \
-           --subscribe front_app front_app_switched
-
-        sketchybar --add item clock right \
-           --set clock update_freq=10 icon=󰥔 script="${sketchybar_src}/plugins/clock.sh" \
-           --add item volume right \
-           --set volume script="${sketchybar_src}/plugins/volume.sh" \
-           --subscribe volume volume_change \
-           --add item battery right \
-           --set battery update_freq=120 script="${sketchybar_src}/plugins/battery.sh" \
-           --subscribe battery system_woke power_source_change
-
-        sketchybar --update
-        '';
-        extraPackages = [
-        ];
-  };
-
-
   services.skhd = {
     enable = true;
     skhdConfig =
@@ -201,10 +118,10 @@ in
         ${super} + ${mod0} - j : yabai -m window --swap south
         ${super} + ${mod0} - h : yabai -m window --swap west
         ${super} + ${mod0} - l : yabai -m window --swap east
-        ${super} + ${mod1} - k : yabai -m space --display north && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces  
-        ${super} + ${mod1} - j : yabai -m space --display south && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
-        ${super} + ${mod1} - h : yabai -m space --display west  && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
-        ${super} + ${mod1} - l : yabai -m space --display east  && ${pkgs.sketchybar}/bin/sketchybar --trigger reset_spaces 
+        ${super} + ${mod1} - k : yabai -m space --display north 
+        ${super} + ${mod1} - j : yabai -m space --display south
+        ${super} + ${mod1} - h : yabai -m space --display west
+        ${super} + ${mod1} - l : yabai -m space --display east
         ${super} - return : open -na "/Users/${username}/Applications/Home Manager Apps/Alacritty.app"
         '' +
         lib.strings.concatImapStrings (i: s:
