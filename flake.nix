@@ -135,7 +135,6 @@
                 "${piAgentDir}"
                 "$HOME/src/github.com/lukasstevens/nix-packages"
               ];
-              # Separate state avoids inheriting the global MCP configuration.
               env = {
                 PI_CODING_AGENT_DIR = "${piAgentDir}";
                 # Copy via the terminal without granting host pasteboard access.
