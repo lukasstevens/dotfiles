@@ -31,6 +31,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    meridian.url = "github:rynfar/meridian";
+
     base16.url = "github:SenchoPens/base16.nix";
 
     firefox-addons = {
@@ -42,6 +44,7 @@
   outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, nix-rosetta-builder, ... }:
     let
       username = "lukas";
+      meridianEndpoint = import ./home/modules/meridian/endpoint.nix;
 
       # Available to both system modules and Home Manager via useGlobalPkgs.
       unstableOverlay = final: prev: {
@@ -65,7 +68,7 @@
           backupFileExtension = "bak";
           extraSpecialArgs = {
             inherit nixpkgs username hostname;
-            inherit (inputs) base16 firefox-addons;
+            inherit (inputs) base16 firefox-addons meridian;
           };
           users.${username} = {
             home.username = username;
@@ -113,6 +116,8 @@
               overlays = [ inputs.nix-packages.overlays.default ];
             };
             sbx = inputs.agent-sandbox.lib.${system};
+            piAgentDir = "$HOME/.local/state/pi/dotfiles";
+            piMeridianModels = "$HOME/.config/pi/meridian-models.json";
             pi-sandboxed = sbx.mkSandbox {
               pkg = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
               binName = "pi";
@@ -121,16 +126,18 @@
               allowNix = true;
               # Subagents use UNIX sockets for local process communication.
               allowUnixSockets = true;
+              allowedHostPorts = [ meridianEndpoint.port ];
+              roFiles = [ "${piMeridianModels}" ];
               allowedDomains = {
                 "*" = "*";
               };
               rwDirs = [
-                "$HOME/.local/state/pi/dotfiles"
+                "${piAgentDir}"
                 "$HOME/src/github.com/lukasstevens/nix-packages"
               ];
               # Separate state avoids inheriting the global MCP configuration.
               env = {
-                PI_CODING_AGENT_DIR = "$HOME/.local/state/pi/dotfiles";
+                PI_CODING_AGENT_DIR = "${piAgentDir}";
                 ANTHROPIC_API_KEY = "\${ANTHROPIC_API_KEY:-}";
                 OPENAI_API_KEY = "\${OPENAI_API_KEY:-}";
                 GEMINI_API_KEY = "\${GEMINI_API_KEY:-}";
@@ -140,7 +147,10 @@
             default = pkgs.mkShell {
               packages = [ pi-sandboxed ];
               shellHook = ''
-                mkdir -p "$HOME/.local/state/pi/dotfiles"
+                mkdir -p "${piAgentDir}"
+                if [ ! -e "${piAgentDir}/models.json" ] && [ ! -L "${piAgentDir}/models.json" ]; then
+                  ln -s "${piMeridianModels}" "${piAgentDir}/models.json"
+                fi
               '';
             };
           });

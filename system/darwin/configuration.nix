@@ -50,7 +50,8 @@ in
     enable = true;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@admin" username ];
+      trusted-users = [ "root" ];
+      sandbox = true;
     };
   };
   ids.uids.nixbld = 3000;
