@@ -138,6 +138,8 @@
               # Separate state avoids inheriting the global MCP configuration.
               env = {
                 PI_CODING_AGENT_DIR = "${piAgentDir}";
+                # Copy via the terminal without granting host pasteboard access.
+                PI_CLIPBOARD_OSC52 = "1";
                 ANTHROPIC_API_KEY = "\${ANTHROPIC_API_KEY:-}";
                 OPENAI_API_KEY = "\${OPENAI_API_KEY:-}";
                 GEMINI_API_KEY = "\${GEMINI_API_KEY:-}";
