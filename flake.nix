@@ -12,7 +12,7 @@
     };
 
     agent-sandbox = {
-      url = "github:archie-judd/agent-sandbox.nix";
+      url = "github:lukasstevens/agent-sandbox.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -68,7 +68,7 @@
           backupFileExtension = "bak";
           extraSpecialArgs = {
             inherit nixpkgs username hostname;
-            inherit (inputs) base16 firefox-addons meridian;
+            inherit (inputs) agent-sandbox base16 firefox-addons meridian;
           };
           users.${username} = {
             home.username = username;
@@ -126,6 +126,9 @@
               allowNix = true;
               # Subagents use UNIX sockets for local process communication.
               allowUnixSockets = true;
+              # Parallel runtimes need named semaphore creation and cleanup on macOS.
+              darwinPosixSemaphoreAccess =
+                if pkgs.stdenv.hostPlatform.isDarwin then "create-unlink" else "none";
               allowedHostPorts = [ meridianEndpoint.port ];
               roFiles = [ "${piMeridianModels}" ];
               allowedDomains = {
@@ -134,6 +137,7 @@
               rwDirs = [
                 "${piAgentDir}"
                 "$HOME/src/github.com/lukasstevens/nix-packages"
+                "$HOME/src/github.com/lukasstevens/agent-sandbox.nix"
               ];
               env = {
                 PI_CODING_AGENT_DIR = "${piAgentDir}";

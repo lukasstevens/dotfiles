@@ -7,15 +7,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1791727350,
-        "narHash": "sha256-Gq/zcnKa7N/INz0xOKAQEzCrW7OEyS/zRiJLce21nyg=",
-        "owner": "archie-judd",
+        "lastModified": 1792667280,
+        "narHash": "sha256-R12Yf4ddClYdzBWWWgBRmGdMFjdtBXhCfz38XY1nEHw=",
+        "owner": "lukasstevens",
         "repo": "agent-sandbox.nix",
-        "rev": "da1af869c23467d3053b454583a5f4e0c832fbb1",
+        "rev": "f032698528eb8a7d8dd290914d4718d9eda52f1f",
         "type": "github"
       },
       "original": {
-        "owner": "archie-judd",
+        "owner": "lukasstevens",
         "repo": "agent-sandbox.nix",
         "type": "github"
       }
@@ -242,11 +242,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792591637,
-        "narHash": "sha256-KbSqUQMyJPhTXcG0uz4lNeEsDCuepIdI3jhKpkPdDUQ=",
+        "lastModified": 1792660414,
+        "narHash": "sha256-Hon3W/D8CUUUFQ4KP7vJmkDBsJMvsdyAImDItq5WURA=",
         "owner": "lukasstevens",
         "repo": "nix-packages",
-        "rev": "76cf29fca9d7c3bc6ebe79a92c4ffea730f2c39a",
+        "rev": "25424fd988499f5ad63e74268728edba0d700ca3",
         "type": "github"
       },
       "original": {
