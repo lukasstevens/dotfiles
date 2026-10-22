@@ -55,7 +55,10 @@ in
     };
   };
   ids.uids.nixbld = 3000;
-  nix-rosetta-builder.onDemand = true;
+  nix-rosetta-builder = {
+    onDemand = true;
+    memory = "16GiB";
+  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
