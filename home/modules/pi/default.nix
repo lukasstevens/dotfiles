@@ -42,6 +42,8 @@ in
   home.sessionPath = lib.mkBefore [ "${config.home.profileDirectory}/bin" ];
 
   home.file = {
+    ".pi/agent/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
+    ".local/state/pi/sandboxed/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
     ".pi/agent/skills/isabelle-pide-mcp".source = "${pideMcp.src}/.agents/skills";
     ".local/state/pi/sandboxed/skills/isabelle-pide-mcp".source = "${pideMcp.src}/.agents/skills";
     ".local/state/pi/sandboxed/models.json".source =
