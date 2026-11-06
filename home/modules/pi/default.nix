@@ -25,7 +25,9 @@ let
     # macOS shares the host network: Isabelle's dynamic prover connections
     # require open networking, including arbitrary loopback ports/listeners.
     allowedHostPorts = if pkgs.stdenv.hostPlatform.isDarwin then null else [ endpoint.port ];
-    allowedDomains = null;
+    # Route HTTP(S) through the host-side proxy, which can use the host's
+    # loopback DNS resolver. Direct DNS cannot reach it from Linux's netns.
+    allowedDomains = { "*" = "*"; };
     rwDirs = [ sandboxAgentDir isabelleUserHome ];
     roFiles = [ "${config.xdg.configHome}/pi/meridian-models.json" ];
     env = {
