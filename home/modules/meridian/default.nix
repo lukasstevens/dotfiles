@@ -6,12 +6,8 @@ let
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfreePredicate = pkg: lib.getName pkg == "claude-code";
   };
-  # Match Meridian's minimum-version selection, including its release manifest.
-  claudeManifest = builtins.fromJSON (builtins.readFile
-    "${meridian}/nix/pkgs/meridian/claude-code-manifest.json");
-  claudeBase = if lib.versionOlder meridianPkgs.claude-code.version claudeManifest.version
-    then meridianPkgs.claude-code.override { manifest = claudeManifest; }
-    else meridianPkgs.claude-code;
+  # Use Meridian's minimum-version and compressed-manifest selection.
+  claudeBase = meridianPkgs.callPackage "${meridian}/nix/pkgs/claude-code/package.nix" {};
   claude = if pkgs.stdenv.hostPlatform.isDarwin
     # The old Bun sandbox workaround is no longer needed (nixpkgs#566625).
     # Keep the version check enabled to verify the binary in the sandbox.
