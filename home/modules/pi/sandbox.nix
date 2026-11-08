@@ -20,7 +20,11 @@ sandbox.mkSandbox {
   pkg = pi;
   binName = "pi";
   outName = "pi-sandboxed";
-  allowedPackages = sandbox.commonTools ++ [ pkgs.isabelle-with-mcp ]
+  allowedPackages = sandbox.commonTools ++ [
+    pkgs.isabelle-with-mcp
+    # Isabelle's gnu-utils settings resolve tar from PATH during startup.
+    pkgs.gnutar
+  ]
     # Isabelle queries macOS hardware through sysctl when starting sessions.
     ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.darwin.system_cmds ];
   allowNix = true;
