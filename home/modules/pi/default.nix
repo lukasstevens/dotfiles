@@ -29,7 +29,7 @@ let
     # loopback DNS resolver. Direct DNS cannot reach it from Linux's netns.
     allowedDomains = { "*" = "*"; };
     rwDirs = [ sandboxAgentDir isabelleUserHome ];
-    roFiles = [ "${config.xdg.configHome}/pi/meridian-models.json" ];
+    roFiles = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ "${config.xdg.configHome}/pi/meridian-models.json" ];
     env = {
       PI_CODING_AGENT_DIR = sandboxAgentDir;
       PI_CLIPBOARD_OSC52 = "1";
