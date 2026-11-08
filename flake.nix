@@ -2,17 +2,19 @@
   description = "Multi-machine NixOS and macOS setup";
 
   inputs = {
+    self.submodules = true;
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nix-packages = {
-      url = "github:lukasstevens/nix-packages";
+      url = "path:./inputs/nix-packages";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
     };
 
     agent-sandbox = {
-      url = "github:lukasstevens/agent-sandbox.nix";
+      url = "path:./inputs/agent-sandbox.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -122,8 +124,6 @@
               meridianEnabled = pkgs.stdenv.hostPlatform.isDarwin;
               sessionDir = piSessionDir;
               extraRwDirs = [
-                "$HOME/src/github.com/lukasstevens/nix-packages"
-                "$HOME/src/github.com/lukasstevens/agent-sandbox.nix"
               ];
             };
           in {

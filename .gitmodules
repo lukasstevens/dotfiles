@@ -1,0 +1,6 @@
+[submodule "nix-packages"]
+	path = inputs/nix-packages
+	url = https://github.com/lukasstevens/nix-packages.git
+[submodule "agent-sandbox.nix"]
+	path = inputs/agent-sandbox.nix
+	url = https://github.com/lukasstevens/agent-sandbox.nix.git

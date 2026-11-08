@@ -7,18 +7,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1792667280,
-        "narHash": "sha256-R12Yf4ddClYdzBWWWgBRmGdMFjdtBXhCfz38XY1nEHw=",
-        "owner": "lukasstevens",
-        "repo": "agent-sandbox.nix",
-        "rev": "f032698528eb8a7d8dd290914d4718d9eda52f1f",
-        "type": "github"
+        "path": "./inputs/agent-sandbox.nix",
+        "type": "path"
       },
       "original": {
-        "owner": "lukasstevens",
-        "repo": "agent-sandbox.nix",
-        "type": "github"
-      }
+        "path": "./inputs/agent-sandbox.nix",
+        "type": "path"
+      },
+      "parent": []
     },
     "base16": {
       "inputs": {
@@ -191,18 +187,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1794165320,
-        "narHash": "sha256-9K69BEM0HaSd9F/N/eo35ml3nRdxykjBaAHzaaAdrdw=",
-        "owner": "lukasstevens",
-        "repo": "nix-packages",
-        "rev": "792cbf2296cd7874252e9f4902bafcf285f9b426",
-        "type": "github"
+        "path": "./inputs/nix-packages",
+        "type": "path"
       },
       "original": {
-        "owner": "lukasstevens",
-        "repo": "nix-packages",
-        "type": "github"
-      }
+        "path": "./inputs/nix-packages",
+        "type": "path"
+      },
+      "parent": []
     },
     "nix-rosetta-builder": {
       "inputs": {

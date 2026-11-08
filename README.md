@@ -10,9 +10,16 @@ Run commands from the repository root on the corresponding host.
 
 ## Custom packages
 
-Custom package definitions live in `https://github.com/lukasstevens/nix-packages`.
-This flake imports that checkout through the `nix-packages` input and applies its
-`overlays.default` to both NixOS and macOS.
+Custom package definitions live in the `inputs/nix-packages` Git submodule, sourced from
+`https://github.com/lukasstevens/nix-packages`. Initialize it after cloning:
+
+```sh
+git submodule update --init --recursive
+```
+
+Alternatively, clone this repository with `git clone --recurse-submodules`.
+The flake imports `path:./inputs/nix-packages` and applies its `overlays.default` to both
+NixOS and macOS. It enables submodule inclusion when Nix fetches this repository.
 
 ## NixOS
 
@@ -38,6 +45,10 @@ sudo ./result/sw/bin/darwin-rebuild switch --flake .#Lukass-MacBook-Pro
 ```
 
 ## Sandboxed Pi for this repository
+
+The `agent-sandbox` input uses the `inputs/agent-sandbox.nix` Git submodule from
+`https://github.com/lukasstevens/agent-sandbox.nix`, via `path:./inputs/agent-sandbox.nix`.
+The submodule initialization command above initializes both submodules.
 
 From the repository root:
 
