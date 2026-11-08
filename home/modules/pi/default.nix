@@ -1,14 +1,14 @@
 { config, pkgs, lib, agent-sandbox, ... }:
 
 let
-  pi = pkgs.pi.withExtensions (extensions: [ extensions.subagents extensions.processes ]);
+  pi = import ./package.nix { inherit pkgs; };
   isabelle = pkgs.isabelle-with-mcp;
   pideMcp = isabelle.pideMcp;
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
   meridianEnabled = config.services.meridian.enable;
   isabelleUserHome = "${config.home.homeDirectory}/.local/state/pi/isabelle-sandboxed";
   piSandboxed = import ./sandbox.nix {
-    inherit pkgs agent-sandbox meridianEnabled;
+    inherit pkgs pi agent-sandbox meridianEnabled;
     inherit (config.home) homeDirectory;
     inherit (config.xdg) configHome;
   };

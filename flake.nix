@@ -114,9 +114,10 @@
               inherit system;
               overlays = [ inputs.nix-packages.overlays.default ];
             };
+            pi = import ./home/modules/pi/package.nix { inherit pkgs; };
             piSessionDir = "$HOME/.local/state/pi/dotfiles/sessions";
             pi-sandboxed = import ./home/modules/pi/sandbox.nix {
-              inherit pkgs;
+              inherit pkgs pi;
               inherit (inputs) agent-sandbox;
               meridianEnabled = pkgs.stdenv.hostPlatform.isDarwin;
               sessionDir = piSessionDir;

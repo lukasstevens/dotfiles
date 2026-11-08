@@ -1,5 +1,6 @@
 # Shared by Home Manager and the dotfiles development shell.
 { pkgs
+, pi
 , agent-sandbox
 , homeDirectory ? "$HOME"
 , configHome ? "${homeDirectory}/.config"
@@ -16,7 +17,7 @@ let
   isabelleUserHome = "${homeDirectory}/.local/state/pi/isabelle-sandboxed";
 in
 sandbox.mkSandbox {
-  pkg = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
+  pkg = pi;
   binName = "pi";
   outName = "pi-sandboxed";
   allowedPackages = sandbox.commonTools ++ [ pkgs.isabelle-with-mcp ]
