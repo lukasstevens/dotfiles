@@ -44,7 +44,6 @@
   outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, nix-rosetta-builder, ... }:
     let
       username = "lukas";
-      meridianEndpoint = import ./home/modules/meridian/endpoint.nix;
 
       # Available to both system modules and Home Manager via useGlobalPkgs.
       unstableOverlay = final: prev: {
@@ -115,47 +114,22 @@
               inherit system;
               overlays = [ inputs.nix-packages.overlays.default ];
             };
-            sbx = inputs.agent-sandbox.lib.${system};
-            piAgentDir = "$HOME/.local/state/pi/dotfiles";
-            piMeridianModels = "$HOME/.config/pi/meridian-models.json";
-            pi-sandboxed = sbx.mkSandbox {
-              pkg = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
-              binName = "pi";
-              outName = "pi-sandboxed";
-              allowedPackages = sbx.commonTools;
-              allowNix = true;
-              # Subagents use UNIX sockets for local process communication.
-              allowUnixSockets = true;
-              # Parallel runtimes need named semaphore creation and cleanup on macOS.
-              darwinPosixSemaphoreAccess =
-                if pkgs.stdenv.hostPlatform.isDarwin then "create-unlink" else "none";
-              allowedHostPorts = [ meridianEndpoint.port ];
-              roFiles = [ "${piMeridianModels}" ];
-              allowedDomains = {
-                "*" = "*";
-              };
-              rwDirs = [
-                "${piAgentDir}"
+            piSessionDir = "$HOME/.local/state/pi/dotfiles/sessions";
+            pi-sandboxed = import ./home/modules/pi/sandbox.nix {
+              inherit pkgs;
+              inherit (inputs) agent-sandbox;
+              meridianEnabled = pkgs.stdenv.hostPlatform.isDarwin;
+              sessionDir = piSessionDir;
+              extraRwDirs = [
                 "$HOME/src/github.com/lukasstevens/nix-packages"
                 "$HOME/src/github.com/lukasstevens/agent-sandbox.nix"
               ];
-              env = {
-                PI_CODING_AGENT_DIR = "${piAgentDir}";
-                # Copy via the terminal without granting host pasteboard access.
-                PI_CLIPBOARD_OSC52 = "1";
-                ANTHROPIC_API_KEY = "\${ANTHROPIC_API_KEY:-}";
-                OPENAI_API_KEY = "\${OPENAI_API_KEY:-}";
-                GEMINI_API_KEY = "\${GEMINI_API_KEY:-}";
-              };
             };
           in {
             default = pkgs.mkShell {
               packages = [ pi-sandboxed ];
               shellHook = ''
-                mkdir -p "${piAgentDir}"
-                if [ ! -e "${piAgentDir}/models.json" ] && [ ! -L "${piAgentDir}/models.json" ]; then
-                  ln -s "${piMeridianModels}" "${piAgentDir}/models.json"
-                fi
+                mkdir -p "${piSessionDir}"
               '';
             };
           });

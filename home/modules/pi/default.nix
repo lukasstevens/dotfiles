@@ -6,39 +6,11 @@ let
   pideMcp = isabelle.pideMcp;
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
   meridianEnabled = config.services.meridian.enable;
-  endpoint = import ../meridian/endpoint.nix;
-  sandboxAgentDir = "${config.home.homeDirectory}/.local/state/pi/sandboxed";
   isabelleUserHome = "${config.home.homeDirectory}/.local/state/pi/isabelle-sandboxed";
-  sandbox = agent-sandbox.lib.${pkgs.stdenv.hostPlatform.system};
-  piSandboxed = sandbox.mkSandbox {
-    pkg = pi;
-    binName = "pi";
-    outName = "pi-sandboxed";
-    allowedPackages = sandbox.commonTools ++ [ isabelle ]
-      # Isabelle queries macOS hardware through sysctl when starting sessions.
-      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.darwin.system_cmds ];
-    allowNix = true;
-    # Pi subagents use local UNIX sockets.
-    allowUnixSockets = true;
-    # Allow parallel runtime synchronization without opening existing host semaphores.
-    darwinPosixSemaphoreAccess =
-      if pkgs.stdenv.hostPlatform.isDarwin then "create-unlink" else "none";
-    # macOS shares the host network: Isabelle's dynamic prover connections
-    # require open networking, including arbitrary loopback ports/listeners.
-    allowedHostPorts = if pkgs.stdenv.hostPlatform.isDarwin then null
-      else lib.optionals meridianEnabled [ endpoint.port ];
-    # Route HTTP(S) through the host-side proxy, which can use the host's
-    # loopback DNS resolver. Direct DNS cannot reach it from Linux's netns.
-    allowedDomains = { "*" = "*"; };
-    rwDirs = [ sandboxAgentDir isabelleUserHome ];
-    roFiles = lib.optionals meridianEnabled [ "${config.xdg.configHome}/pi/meridian-models.json" ];
-    env = {
-      PI_CODING_AGENT_DIR = sandboxAgentDir;
-      PI_CLIPBOARD_OSC52 = "1";
-      ANTHROPIC_API_KEY = "\${ANTHROPIC_API_KEY:-}";
-      OPENAI_API_KEY = "\${OPENAI_API_KEY:-}";
-      GEMINI_API_KEY = "\${GEMINI_API_KEY:-}";
-    };
+  piSandboxed = import ./sandbox.nix {
+    inherit pkgs agent-sandbox meridianEnabled;
+    inherit (config.home) homeDirectory;
+    inherit (config.xdg) configHome;
   };
 in
 {
