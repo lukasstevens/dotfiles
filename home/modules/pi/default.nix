@@ -5,6 +5,7 @@ let
   isabelle = pkgs.isabelle-with-mcp;
   pideMcp = isabelle.pideMcp;
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
+  meridianEnabled = config.services.meridian.enable;
   endpoint = import ../meridian/endpoint.nix;
   sandboxAgentDir = "${config.home.homeDirectory}/.local/state/pi/sandboxed";
   isabelleUserHome = "${config.home.homeDirectory}/.local/state/pi/isabelle-sandboxed";
@@ -24,12 +25,13 @@ let
       if pkgs.stdenv.hostPlatform.isDarwin then "create-unlink" else "none";
     # macOS shares the host network: Isabelle's dynamic prover connections
     # require open networking, including arbitrary loopback ports/listeners.
-    allowedHostPorts = if pkgs.stdenv.hostPlatform.isDarwin then null else [ endpoint.port ];
+    allowedHostPorts = if pkgs.stdenv.hostPlatform.isDarwin then null
+      else lib.optionals meridianEnabled [ endpoint.port ];
     # Route HTTP(S) through the host-side proxy, which can use the host's
     # loopback DNS resolver. Direct DNS cannot reach it from Linux's netns.
     allowedDomains = { "*" = "*"; };
     rwDirs = [ sandboxAgentDir isabelleUserHome ];
-    roFiles = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ "${config.xdg.configHome}/pi/meridian-models.json" ];
+    roFiles = lib.optionals meridianEnabled [ "${config.xdg.configHome}/pi/meridian-models.json" ];
     env = {
       PI_CODING_AGENT_DIR = sandboxAgentDir;
       PI_CLIPBOARD_OSC52 = "1";
@@ -44,12 +46,8 @@ in
   home.sessionPath = lib.mkBefore [ "${config.home.profileDirectory}/bin" ];
 
   home.file = {
-    ".pi/agent/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
-    ".local/state/pi/sandboxed/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
     ".pi/agent/skills/isabelle-pide-mcp".source = "${pideMcp.src}/.agents/skills";
     ".local/state/pi/sandboxed/skills/isabelle-pide-mcp".source = "${pideMcp.src}/.agents/skills";
-    ".local/state/pi/sandboxed/models.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/pi/meridian-models.json";
     ".local/state/pi/isabelle-sandboxed/.isabelle/Isabelle${isabelle.version}-pi-sandboxed/etc/settings".text = ''
       # Keep Isabelle's temporary files inside its dedicated sandbox state.
       ISABELLE_TMP_PREFIX="$USER_HOME/tmp"
@@ -70,6 +68,11 @@ in
         timeout = 600;
       };
     };
+  } // lib.optionalAttrs meridianEnabled {
+    ".pi/agent/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
+    ".local/state/pi/sandboxed/extensions/meridian-session-affinity.ts".source = ./meridian-session-affinity.ts;
+    ".local/state/pi/sandboxed/models.json".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.xdg.configHome}/pi/meridian-models.json";
   };
 
   # Pi writes preferences and MCP settings itself, so keep these files mutable.

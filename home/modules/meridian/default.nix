@@ -21,7 +21,9 @@ let
   '';
 in
 {
-  config = lib.mkMerge [
+  options.services.meridian.enable = lib.mkEnableOption "Meridian and its Pi integration";
+
+  config = lib.mkIf config.services.meridian.enable (lib.mkMerge [
     {
       home.packages = [ package claudeLauncher ];
 
@@ -68,5 +70,5 @@ in
         };
       };
     })
-  ];
+  ]);
 }

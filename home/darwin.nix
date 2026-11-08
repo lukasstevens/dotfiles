@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  services.meridian.enable = true;
+
   home.packages = with pkgs; [
     nerd-fonts.hack
   ];
