@@ -1,7 +1,7 @@
 { config, pkgs, lib, agent-sandbox, ... }:
 
 let
-  pi = pkgs.pi.withExtensions (extensions: [ extensions.subagents ]);
+  pi = pkgs.pi.withExtensions (extensions: [ extensions.subagents extensions.processes ]);
   isabelle = pkgs.isabelle-with-mcp;
   pideMcp = isabelle.pideMcp;
   emptyJson = pkgs.writeText "pi-empty-settings.json" "{}";
